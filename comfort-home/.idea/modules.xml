@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/cf-home.iml" filepath="$PROJECT_DIR$/cf-home.iml" />
+      <module fileurl="file://$PROJECT_DIR$/home-cms/home-cms.iml" filepath="$PROJECT_DIR$/home-cms/home-cms.iml" />
+      <module fileurl="file://$PROJECT_DIR$/home-service/home-service.iml" filepath="$PROJECT_DIR$/home-service/home-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/home-website/home-website.iml" filepath="$PROJECT_DIR$/home-website/home-website.iml" />
+    </modules>
+  </component>
+</project>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd">
+
+
+    <context:component-scan base-package="com.jd.bdp.buffalo.manager.service"/>
+
+    <!--&lt;!&ndash;UMP主程序存活监控&ndash;&gt;-->
+    <bean id="appSystemActiveMonitor" class="com.jd.bdp.atom.aop.advisor.AopUmpSystemMonitor"
+          init-method="appSystemActiveMonitor">
+        <property name="appActiveKey" value="${appActiveKey}"/>
+    </bean>
+
+    <!--&lt;!&ndash;UMP的JVM监控&ndash;&gt;-->
+    <bean id="appSystemJvmMonitor" class="com.jd.bdp.atom.aop.advisor.AopUmpSystemMonitor"
+          init-method="appSystemJvmMonitor">
+        <property name="appJvmKey" value="${appJvmKey}"/>
+    </bean>
+
+    <bean id="velocityEngine" class="org.springframework.ui.velocity.VelocityEngineFactoryBean">
+        <property name="resourceLoaderPath" value="/WEB-INF/mail/"/>
+        <property name="velocityProperties">
+            <props>
+                <prop key="default.contentType">text/html; charset=utf-8</prop>
+                <prop key="output.encoding">utf-8</prop>
+                <prop key="input.encoding">utf-8</prop>
+                <prop key="dateToolAttribute">dateTool</prop>
+                <!--<prop key="resource.loader">class</prop>-->
+                <!--<prop key="class.resource.loader.class">org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader</prop>-->
+            </props>
+        </property>
+    </bean>
+
+    <bean class="com.jd.bdp.buffalo.manager.service.utils.HttpRequestUtil">
+        <property name="appId" value="${buffalo.appId}"/>
+        <property name="token" value="${buffalo.token}"/>
+    </bean>
+
+
+    <bean id="instanceStatusSender" class="com.jd.bdp.buffalo.manager.service.common.impl.InstanceStatusSender"
+          scope="singleton" init-method="init" lazy-init="true" >
+        <property name="username" value="${buffalo.jdq.producer.username}"/>
+        <property name="password" value="${buffalo.jdq.producer.password}"/>
+        <property name="runningEnv" value="${buffalo.jdq.producer.runningEnv}"/>
+        <property name="topic" value="${buffalo.jdq.producer.topic}"/>
+        <property name="clientId" value="${buffalo.jdq.producer.clientId}"/>
+        <property name="kdcUrl" value="${buffalo.jdq.producer.kdcUrl}"/>
+    </bean>
+
+
+    <bean id="phenixSender" class="com.jd.bdp.buffalo.manager.service.common.impl.PhenixSender"
+          scope="singleton" init-method="init" lazy-init="true" >
+        <property name="username" value="${phenix.jdq.producer.username}"/>
+        <property name="password" value="${phenix.jdq.producer.password}"/>
+        <property name="runningEnv" value="${phenix.jdq.producer.runningEnv}"/>
+        <property name="topic" value="${phenix.jdq.producer.topic}"/>
+        <property name="clientId" value="${phenix.jdq.producer.clientId}"/>
+        <property name="kdcUrl" value="${phenix.jdq.producer.kdcUrl}"/>
+    </bean>
+
+</beans>

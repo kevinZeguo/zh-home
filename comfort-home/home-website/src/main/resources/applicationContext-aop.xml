@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd">
+
+    <aop:aspectj-autoproxy proxy-target-class="true"/>
+    <context:component-scan base-package="com.jd.bdp.atom.aop.advisor"/>
+
+    <bean id="aopUmpInterceptor" class="com.jd.bdp.atom.aop.advisor.AopUmpInterceptor"/>
+    <aop:config>
+        <aop:advisor id="umpAdvisorService" advice-ref="aopUmpInterceptor"
+                     pointcut="execution(* com.jd.bdp.buffalo.manager.service.*.*.*(..))"/>
+    </aop:config>
+
+    <bean id="aopInterceptor" class="com.jd.bdp.atom.aop.advisor.AopInterceptor"/>
+    <aop:config>
+        <aop:advisor id="paramAdvisor" advice-ref="aopInterceptor" pointcut="execution(* com.jd.bdp.buffalo.manager.service.*.*.*(..)) "/>
+    </aop:config>
+    <!--<bean id="monitorAccessInterceptor" class="com.jd.bdp.atom.aop.advisor.MonitorAccessInterceptor"/>-->
+    <!--<aop:config>-->
+    <!--<aop:advisor id="paramAdvisor" advice-ref="aopInterceptor" pointcut="-->
+    <!--execution(* com.jd.bdp.buffalo.manager.service.*.*.*(..))-->
+    <!--"/>-->
+    <!--&lt;!&ndash;监控日志采集 &ndash;&gt;-->
+    <!--<aop:advisor id="monitorAccessAdvisor" advice-ref="monitorAccessInterceptor" pointcut="-->
+    <!--execution(* com.jd.bdp.buffalo.manager.api.*.*.*(..))-->
+    <!--"/>-->
+    <!--</aop:config>-->
+</beans>
