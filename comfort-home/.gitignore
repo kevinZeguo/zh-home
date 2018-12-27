@@ -1,1 +1,8 @@
 /target
+*.iml
+.idea
+cf-home.iml
+comfort-home.iml
+home-cms/home-cms.iml
+home-service/home-service.iml
+home-website/home-website.iml
