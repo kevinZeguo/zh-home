@@ -1,0 +1,95 @@
+﻿@charset "utf-8"; 
+
+// Colors
+$light: #fff !default;
+$gray-f3f: #F3F3F3 !default;
+$gray-f7f: #F7F7F7 !default;
+$gray-ccc: #ccc !default;
+$gray-dae: #DAE3EC !default;
+$gray-eee: #eee !default;
+$gray-333: #333 !default;
+$gray-666: #666 !default;
+$gray-999: #999 !default;
+$gray-eff: #EFF5F9 !default;
+$gray-bbb: #BBBDBF !default;
+$gray-4f4: #4f4f4f !default;
+$orange-f49: #F49A00 !default;
+$orange-f6A: #F6AA01 !default;
+$orange-fff: #FFF6E7 !default;
+$blue-20a: #20ADFF !default;
+$blue-1e8: #1E88F5 !default;
+$blue-56c: #56C3F4 !default;
+$red-c71: #C71B0C !default;
+$red-d00: #D0011B !default;
+
+// Base
+$font-family-base: PingFangSC-Regular, PingFangSC-Light, Arial, "Microsoft YaHei", sans-serif !default;
+$font-size-base: 14px !default;
+$font-size-large: 18px !default;
+$font-size-small: 11px !default;
+$line-height-base: 1.428571429 !default; // 20/14
+$line-height-computed: floor($font-size-base * $line-height-base) !default; // ~20px
+$line-height-large: 1.33 !default;
+$line-height-small: 1.5 !default;
+$headings-font-family: $font-family-base !default;
+$headings-font-weight: 500 !default;
+$headings-line-height: 1.2 !default;
+$base-background-color: #fff !default;
+$base-color: $gray-4f4 !default;
+$link-color: $gray-666 !default;
+$link-hover-color: darken($link-color, 15%) !default;
+$content-padding: 10px !default;
+$padding-base-vertical: 6px !default;
+$padding-base-horizontal: 12px !default;
+$padding-large-vertical: 10px !default;
+$padding-large-horizontal: 16px !default;
+$padding-small-vertical: 5px !default;
+$padding-small-horizontal: 10px !default;
+$border-radius-base: 4px !default;
+$border-radius-large: 6px !default;
+$border-radius-small: 3px !default; 
+
+// Loading
+$loading-text-color: #fff !default;
+$loading-bg-color: rgba(0,0,0,0.7) !default;
+$loading-padding: 20px !default;
+$loading-border-radius: 5px !default;
+$loading-font-size: 15px !default;
+$loading-backdrop-fadein-duration: 0.1s !default;
+$loading-backdrop-bg-color: rgba(0,0,0,0.4) !default;
+
+// Z-Indexes
+$z-index-bar-title: 0 !default;
+$z-index-item-drag: 0 !default;
+$z-index-item-edit: 0 !default;
+$z-index-menu: 0 !default;
+$z-index-badge: 1 !default;
+$z-index-bar-button: 1 !default;
+$z-index-item-options: 1 !default;
+$z-index-pane: 1 !default;
+$z-index-slider-pager: 1 !default;
+$z-index-view: 1 !default;
+$z-index-view-below: 2 !default;
+$z-index-item: 2 !default;
+$z-index-item-checkbox: 3 !default;
+$z-index-item-radio: 3 !default;
+$z-index-item-reorder: 3 !default;
+$z-index-item-toggle: 3 !default;
+$z-index-view-above: 3 !default;
+$z-index-tabs: 5 !default;
+$z-index-item-reordering: 9 !default;
+$z-index-bar: 9 !default;
+$z-index-bar-above: 10 !default;
+$z-index-menu-scroll-content: 10 !default;
+$z-index-modal: 10 !default;
+$z-index-popover: 10 !default;
+$z-index-action-sheet: 11 !default;
+$z-index-backdrop: 11 !default;
+$z-index-menu-bar-header: 11 !default;
+$z-index-scroll-content-false: 11 !default;
+$z-index-popup: 12 !default;
+$z-index-loading: 13 !default;
+$z-index-scroll-bar: 9999 !default;
+$z-index-click-block: 99999 !default;
+
+

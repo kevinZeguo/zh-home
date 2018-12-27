@@ -1,0 +1,10 @@
+﻿@charset "UTF-8";
+
+@import
+        // 初始变量和函数
+        'variables',
+        'mixins',
+
+        // 初始化样式和共用样式
+        'reset',
+        'util';
