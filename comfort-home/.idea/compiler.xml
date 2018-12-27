@@ -7,13 +7,14 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="home-cms" />
+        <module name="home-service" />
         <module name="home-website" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="cf-home" target="1.5" />
       <module name="home-cms" target="1.7" />
-      <module name="home-service" target="1.5" />
+      <module name="home-service" target="1.7" />
       <module name="home-website" target="1.7" />
     </bytecodeTargetLevel>
   </component>

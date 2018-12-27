@@ -1,8 +1,9 @@
 package com.zhonghua.comfortable.home.website.web.controller;
 
-import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.logging.Logger;
 
 /**
  * @author  mazeguo
@@ -12,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/")
 public class MainController {
-    private static final Logger logger = Logger.getLogger(MainController.class);
+//    private static final Logger logger = Logger.getLogger(MainController.class);
 
 
 
