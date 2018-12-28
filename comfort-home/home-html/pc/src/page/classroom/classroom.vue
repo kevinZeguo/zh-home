@@ -1,6 +1,6 @@
 <template>
     <div>
-        classroom
+        温度课堂
     </div>
 </template>
 
