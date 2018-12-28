@@ -32,6 +32,6 @@ export default {
 
 <style lang="scss" scoped>
 .template-container {
-    padding: 80px 0 0;
+    
 }
 </style>

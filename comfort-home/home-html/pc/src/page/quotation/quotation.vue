@@ -1,6 +1,6 @@
 <template>
     <div class="quotation">
-        <el-carousel height="600px">
+        <el-carousel height="680px">
             <el-carousel-item v-for="(item, index) in banners" :key="index">
                 <img :src="item.src" />
             </el-carousel-item>
@@ -124,13 +124,10 @@ export default {
             },
             banners: [
                 {
-                    src: require('../../assets/img/bg-home-four.jpg')
+                    src: require('../../assets/img/pic-banner-1.jpg')
                 },
                 {
-                    src: require('../../assets/img/bg-home-eight-1.jpg')
-                },
-                {
-                    src: require('../../assets/img/bg-home-four.jpg')
+                    src: require('../../assets/img/pic-banner-2.jpg')
                 }
             ]
         }
