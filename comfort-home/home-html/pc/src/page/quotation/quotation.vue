@@ -403,6 +403,7 @@ export default {
             background:rgba(233,197,14,1);
             box-shadow:0px 2px 4px 0px rgba(0,0,0,0.5);
             border-radius:20px;
+            border: 0;
             color: #fff;
             font-size:20px;
         }
