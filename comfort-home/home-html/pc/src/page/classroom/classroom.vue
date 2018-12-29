@@ -63,9 +63,9 @@ export default {
 
 <style lang="scss" scoped>
 .class-room {
-     padding: 165px 0 0;
+    padding: 165px 0 0;
 
-     .c-nav {
+    .c-nav {
         margin: 0 auto;
         padding: 0 65px;
         width: 1200px;

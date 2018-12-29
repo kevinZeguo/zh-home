@@ -59,7 +59,6 @@ export default {
     z-index: 1000;
 
     a {
-        padding: 0 20px;
         width: 25%;
         height:4.95rem;
         line-height: 4.95rem;
