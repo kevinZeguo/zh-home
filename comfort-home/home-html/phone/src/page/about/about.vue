@@ -222,7 +222,7 @@ export default {
                     text-align: center;
 
                     img {
-                        width: 1rem;
+                        width: 3.4rem;
                     }
                 }
 
@@ -248,7 +248,8 @@ export default {
     .a-pro {
         padding: 4.6rem 2.4rem 4.25rem;
         width: 100%;
-        background: #000;
+        background: url(../../assets/img/pic-640x520-1.jpg) no-repeat center center;
+        background-size: cover;
 
         .a-pro-one {
             background:rgba(255,255,255,0.8);

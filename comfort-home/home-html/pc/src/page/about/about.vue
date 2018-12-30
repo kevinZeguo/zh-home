@@ -100,8 +100,8 @@ export default {
     .a-banner {
         width: 100%;
         min-width: 1200px;
-        height: 515px;
-        background: url(../../assets/img/pic-1920x515-1.jpg) no-repeat center center;
+        height: 550px;
+        background: url(../../assets/img/pic-1920x550-1.jpg) no-repeat center center;
     }
 
     .a-col {
@@ -250,7 +250,7 @@ export default {
         width: 100%;
         min-width: 1200px;
         height: 500px;
-        background: url(../../assets/img/pic-1920x515-1.jpg) no-repeat center center;
+        background: url(../../assets/img/pic-1920x535-1.jpg) no-repeat center center;
 
         .a-pro-one {
             margin: 0 auto;
