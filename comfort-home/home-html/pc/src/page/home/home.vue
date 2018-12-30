@@ -53,7 +53,7 @@
                     <ul>
                         <li>
                             <p class="name">100+</p>
-                            <p class="prop">1000+专业服务团队</p>
+                            <p class="prop">100+专业服务团队</p>
                         </li>
                         <li>
                             <p class="name">10年</p>
