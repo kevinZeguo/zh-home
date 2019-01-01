@@ -72,7 +72,7 @@
                         <li :class="{active: activeStatus == 2}">
                             <div class="icons icon-home-five-3" @click="changeTabs(2)"></div>
                             <p class="name">清新的空气</p>
-                            <p class="sel-result">已选 | 森得新风<span class="sel-btn-close"></span></p>
+                            <!--<p class="sel-result">已选 | 森得新风<span class="sel-btn-close"></span></p>-->
                         </li>
                         <li :class="{active: activeStatus == 3}">
                             <div class="icons icon-home-five-2" @click="changeTabs(3)"></div>
@@ -102,37 +102,37 @@
                         </ul>
                         <ul v-if="activeStatus == 2">
                             <li :class="{active: twoStatus == index}" v-for="(item, index) in resultArrs[1]" @click="changeTwos(index)">
-                                <p class="name">大金空调2</p>
+                                <p class="name">{{ item.brand }}</p>
                                 <p class="pic"><img src="../../assets/img/pic-160x160-1.png" /></p>
-                                <p class="prop">出色的低噪音特性<br />高效节能精准温控<br />营造恒温舒适的居家享受</p>
+                                <p class="prop">{{ item.recommend }}</p>
                             </li>
                         </ul>
                         <ul v-if="activeStatus == 3">
                             <li :class="{active: threeStatus == index}" v-for="(item, index) in resultArrs[2]" @click="changeThrees(index)">
-                                <p class="name">大金空调3</p>
+                                <p class="name">{{ item.brand }}</p>
                                 <p class="pic"><img src="../../assets/img/pic-160x160-1.png" /></p>
-                                <p class="prop">出色的低噪音特性<br />高效节能精准温控<br />营造恒温舒适的居家享受</p>
+                                <p class="prop">{{ item.recommend }}</p>
                             </li>
                         </ul>
                         <ul v-if="activeStatus == 4">
                             <li :class="{active: fourStatus == index}" v-for="(item, index) in resultArrs[3]" @click="changeFours(index)">
-                                <p class="name">大金空调4</p>
+                                <p class="name">{{ item.brand }}</p>
                                 <p class="pic"><img src="../../assets/img/pic-160x160-1.png" /></p>
-                                <p class="prop">出色的低噪音特性<br />高效节能精准温控<br />营造恒温舒适的居家享受</p>
+                                <p class="prop">{{ item.recommend }}</p>
                             </li>
                         </ul>
                         <ul v-if="activeStatus == 5">
                             <li :class="{active: fiveStatus == index}" v-for="(item, index) in resultArrs[4]" @click="changeFives(index)">
-                                <p class="name">大金空调5</p>
+                                <p class="name">{{ item.brand }}</p>
                                 <p class="pic"><img src="../../assets/img/pic-160x160-1.png" /></p>
-                                <p class="prop">出色的低噪音特性<br />高效节能精准温控<br />营造恒温舒适的居家享受</p>
+                                <p class="prop">{{ item.recommend }}</p>
                             </li>
                         </ul>
                         <ul v-if="activeStatus == 6">
                             <li :class="{active: sixStatus == index}" v-for="(item, index) in resultArrs[5]" @click="changeSixs(index)">
-                                <p class="name">大金空调6</p>
+                                <p class="name">{{ item.brand }}</p>
                                 <p class="pic"><img src="../../assets/img/pic-160x160-1.png" /></p>
-                                <p class="prop">出色的低噪音特性<br />高效节能精准温控<br />营造恒温舒适的居家享受</p>
+                                <p class="prop">{{ item.recommend }}</p>
                             </li>
                         </ul>
                     </div>
@@ -163,8 +163,8 @@
 </template>
 
 <script>
-import { productList } from '../../service/getData';
 import { isvalidPhone } from '../../config/utils';
+import { productList, productQuote } from '../../service/getData';
 
 export default {
     data () {
@@ -323,259 +323,11 @@ export default {
                 [],
                 [],
                 []
-            ],
-            result: {
-                "success": true,
-                "list": [
-                    {
-                        "id": 10001,
-                        "brand": "大金空调",
-                        "model": null,
-                        "name": null,
-                        "icon": null,
-                        "recommend": null,
-                        "module": 1,
-                        "moduleName": "凉爽的夏⽇",
-                        "productPrices": null,
-                        "productPartList": null,
-                        "formula": "TP+PP"
-                    },
-                    {
-                        "id": 10002,
-                        "brand": "⽇立空调",
-                        "model": null,
-                        "name": null,
-                        "icon": null,
-                        "recommend": null,
-                        "module": 1,
-                        "moduleName": "凉爽的夏⽇",
-                        "productPrices": null,
-                        "productPartList": null,
-                        "formula": "TP+PP"
-                    },
-                    {
-                        "id": 10003,
-                        "brand": "约克空调",
-                        "model": null,
-                        "name": null,
-                        "icon": null,
-                        "recommend": null,
-                        "module": 1,
-                        "moduleName": "凉爽的夏⽇",
-                        "productPrices": null,
-                        "productPartList": null,
-                        "formula": "TP+PP"
-                    },
-                    {
-                        "id": 10004,
-                        "brand": "格力空调",
-                        "model": null,
-                        "name": null,
-                        "icon": null,
-                        "recommend": null,
-                        "module": 1,
-                        "moduleName": "凉爽的夏⽇",
-                        "productPrices": null,
-                        "productPartList": null,
-                        "formula": "TP+PP"
-                    },
-                    {
-                        "id": 20001,
-                        "brand": "霍尼韦尔",
-                        "model": null,
-                        "name": null,
-                        "icon": null,
-                        "recommend": null,
-                        "module": 2,
-                        "moduleName": "清新的空气",
-                        "productPrices": null,
-                        "productPartList": null,
-                        "formula": "TP+PP"
-                    },
-                    {
-                        "id": 20002,
-                        "brand": "森德新⻛",
-                        "model": null,
-                        "name": null,
-                        "icon": null,
-                        "recommend": null,
-                        "module": 2,
-                        "moduleName": "清新的空气",
-                        "productPrices": null,
-                        "productPartList": null,
-                        "formula": "TP+PP"
-                    },
-                    {
-                        "id": 20003,
-                        "brand": "希海姆新⻛",
-                        "model": null,
-                        "name": null,
-                        "icon": null,
-                        "recommend": null,
-                        "module": 2,
-                        "moduleName": "清新的空气",
-                        "productPrices": null,
-                        "productPartList": null,
-                        "formula": "TP+PP"
-                    },
-                    {
-                        "id": 20004,
-                        "brand": "第五季新⻛",
-                        "model": null,
-                        "name": null,
-                        "icon": null,
-                        "recommend": null,
-                        "module": 2,
-                        "moduleName": "清新的空气",
-                        "productPrices": null,
-                        "productPartList": null,
-                        "formula": "TP+PP"
-                    },
-                    {
-                        "id": 30001,
-                        "brand": "霍尼⻙尔",
-                        "model": null,
-                        "name": null,
-                        "icon": null,
-                        "recommend": null,
-                        "module": 3,
-                        "moduleName": "洁净的⽔源",
-                        "productPrices": null,
-                        "productPartList": null,
-                        "formula": "TP"
-                    },
-                    {
-                        "id": 30002,
-                        "brand": "怡⼝净水",
-                        "model": null,
-                        "name": null,
-                        "icon": null,
-                        "recommend": null,
-                        "module": 3,
-                        "moduleName": "洁净的⽔源",
-                        "productPrices": null,
-                        "productPartList": null,
-                        "formula": "TP"
-                    },
-                    {
-                        "id": 40001,
-                        "brand": "威能采暖炉+瑞好地暖",
-                        "model": null,
-                        "name": null,
-                        "icon": null,
-                        "recommend": null,
-                        "module": 4,
-                        "moduleName": "温暖的房间",
-                        "productPrices": null,
-                        "productPartList": null,
-                        "formula": "BP"
-                    },
-                    {
-                        "id": 40002,
-                        "brand": "威能采暖炉+赫兰德暖⽓⽚",
-                        "model": null,
-                        "name": null,
-                        "icon": null,
-                        "recommend": null,
-                        "module": 4,
-                        "moduleName": "温暖的房间",
-                        "productPrices": null,
-                        "productPartList": null,
-                        "formula": "TP+PP"
-                    },
-                    {
-                        "id": 40003,
-                        "brand": "卡洛毛细管网",
-                        "model": null,
-                        "name": null,
-                        "icon": null,
-                        "recommend": null,
-                        "module": 4,
-                        "moduleName": "温暖的房间",
-                        "productPrices": null,
-                        "productPartList": null,
-                        "formula": "UP"
-                    },
-                    {
-                        "id": 50001,
-                        "brand": "林内燃⽓热⽔器",
-                        "model": null,
-                        "name": null,
-                        "icon": null,
-                        "recommend": null,
-                        "module": 5,
-                        "moduleName": "24⼩时热⽔",
-                        "productPrices": null,
-                        "productPartList": null,
-                        "formula": "TP"
-                    },
-                    {
-                        "id": 50002,
-                        "brand": "能率燃⽓热⽔器",
-                        "model": null,
-                        "name": null,
-                        "icon": null,
-                        "recommend": null,
-                        "module": 5,
-                        "moduleName": "24⼩时热⽔",
-                        "productPrices": null,
-                        "productPartList": null,
-                        "formula": "TP"
-                    },
-                    {
-                        "id": 50003,
-                        "brand": "威能太阳能热⽔器",
-                        "model": null,
-                        "name": null,
-                        "icon": null,
-                        "recommend": null,
-                        "module": 5,
-                        "moduleName": "24⼩时热⽔",
-                        "productPrices": null,
-                        "productPartList": null,
-                        "formula": "TP"
-                    },
-                    {
-                        "id": 60001,
-                        "brand": "集成线控+APP联动控制",
-                        "model": null,
-                        "name": null,
-                        "icon": null,
-                        "recommend": null,
-                        "module": 6,
-                        "moduleName": "智能的房⼦",
-                        "productPrices": null,
-                        "productPartList": null,
-                        "formula": "TP"
-                    },
-                    {
-                        "id": 60002,
-                        "brand": "灯光窗帘音乐模块",
-                        "model": null,
-                        "name": null,
-                        "icon": null,
-                        "recommend": null,
-                        "module": 6,
-                        "moduleName": "智能的房⼦",
-                        "productPrices": null,
-                        "productPartList": null,
-                        "formula": "BP"
-                    }
-                ]
-            }
+            ]
         }
     },
     mounted () {
         this.productList();
-
-        this.result.list.forEach((value, index) => {
-            //console.log(index);
-            //if ( == index) {
-                this.resultArrs[(value.module - 1)].push(value);
-            //}
-        });
-
-        //console.log(JSON.stringify(this.resultArrs));
     },
     methods: {
         changeTabs (index) {
@@ -643,6 +395,7 @@ export default {
             });
         },
         submitForm (formName) {
+                    
             this.$refs[formName].validate((valid) => {
                 if (valid) {
                     let ps = this.resultArrs[0][this.oneStatus].id + ',' +
@@ -664,6 +417,7 @@ export default {
                     }
 
                     console.log(JSON.stringify(params));
+                    this.productQuote(params);
                 } else {
                     console.log(123);
                 }
@@ -721,16 +475,51 @@ export default {
             done();
 
             this.dialogFormClose();
-
         },
         async productList () {
             const res = await productList('');
 
-            console.log(JSON.stringify(res));
+            // console.log(JSON.stringify(res));
 
+            if (res.data.success == true) { 
+                res.data.list.forEach((value, index) => {
+                    //console.log(index);
+                    this.resultArrs[(value.module - 1)].push(value);
+                });
+            }
+        },
+        async productQuote (params) {
+            const res = await productQuote(params);
+
+            if (res.data.success == true) {
+                this.dialogFormClose();
+
+                this.oneStatus = null;
+                this.twoStatus = null;
+                this.threeStatus = null;
+                this.fourStatus = null;
+                this.fiveStatus = null;
+                this.sixStatus = null;
+
+                this.chooseForm.ps = '';
+                this.chooseForm.type = '';
+                this.chooseForm.usableArea = '';
+                this.chooseForm.liveCount = '';
+                this.chooseForm.parlorCount = '';
+                this.chooseForm.roomCount = '';
+
+                this.$message({
+                    message: '恭喜您，操作成功，报价信息已经发送至您的手机，请查收',
+                    type: 'success'
+                });
+            } else {
+                this.$message({
+                    message: '请求失败，请稍后再试',
+                    type: 'error'
+                });
+            }
         }
     }
-
 }
 </script>
 
@@ -945,6 +734,10 @@ export default {
 
                         &:last-child {
                             margin-right: 0;
+                        }
+
+                        &:hover {
+                            border:2px solid #90C422;
                         }
 
                         &.active {

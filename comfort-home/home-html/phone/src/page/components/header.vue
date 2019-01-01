@@ -33,10 +33,10 @@ export default {
                     name: '解决方案',
                     url: '/solution'
                 },
-                {
+                /*{
                     name: '客户案例',
                     url: '/customer-case'
-                },
+                },*/
                 {
                     name: '关于我们',
                     url: '/about'

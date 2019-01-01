@@ -21,33 +21,36 @@
         <div v-if="step.oneActive">
             <div class="quo-selects">
                 <p class="label">我家是</p>
-                <div class="select-box">
-                    <select v-model="chooseForm.home">
-                        <option value='' disabled selected style='color; #999;display:none;'></option>
-                        <option label="home1" value="1"></option>
-                        <option label="home2" value="1"></option>
+                <div class="select-box" style="margin-bottom: 1rem;">
+                    <select v-model="chooseForm.roomCount">
+                        <option v-for="(item, index) in roomsType" :label="item.label" :value="item.value" :key="index"></option>
                     </select>
-                    <span class="txt">请选择</span>
+                    <span class="txt" v-if="chooseForm.roomCount == ''">请选择卧室数量</span>
+                </div>
+                <div class="select-box">
+                    <select v-model="chooseForm.parlorCount">
+                        <option v-for="(item, index) in hallsType" :label="item.label" :value="item.value" :key="index"></option>
+                    </select>
+                    <span class="txt" v-if="chooseForm.parlorCount == ''">请选择客厅数量</span>
                 </div>
             
                 <p class="label">实际使用面积</p>
                 <div class="field-box">
-                    <input type="text" v-model="chooseForm.use" placeholder="请填写使用面积" />
+                    <input type="text" v-model="chooseForm.usableArea" placeholder="请填写使用面积" />
                     <span class="txt">㎡</span>
                 </div>
             
                 <p class="label">房屋户型</p>
                 <div class="select-box">
-                    <select v-model="chooseForm.projtect">
-                        <option label="projtect1" value="1"></option>
-                        <option label="projtect2" value="2"></option>
+                    <select v-model="chooseForm.type">
+                        <option v-for="(item, index) in homeTypes" :label="item.label" :value="item.value" :key="index"></option>
                     </select>
-                    <span class="txt">请选择</span>
+                    <span class="txt" v-if="chooseForm.type == ''">请选择户型</span>
                 </div>
             
                 <p class="label">我家里有</p>
                 <div class="field-box">
-                    <input type="text" v-model="chooseForm.use" placeholder="请填写" />
+                    <input type="text" v-model="chooseForm.liveCount" placeholder="请填写" />
                     <span class="txt">人</span>
                 </div>
             </div>
@@ -60,49 +63,74 @@
         <div v-if="step.twoActive">
             <div class="quo-choose">
                 <ul class="tab-ul">
-                    <li class="active">
+                    <li :class="{active: activeStatus == 1}" @click="changeTabs(1)">
                         <div class="icons icon-home-five-5"></div>
                         <p class="name">凉爽的夏日</p>
                     </li>
-                    <li>
+                    <li :class="{active: activeStatus == 2}" @click="changeTabs(2)">
                         <div class="icons icon-home-five-3"></div>
                         <p class="name">清新的空气</p>
-                        <p class="sel-result">已选 | 森得新风<span class="sel-btn-close"></span></p>
+                        <!--<p class="sel-result">已选 | 森得新风<span class="sel-btn-close"></span></p>-->
                     </li>
-                    <li>
+                    <li :class="{active: activeStatus == 3}" @click="changeTabs(3)">
                         <div class="icons icon-home-five-2"></div>
                         <p class="name">洁净的水源</a></p>
                     </li>
-                    <li>
+                    <li :class="{active: activeStatus == 4}" @click="changeTabs(4)">
                         <div class="icons icon-home-five-1"></div>
                         <p class="name">温暖的房间</p>
                     </li>
-                    <li>
+                    <li :class="{active: activeStatus == 5}" @click="changeTabs(5)">
                         <div class="icons icon-home-five-4"></div>
                         <p class="name">24小时热水</p>
                     </li>
-                    <li>
+                    <li :class="{active: activeStatus == 6}" @click="changeTabs(6)">
                         <div class="icons icon-home-five-6"></div>
                         <p class="name">智能的房子</p>
                     </li>
                 </ul>
 
                 <div class="pro-list">
-                    <ul>
-                        <li class="active">
-                            <p class="name">大金空调</p>
+                   <ul v-if="activeStatus == 1">
+                        <li :class="{active: oneStatus == index}" v-for="(item, index) in resultArrs[0]" @click="changeOnes(index)">
+                            <p class="name">{{ item.brand }}</p>
                             <p class="pic"><img src="../../assets/img/pic-160x160-1.png" /></p>
-                            <p class="prop">出色的低噪音特性<br />高效节能精准温控<br />营造恒温舒适的居家享受</p>
+                            <p class="prop">{{ item.name }}</p>
                         </li>
-                        <li>
-                            <p class="name">日立空调</p>
+                    </ul>
+                    <ul v-if="activeStatus == 2">
+                        <li :class="{active: twoStatus == index}" v-for="(item, index) in resultArrs[1]" @click="changeTwos(index)">
+                            <p class="name">{{ item.brand }}</p>
                             <p class="pic"><img src="../../assets/img/pic-160x160-1.png" /></p>
-                            <p class="prop">出色的低噪音特性<br />高效节能精准温控<br />营造恒温舒适的居家享受</p>
+                            <p class="prop">{{ item.recommend }}</p>
                         </li>
-                        <li>
-                            <p class="name">约克空调</p>
+                    </ul>
+                    <ul v-if="activeStatus == 3">
+                        <li :class="{active: threeStatus == index}" v-for="(item, index) in resultArrs[2]" @click="changeThrees(index)">
+                            <p class="name">{{ item.brand }}</p>
                             <p class="pic"><img src="../../assets/img/pic-160x160-1.png" /></p>
-                            <p class="prop">出色的低噪音特性<br />高效节能精准温控<br />营造恒温舒适的居家享受</p>
+                            <p class="prop">{{ item.recommend }}</p>
+                        </li>
+                    </ul>
+                    <ul v-if="activeStatus == 4">
+                        <li :class="{active: fourStatus == index}" v-for="(item, index) in resultArrs[3]" @click="changeFours(index)">
+                            <p class="name">{{ item.brand }}</p>
+                            <p class="pic"><img src="../../assets/img/pic-160x160-1.png" /></p>
+                            <p class="prop">{{ item.recommend }}</p>
+                        </li>
+                    </ul>
+                    <ul v-if="activeStatus == 5">
+                        <li :class="{active: fiveStatus == index}" v-for="(item, index) in resultArrs[4]" @click="changeFives(index)">
+                            <p class="name">{{ item.brand }}</p>
+                            <p class="pic"><img src="../../assets/img/pic-160x160-1.png" /></p>
+                            <p class="prop">{{ item.recommend }}</p>
+                        </li>
+                    </ul>
+                    <ul v-if="activeStatus == 6">
+                        <li :class="{active: sixStatus == index}" v-for="(item, index) in resultArrs[5]" @click="changeSixs(index)">
+                            <p class="name">{{ item.brand }}</p>
+                            <p class="pic"><img src="../../assets/img/pic-160x160-1.png" /></p>
+                            <p class="prop">{{ item.recommend }}</p>
                         </li>
                     </ul>
                 </div>
@@ -115,8 +143,8 @@
 
         <div class="view-result" v-if="step.threeActive">
             <div class="con">
-                <p>报价短信已发送至您的手机 189****4871，请查收。 我们的客户经理将尽快与您联系。</p>
-                <p>也欢迎您随时致电： 021-4689210</p>
+                <p>报价短信已发送至您的手机 {{ nowPhone.substring(0, 3) }}****{{ nowPhone.substring(7) }}，请查收。 我们的客户经理将尽快与您联系。</p>
+                <p>也欢迎您随时致电： 022-84127996</p>
                 <p>众华舒适家</p>
             </div>
         </div>
@@ -130,8 +158,8 @@
             <div class="quo-dialog-bd">
                 <p class="prop">报价结果将以短信形式发送至您手机</p>
                 <div class="quo-dialog-forms">
-                    <input type="text" class="text" placeholder="姓名" />
-                    <input type="text" class="text" placeholder="手机号" />
+                    <input type="text" class="text" v-model="ruleForm.userName" placeholder="姓名" />
+                    <input type="text" class="text" v-model="ruleForm.phoneNum" placeholder="手机号" />
                     <button type="submit" class="btn-submit" @click="threeClick">获取报价</button>
                 </div>
             </div>
@@ -141,8 +169,21 @@
 </template>
 
 <script>
+import { isvalidPhone } from '../../config/utils';
+import { productList, productQuote } from '../../service/getData';
+
 export default {
     data () {
+        var validPhone=(rule, value,callback)=>{
+            if (!value){
+                callback(new Error('请输入手机号'));
+            }else if (!isvalidPhone(value)){
+                callback(new Error('请输入正确的11位手机号码'));
+            }else {
+                callback();
+            }
+        };
+
         return {
             step: {
                 oneActive: true,
@@ -152,36 +193,425 @@ export default {
                 threeActive: false,
                 threeSelected: false
             },
+            dialogBln: false,
+            homeTypes: [
+                {
+                    value: 1,
+                    label:'别墅'
+                },
+                {
+                    value: 2,
+                    label: '平层'
+                },
+                {
+                    value: 3,
+                    label: '复式'
+                }
+            ],
+            roomsType: [
+                {
+                    value: 1,
+                    label:'1居'
+                },
+                {
+                    value: 2,
+                    label: '2居'
+                },
+                {
+                    value: 3,
+                    label: '3居'
+                },
+                {
+                    value: 4,
+                    label: '4居'
+                },
+                {
+                    value: 5,
+                    label: '5居'
+                },
+                {
+                    value: 6,
+                    label: '6居'
+                },
+                {
+                    value: 7,
+                    label: '7居'
+                },
+                {
+                    value: 8,
+                    label: '8居'
+                },
+                {
+                    value: 9,
+                    label: '9居'
+                }
+            ],
+            hallsType: [
+                {
+                    value: 1,
+                    label:'1厅'
+                },
+                {
+                    value: 2,
+                    label: '2厅'
+                },
+                {
+                    value: 3,
+                    label: '3厅'
+                },
+                {
+                    value: 4,
+                    label: '4厅'
+                },
+                {
+                    value: 5,
+                    label: '5厅'
+                },
+                {
+                    value: 6,
+                    label: '6厅'
+                },
+                {
+                    value: 7,
+                    label: '7厅'
+                },
+                {
+                    value: 8,
+                    label: '8厅'
+                },
+                {
+                    value: 9,
+                    label: '9厅'
+                }
+            ],
             chooseForm: {
-                home: '',
-                use: '',
-                projtect: '',
-                have: ''
+                ps: '', //产品Id，多个以逗号分割
+                type: '', //房间类型 1-别墅 2-平层 3-复式
+                usableArea: null, //使用面积
+                liveCount: null, //居住人数
+                parlorCount: '', //客厅数量
+                roomCount: '' //卧室数量
             },
-            dialogBln: false
+            rules: {
+                roomCount: [
+                    { required: true, message: '请选择卧室数量', trigger: 'change' }
+                ],
+                parlorCount: [
+                    { required: true, message: '请选择客厅数量', trigger: 'change' }
+                ],
+                usableArea: [
+                    { required: true, message: '使用面积不能为空'},
+                    { type: 'number', message: '使用面积必须为数字值'}
+                ],
+                type: [
+                    { required: true, message: '请选择房屋户型', trigger: 'change' }
+                ],
+                liveCount: [
+                    { required: true, message: '人数不能为空'},
+                    { type: 'number', message: '人数必须为数字值'}
+                ]
+            },
+            ruleForm: {
+                phoneNum: '', //手机号
+                userName: '' //用户姓名
+            },
+            rulesForm: {
+                userName: [
+                    { required: true, message: '用户姓名不能为空'}
+                ],
+                phoneNum: [
+                    { required: true, trigger: 'blur', validator: validPhone }
+                ]
+            },
+            activeStatus: 1,
+            oneStatus: null,
+            twoStatus: null,
+            threeStatus: null,
+            fourStatus: null,
+            fiveStatus: null,
+            sixStatus: null,
+            resultArrs: [
+                [],
+                [],
+                [],
+                [],
+                [],
+                []
+            ],
+            nowPhone: '15800001111'
         }
     },
     mounted () {
+        this.productList();
     },
     methods: {
         oneClick () {
+
+            //卧室数量
+            if (this.chooseForm.roomCount == '') {
+                this.$toast({
+                    message: '请选择卧室数量'
+                });
+
+                return false;
+            } 
+
+            //客厅数量
+            if (this.chooseForm.parlorCount == '') {
+                this.$toast({
+                    message: '请选择客厅数量'
+                });
+                return false;
+            }
+
+            //使用面积
+            if (this.chooseForm.usableArea == null) {
+                this.$toast({
+                    message: '请填写使用面积'
+                });
+                return false;
+            }
+
+            if (!/^\+?[1-9][0-9]*$/.test(this.chooseForm.usableArea)) {
+                this.$toast({
+                    message: '使用面积只能为数值'
+                });
+                return false;
+            }
+
+            //房间类型 1-别墅 2-平层 3-复式
+            if (this.chooseForm.type == '') {
+                this.$toast({
+                    message: '请选择房间类型'
+                });
+                return false;
+            }
+
+            //居住人数
+            if (this.chooseForm.liveCount == null) {
+                this.$toast({
+                    message: '请填写居住人数'
+                });
+                return false;
+            }
+
+            if (!/^\+?[1-9][0-9]*$/.test(this.chooseForm.liveCount)) {
+                this.$toast({
+                    message: '人数只能为数值'
+                });
+                return false;
+            }
+
             this.step.oneActive = false;
             this.step.oneSelected = true;
             this.step.twoActive = true;
         },
         twoClick () {
+            if (this.oneStatus == null) {
+                this.$toast({
+                    message: '请选择凉爽的夏日',
+                    type: 'warning'
+                });
+
+                return false;
+            }
+
+            if (this.twoStatus == null) {
+                this.$toast({
+                    message: '请选择清新的空气',
+                    type: 'warning'
+                });
+                
+                return false;
+            }
+
+            if (this.threeStatus == null) {
+                this.$toast({
+                    message: '请选择洁净的水源',
+                    type: 'warning'
+                });
+                
+                return false;
+            }
+
+            if (this.fourStatus == null) {
+                this.$toast({
+                    message: '请选择温暖的房间',
+                    type: 'warning'
+                });
+                
+                return false;
+            }
+
+            if (this.fiveStatus == null) {
+                this.$toast({
+                    message: '请选择24小时热水',
+                    type: 'warning'
+                });
+                
+                return false;
+            }
+
+            if (this.sixStatus == null) {
+                this.$toast({
+                    message: '请选择智能的房子',
+                    type: 'warning'
+                });
+                
+                return false;
+            }
+
             this.dialogBln = true;
         },
         threeClick () {
-            this.dialogBln = false;
 
-            this.step.twoActive = false;
-            this.step.twoSelected = true;
-            this.step.threeSelected = true;
-            this.step.threeActive = true;
+            //手机号
+            if (this.ruleForm.phoneNum == '' ) {
+                this.$toast({
+                    message: '请填写手机号'
+                });
+
+                return false;
+            }
+
+            if (!isvalidPhone(this.ruleForm.phoneNum)) {
+                this.$toast({
+                    message: '请输入正确的11位手机号码'
+                });
+            }
+
+            //用户姓名
+            if (this.ruleForm.userName == '' ) {
+                this.$toast({
+                    message: '请填写用户姓名'
+                });
+                return false;
+            }
+
+            let ps = this.resultArrs[0][this.oneStatus].id + ',' +
+                     this.resultArrs[1][this.twoStatus].id + ',' +
+                     this.resultArrs[2][this.threeStatus].id + ',' +
+                     this.resultArrs[3][this.fourStatus].id + ',' +
+                     this.resultArrs[4][this.fiveStatus].id + ',' +
+                     this.resultArrs[5][this.sixStatus].id;
+
+            let params = {
+                ps: ps, //产品Id，多个以逗号分割
+                type: this.chooseForm.type, //房间类型 1-别墅 2-平层 3-复式
+                usableArea: this.chooseForm.usableArea, //使用面积
+                liveCount: this.chooseForm.liveCount, //居住人数
+                parlorCount: this.chooseForm.parlorCount, //客厅数量
+                roomCount: this.chooseForm.roomCount, //卧室数量
+                phoneNum: this.ruleForm.phoneNum, //手机号
+                userName: this.ruleForm.userName //用户姓名
+            }
+
+            //console.log(JSON.stringify(params));
+            this.productQuote(params, () => {
+
+                this.dialogBln = false;
+
+                this.step.twoActive = false;
+                this.step.twoSelected = true;
+                this.step.threeSelected = true;
+                this.step.threeActive = true;
+            });            
         },
         closeClick () {
-           this.dialogBln = false; 
+            this.dialogBln = false;
+
+            this.ruleForm.phoneNum = ''; //手机号
+            this.ruleForm.userName = ''; //用户姓名
+        },
+        changeTabs (index) {
+            this.activeStatus = index;
+        },
+        changeOnes (index) {
+            if (this.oneStatus == index) {
+                this.oneStatus = null;
+            } else {
+                this.oneStatus = index; 
+            }
+        },
+        changeTwos (index) {
+            if (this.twoStatus == index) {
+                this.twoStatus = null;
+            } else {
+                this.twoStatus = index; 
+            }
+        },
+        changeThrees (index) {
+            if (this.threeStatus == index) {
+                this.threeStatus = null;
+            } else {
+                this.threeStatus = index; 
+            }
+        },
+        changeFours (index) {
+            if (this.fourStatus == index) {
+                this.fourStatus = null;
+            } else {
+                this.fourStatus = index; 
+            }
+        },
+        changeFives (index) {
+            if (this.fiveStatus == index) {
+                this.fiveStatus = null;
+            } else {
+                this.fiveStatus = index; 
+            }
+        },
+        changeSixs (index) {
+            if (this.sixStatus == index) {
+                this.sixStatus = null;
+            } else {
+                this.sixStatus = index; 
+            }
+        },
+        async productList () {
+            const res = await productList('');
+
+            if (res.data.success == true) { 
+                res.data.list.forEach((value, index) => {
+                    this.resultArrs[(value.module - 1)].push(value);
+                });
+            }
+        },
+        async productQuote (params, callback) {
+            const res = await productQuote(params);
+            //console.log(JSON.stringify(res));
+            if (res.data.success == true) {
+                callback();
+
+                this.nowPhone = this.ruleForm.phoneNum + '';
+
+                this.ruleForm.phoneNum = ''; //手机号
+                this.ruleForm.userName = ''; //用户姓名
+
+                this.oneStatus = null;
+                this.twoStatus = null;
+                this.threeStatus = null;
+                this.fourStatus = null;
+                this.fiveStatus = null;
+                this.sixStatus = null;
+
+                this.chooseForm.ps = '';
+                this.chooseForm.type = '';
+                this.chooseForm.usableArea = null;
+                this.chooseForm.liveCount = null;
+                this.chooseForm.parlorCount = '';
+                this.chooseForm.roomCount = '';
+
+                this.$toast({
+                    message: '恭喜您，操作成功，报价信息已经发送至您的手机，请查收',
+                    type: 'success'
+                });
+            } else {
+                this.$toast({
+                    message: '请求失败，请稍后再试',
+                    type: 'error'
+                });
+            }
         }
     }
 }
@@ -287,6 +717,7 @@ export default {
             position: relative;
 
             select {
+                padding-left: 1rem;
                 width: 100%;
                 height: 3.4rem;
                 background: transparent;
@@ -295,6 +726,7 @@ export default {
                 line-height: 1.2rem;
                 color: #424242;
                 position: relative;
+                font-size: 1.2rem;
                 z-index: 10;
             }
 
@@ -305,6 +737,7 @@ export default {
                 top: 0;
                 left: 1rem;
                 line-height: 3.4rem;
+                font-size: 1.2rem;
             }
         }
 
@@ -338,6 +771,7 @@ export default {
                 top: 0;
                 color:#C3C1C1;
                 right: 1rem;
+                font-size: 1.2rem;
             }
         }
     }
@@ -591,7 +1025,7 @@ export default {
         backface-visibility: hidden;
         -webkit-transition: .2s;
         transition: .2s;
-        z-index: 2001;
+        z-index: 101;
 
         .quo-dialog-hd {
             padding: 1.7rem 0 1.2rem;
@@ -667,7 +1101,7 @@ export default {
         height: 100%;
         opacity: 0.5;
         background: #000;
-        z-index: 2000;
+        z-index: 100;
     }
 }
 </style>

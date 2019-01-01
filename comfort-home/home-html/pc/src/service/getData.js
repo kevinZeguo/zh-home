@@ -3,13 +3,12 @@ import { openUrl } from '../config/env';
 
 import req from '../config/axios';
 
-/*
- * 统一认证系统接口
- * Author: yujp
- */
-
-// 用户登录
+// 产品列表
 export const productList = param => {
-	return req.post('home/product.ajax', '');
+	return req.get('home/product.ajax', param);
 };
 
+// 获取报价
+export const productQuote = param => {
+	return req.get('home/quote.ajax', param);
+};
