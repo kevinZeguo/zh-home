@@ -90,13 +90,13 @@ export default {
             padding: 0 20px;
             height:50px;
             line-height: 50px;
-            font-size:20px;
+            font-size:18px;
             font-weight:300;
             color: #666;
             
             &.router-link-exact-active, &:hover {
-                color: #000;
-                text-decoration: underline;
+                color: #0060FF;
+                text-decoration: none;
             }
         }
     }

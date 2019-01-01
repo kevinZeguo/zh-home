@@ -1,10 +1,6 @@
 <template>
     <div class="quotation">
-        <el-carousel height="680px">
-            <el-carousel-item v-for="(item, index) in banners" :key="index">
-                <img :src="item.src" />
-            </el-carousel-item>
-        </el-carousel>
+        <div class="banner"></div>
 
         <el-form :model="chooseForm" ref="chooseForm" :rules="rules" class="layout">
             <div class="step-num">1</div>
@@ -98,42 +94,42 @@
 
                     <div class="pro-list">
                         <ul v-if="activeStatus == 1">
-                            <li :class="{active: oneStatus == 0}" @click="changeOnes(0)">
-                                <p class="name">大金空调1</p>
+                            <li :class="{active: oneStatus == index}" v-for="(item, index) in resultArrs[0]" @click="changeOnes(index)">
+                                <p class="name">{{ item.brand }}</p>
                                 <p class="pic"><img src="../../assets/img/pic-160x160-1.png" /></p>
-                                <p class="prop">出色的低噪音特性<br />高效节能精准温控<br />营造恒温舒适的居家享受</p>
+                                <p class="prop">{{ item.name }}</p>
                             </li>
                         </ul>
                         <ul v-if="activeStatus == 2">
-                            <li :class="{active: twoStatus == 0}" @click="changeTwos(0)">
+                            <li :class="{active: twoStatus == index}" v-for="(item, index) in resultArrs[1]" @click="changeTwos(index)">
                                 <p class="name">大金空调2</p>
                                 <p class="pic"><img src="../../assets/img/pic-160x160-1.png" /></p>
                                 <p class="prop">出色的低噪音特性<br />高效节能精准温控<br />营造恒温舒适的居家享受</p>
                             </li>
                         </ul>
                         <ul v-if="activeStatus == 3">
-                            <li :class="{active: threestatus == 0}" @click="changeThrees(0)">
+                            <li :class="{active: threeStatus == index}" v-for="(item, index) in resultArrs[2]" @click="changeThrees(index)">
                                 <p class="name">大金空调3</p>
                                 <p class="pic"><img src="../../assets/img/pic-160x160-1.png" /></p>
                                 <p class="prop">出色的低噪音特性<br />高效节能精准温控<br />营造恒温舒适的居家享受</p>
                             </li>
                         </ul>
                         <ul v-if="activeStatus == 4">
-                            <li :class="{active: fourStatus == 0}" @click="changeFours(0)">
+                            <li :class="{active: fourStatus == index}" v-for="(item, index) in resultArrs[3]" @click="changeFours(index)">
                                 <p class="name">大金空调4</p>
                                 <p class="pic"><img src="../../assets/img/pic-160x160-1.png" /></p>
                                 <p class="prop">出色的低噪音特性<br />高效节能精准温控<br />营造恒温舒适的居家享受</p>
                             </li>
                         </ul>
                         <ul v-if="activeStatus == 5">
-                            <li :class="{active: fiveStatus == 0}" @click="changeFives(0)">
+                            <li :class="{active: fiveStatus == index}" v-for="(item, index) in resultArrs[4]" @click="changeFives(index)">
                                 <p class="name">大金空调5</p>
                                 <p class="pic"><img src="../../assets/img/pic-160x160-1.png" /></p>
                                 <p class="prop">出色的低噪音特性<br />高效节能精准温控<br />营造恒温舒适的居家享受</p>
                             </li>
                         </ul>
                         <ul v-if="activeStatus == 6">
-                            <li :class="{active: sixStatus == 0}" @click="changeSixs(0)">
+                            <li :class="{active: sixStatus == index}" v-for="(item, index) in resultArrs[5]" @click="changeSixs(index)">
                                 <p class="name">大金空调6</p>
                                 <p class="pic"><img src="../../assets/img/pic-160x160-1.png" /></p>
                                 <p class="prop">出色的低噪音特性<br />高效节能精准温控<br />营造恒温舒适的居家享受</p>
@@ -144,7 +140,7 @@
             </div>
 
             <div class="btns-box">
-                <button type="button" @click="submitForm('chooseForm')">获取报价</button>
+                <button type="button" @click="openDialog('chooseForm')">获取报价</button>
             </div>
         </el-form>
 
@@ -159,7 +155,7 @@
             </el-form>
             <span slot="footer" class="dialog-footer">
                 <el-button @click="dialogFormClose">取 消</el-button>
-                <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
+                <el-button type="primary" @click="submitForm('ruleForm')">确 定</el-button>
             </span>
         </el-dialog>
 
@@ -168,8 +164,20 @@
 
 <script>
 import { productList } from '../../service/getData';
+import { isvalidPhone } from '../../config/utils';
+
 export default {
     data () {
+        var validPhone=(rule, value,callback)=>{
+            if (!value){
+                callback(new Error('请输入手机号'));
+            }else  if (!isvalidPhone(value)){
+                callback(new Error('请输入正确的11位手机号码'));
+            }else {
+                callback();
+            }
+        };
+
         return {
             dialogVisible: false,
             homeTypes: [
@@ -298,18 +306,9 @@ export default {
                     { required: true, message: '用户姓名不能为空'}
                 ],
                 phoneNum: [
-                    { required: true, message: '人数不能为空'},
-                    { type: 'number', message: '人数必须为数字值'}
+                    { required: true, trigger: 'blur', validator: validPhone }
                 ]
             },
-            banners: [
-                {
-                    src: require('../../assets/img/pic-banner-1.jpg')
-                },
-                {
-                    src: require('../../assets/img/pic-banner-2.jpg')
-                }
-            ],
             activeStatus: 1,
             oneStatus: null,
             twoStatus: null,
@@ -317,22 +316,356 @@ export default {
             fourStatus: null,
             fiveStatus: null,
             sixStatus: null,
+            resultArrs: [
+                [],
+                [],
+                [],
+                [],
+                [],
+                []
+            ],
+            result: {
+                "success": true,
+                "list": [
+                    {
+                        "id": 10001,
+                        "brand": "大金空调",
+                        "model": null,
+                        "name": null,
+                        "icon": null,
+                        "recommend": null,
+                        "module": 1,
+                        "moduleName": "凉爽的夏⽇",
+                        "productPrices": null,
+                        "productPartList": null,
+                        "formula": "TP+PP"
+                    },
+                    {
+                        "id": 10002,
+                        "brand": "⽇立空调",
+                        "model": null,
+                        "name": null,
+                        "icon": null,
+                        "recommend": null,
+                        "module": 1,
+                        "moduleName": "凉爽的夏⽇",
+                        "productPrices": null,
+                        "productPartList": null,
+                        "formula": "TP+PP"
+                    },
+                    {
+                        "id": 10003,
+                        "brand": "约克空调",
+                        "model": null,
+                        "name": null,
+                        "icon": null,
+                        "recommend": null,
+                        "module": 1,
+                        "moduleName": "凉爽的夏⽇",
+                        "productPrices": null,
+                        "productPartList": null,
+                        "formula": "TP+PP"
+                    },
+                    {
+                        "id": 10004,
+                        "brand": "格力空调",
+                        "model": null,
+                        "name": null,
+                        "icon": null,
+                        "recommend": null,
+                        "module": 1,
+                        "moduleName": "凉爽的夏⽇",
+                        "productPrices": null,
+                        "productPartList": null,
+                        "formula": "TP+PP"
+                    },
+                    {
+                        "id": 20001,
+                        "brand": "霍尼韦尔",
+                        "model": null,
+                        "name": null,
+                        "icon": null,
+                        "recommend": null,
+                        "module": 2,
+                        "moduleName": "清新的空气",
+                        "productPrices": null,
+                        "productPartList": null,
+                        "formula": "TP+PP"
+                    },
+                    {
+                        "id": 20002,
+                        "brand": "森德新⻛",
+                        "model": null,
+                        "name": null,
+                        "icon": null,
+                        "recommend": null,
+                        "module": 2,
+                        "moduleName": "清新的空气",
+                        "productPrices": null,
+                        "productPartList": null,
+                        "formula": "TP+PP"
+                    },
+                    {
+                        "id": 20003,
+                        "brand": "希海姆新⻛",
+                        "model": null,
+                        "name": null,
+                        "icon": null,
+                        "recommend": null,
+                        "module": 2,
+                        "moduleName": "清新的空气",
+                        "productPrices": null,
+                        "productPartList": null,
+                        "formula": "TP+PP"
+                    },
+                    {
+                        "id": 20004,
+                        "brand": "第五季新⻛",
+                        "model": null,
+                        "name": null,
+                        "icon": null,
+                        "recommend": null,
+                        "module": 2,
+                        "moduleName": "清新的空气",
+                        "productPrices": null,
+                        "productPartList": null,
+                        "formula": "TP+PP"
+                    },
+                    {
+                        "id": 30001,
+                        "brand": "霍尼⻙尔",
+                        "model": null,
+                        "name": null,
+                        "icon": null,
+                        "recommend": null,
+                        "module": 3,
+                        "moduleName": "洁净的⽔源",
+                        "productPrices": null,
+                        "productPartList": null,
+                        "formula": "TP"
+                    },
+                    {
+                        "id": 30002,
+                        "brand": "怡⼝净水",
+                        "model": null,
+                        "name": null,
+                        "icon": null,
+                        "recommend": null,
+                        "module": 3,
+                        "moduleName": "洁净的⽔源",
+                        "productPrices": null,
+                        "productPartList": null,
+                        "formula": "TP"
+                    },
+                    {
+                        "id": 40001,
+                        "brand": "威能采暖炉+瑞好地暖",
+                        "model": null,
+                        "name": null,
+                        "icon": null,
+                        "recommend": null,
+                        "module": 4,
+                        "moduleName": "温暖的房间",
+                        "productPrices": null,
+                        "productPartList": null,
+                        "formula": "BP"
+                    },
+                    {
+                        "id": 40002,
+                        "brand": "威能采暖炉+赫兰德暖⽓⽚",
+                        "model": null,
+                        "name": null,
+                        "icon": null,
+                        "recommend": null,
+                        "module": 4,
+                        "moduleName": "温暖的房间",
+                        "productPrices": null,
+                        "productPartList": null,
+                        "formula": "TP+PP"
+                    },
+                    {
+                        "id": 40003,
+                        "brand": "卡洛毛细管网",
+                        "model": null,
+                        "name": null,
+                        "icon": null,
+                        "recommend": null,
+                        "module": 4,
+                        "moduleName": "温暖的房间",
+                        "productPrices": null,
+                        "productPartList": null,
+                        "formula": "UP"
+                    },
+                    {
+                        "id": 50001,
+                        "brand": "林内燃⽓热⽔器",
+                        "model": null,
+                        "name": null,
+                        "icon": null,
+                        "recommend": null,
+                        "module": 5,
+                        "moduleName": "24⼩时热⽔",
+                        "productPrices": null,
+                        "productPartList": null,
+                        "formula": "TP"
+                    },
+                    {
+                        "id": 50002,
+                        "brand": "能率燃⽓热⽔器",
+                        "model": null,
+                        "name": null,
+                        "icon": null,
+                        "recommend": null,
+                        "module": 5,
+                        "moduleName": "24⼩时热⽔",
+                        "productPrices": null,
+                        "productPartList": null,
+                        "formula": "TP"
+                    },
+                    {
+                        "id": 50003,
+                        "brand": "威能太阳能热⽔器",
+                        "model": null,
+                        "name": null,
+                        "icon": null,
+                        "recommend": null,
+                        "module": 5,
+                        "moduleName": "24⼩时热⽔",
+                        "productPrices": null,
+                        "productPartList": null,
+                        "formula": "TP"
+                    },
+                    {
+                        "id": 60001,
+                        "brand": "集成线控+APP联动控制",
+                        "model": null,
+                        "name": null,
+                        "icon": null,
+                        "recommend": null,
+                        "module": 6,
+                        "moduleName": "智能的房⼦",
+                        "productPrices": null,
+                        "productPartList": null,
+                        "formula": "TP"
+                    },
+                    {
+                        "id": 60002,
+                        "brand": "灯光窗帘音乐模块",
+                        "model": null,
+                        "name": null,
+                        "icon": null,
+                        "recommend": null,
+                        "module": 6,
+                        "moduleName": "智能的房⼦",
+                        "productPrices": null,
+                        "productPartList": null,
+                        "formula": "BP"
+                    }
+                ]
+            }
         }
     },
     mounted () {
         this.productList();
+
+        this.result.list.forEach((value, index) => {
+            //console.log(index);
+            //if ( == index) {
+                this.resultArrs[(value.module - 1)].push(value);
+            //}
+        });
+
+        //console.log(JSON.stringify(this.resultArrs));
     },
     methods: {
         changeTabs (index) {
             this.activeStatus = index;
         },
-        submitForm(formName) {
+        openDialog (formName) {
             this.$refs[formName].validate((valid) => {
                 if (valid) {
+                    if (this.oneStatus == null) {
+                        this.$message({
+                            message: '请选择凉爽的夏日',
+                            type: 'warning'
+                        });
+
+                        return false;
+                    }
+
+                    if (this.twoStatus == null) {
+                        this.$message({
+                            message: '请选择清新的空气',
+                            type: 'warning'
+                        });
+                        
+                        return false;
+                    }
+
+                    if (this.threeStatus == null) {
+                        this.$message({
+                            message: '请选择洁净的水源',
+                            type: 'warning'
+                        });
+                        
+                        return false;
+                    }
+
+                    if (this.fourStatus == null) {
+                        this.$message({
+                            message: '请选择温暖的房间',
+                            type: 'warning'
+                        });
+                        
+                        return false;
+                    }
+
+                    if (this.fiveStatus == null) {
+                        this.$message({
+                            message: '请选择24小时热水',
+                            type: 'warning'
+                        });
+                        
+                        return false;
+                    }
+
+                    if (this.sixStatus == null) {
+                        this.$message({
+                            message: '请选择智能的房子',
+                            type: 'warning'
+                        });
+                        
+                        return false;
+                    }
+
                     this.dialogVisible = true;
+                }
+            });
+        },
+        submitForm (formName) {
+            this.$refs[formName].validate((valid) => {
+                if (valid) {
+                    let ps = this.resultArrs[0][this.oneStatus].id + ',' +
+                             this.resultArrs[1][this.twoStatus].id + ',' +
+                             this.resultArrs[2][this.threeStatus].id + ',' +
+                             this.resultArrs[3][this.fourStatus].id + ',' +
+                             this.resultArrs[4][this.fiveStatus].id + ',' +
+                             this.resultArrs[5][this.sixStatus].id;
+
+                    let params = {
+                        ps: ps, //产品Id，多个以逗号分割
+                        type: this.chooseForm.type, //房间类型 1-别墅 2-平层 3-复式
+                        usableArea: this.chooseForm.usableArea, //使用面积
+                        liveCount: this.chooseForm.liveCount, //居住人数
+                        parlorCount: this.chooseForm.parlorCount, //客厅数量
+                        roomCount: this.chooseForm.roomCount, //卧室数量
+                        phoneNum: this.ruleForm.phoneNum, //手机号
+                        userName: this.ruleForm.userName //用户姓名
+                    }
+
+                    console.log(JSON.stringify(params));
                 } else {
-                    console.log('error submit!!');
-                    return false;
+                    console.log(123);
                 }
             });
         },
@@ -354,7 +687,7 @@ export default {
             if (this.threeStatus == index) {
                 this.threeStatus = null;
             } else {
-                this.oneStatus = index; 
+                this.threeStatus = index; 
             }
         },
         changeFours (index) {
@@ -403,6 +736,13 @@ export default {
 
 <style lang="scss" scoped>
 .quotation {
+    .banner {
+        width: 100%;
+        min-width: 1200px;
+        height:680px;
+        background: url(../../assets/img/pic-banner-2.jpg) no-repeat center center;
+    }
+
     .step-num {
         margin: 27px auto 0;
         width:50px;
