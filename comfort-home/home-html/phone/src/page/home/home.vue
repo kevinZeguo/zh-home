@@ -186,7 +186,7 @@
                     <li><img src="../../assets/img/icon-logo-6.png" /></li>
                     <li><img src="../../assets/img/icon-logo-7.png" /></li>
                     <li><img src="../../assets/img/icon-logo-8.png" /></li>
-                    <li><img src="../../assets/img/icon-logo-8.png" /></li>
+                    <li><img src="../../assets/img/icon-logo-9.png" /></li>
                     <li><img src="../../assets/img/icon-logo-10.png" /></li>
                     <li><img src="../../assets/img/icon-logo-11.png" /></li>
                     <li><img src="../../assets/img/icon-logo-12.png" /></li>

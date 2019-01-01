@@ -106,16 +106,6 @@ export default {
             border-bottom: 0.2rem solid #4A4646;
             color: #fff;
             position: relative;
-
-            &:after {
-                line-height: 2.7rem;
-                content: "+";
-                position: absolute;
-                right: 0;
-                top: 0;
-                color: #fff;
-                font-size: 2rem;
-            }
         }
         
         .bd {
@@ -143,16 +133,6 @@ export default {
             color: #fff;
             position: relative;
             font-size: 1.2rem;
-
-            &:after {
-                line-height: 2.7rem;
-                content: "+";
-                position: absolute;
-                right: 0;
-                top: 0;
-                color: #fff;
-                font-size: 2rem;
-            }
         }
         
         .bd {

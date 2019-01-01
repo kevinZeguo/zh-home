@@ -1,10 +1,12 @@
 <template>
     <div class="header">
         <div class="logo">众华舒适家居门户</div>
-        <div class="menu"></div>
-        <div class="nav">
-            <router-link :to="item.url" v-for="(item, index) in menuList" :key="index">{{ item.name }}</router-link>
-        </div>
+        <div class="menu" @click="popupVisible=true"></div>
+        <mt-popup v-model="popupVisible" position="top">
+            <div class="nav">
+                <span v-for="(item, index) in menuList" :key="index" @click="goPath(item.url)">{{ item.name }}</span>
+            </div>
+        </mt-popup>
     </div>
 </template>
 
@@ -13,7 +15,7 @@
 export default {
     data () {
         return {
-            msg: '',
+            popupVisible: false,
             menuList: [
                 {
                     name: '首页',
@@ -46,6 +48,10 @@ export default {
         
     },
     methods: {
+        goPath(path) {
+            this.$router.push({path: path});
+            this.popupVisible = false;
+        }
     }
 
 }
@@ -84,18 +90,18 @@ export default {
     }
 
     .nav {
+        width: 100vw;
         padding: 15px 0 15px 58px;
-        height: 80px;
-        float: left;
-        display: none;
 
-        a {
+
+        span {
             padding: 0 20px;
             height:50px;
             line-height: 50px;
             font-size:20px;
             font-weight:300;
             color: #666;
+            display: block;
             
             &.router-link-exact-active, &:hover {
                 color: #000;
