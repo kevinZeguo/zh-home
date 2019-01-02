@@ -10,6 +10,8 @@ import java.util.List;
  **/
 public class QotesForm {
     private String phoneNum;
+    private String userName;//用户姓名
+    private String ps;//产品ID列表
     private Integer type;
     private float usableArea; // 使用面积
     private Integer parlorCount;//客厅数量
@@ -71,5 +73,21 @@ public class QotesForm {
 
     public void setProductList(List<Integer> productList) {
         this.productList = productList;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getPs() {
+        return ps;
+    }
+
+    public void setPs(String ps) {
+        this.ps = ps;
     }
 }

@@ -11,8 +11,10 @@ import java.util.List;
 public class UserChooseProduct {
     private Integer id;
     private Integer moduleId; // 模块ID
+    private Integer userId;//用户ID
     private String moduleName;//选择模块名称
     private List<Integer> productIdList;// 当前模块下产品列表
+    private String productIds;
     private float costMin;//价格最小值
     private float costMax;//价格最大值
 
@@ -62,5 +64,21 @@ public class UserChooseProduct {
 
     public void setCostMax(float costMax) {
         this.costMax = costMax;
+    }
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
+
+    public String getProductIds() {
+        return productIds;
+    }
+
+    public void setProductIds(String productIds) {
+        this.productIds = productIds;
     }
 }

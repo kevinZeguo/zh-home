@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zhonghua.comfortable.home.dao.ZhProductPartDao">
+    
+    <!-- 查询字段 -->
+    <sql id="Base_Column_List">
+    </sql>
+
+    <select id="selectListByProductId" resultType="DefProductPart">
+        select zpp.id,zpp.name,zpp.unit_price unitPrice,zpp.area_range_min areaRangeMin,
+        zpp.area_range_max areaRangeMax,zpp.creator,zpp.created,zpp.modifier,zpp.deleted,
+        zppr.count
+        from zh_product_part zpp
+        left join zh_product_part_rlt zppr
+        on zpp.id = zppr.part_id
+        where zpp.deleted = 0
+        and zppr.deleted = 0
+        and zppr.product_id = #{productId}
+    </select>
+
+</mapper>

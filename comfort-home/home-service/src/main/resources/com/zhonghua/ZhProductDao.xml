@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zhonghua.comfortable.home.dao.ZhProductDao">
+
+    <!-- 查询字段 -->
+    <sql id="Base_Column_List">
+    </sql>
+
+    <select id="selectProductBaseInfoList" resultType="DefProduct">
+        SELECT zp.id,zp.name,zp.brand,zp.recommend,zp.icon,zp.module module,zm.name moduleName
+          FROM zh_module zm
+          left join zh_product zp on zm.id = zp.module
+          where zm.deleted =0
+            and zp.deleted =0
+       order by zm.id , zp.id
+    </select>
+
+    <select id="selectAllProductList" resultType="DefProduct">
+        SELECT zp.id,zp.name,zp.brand,zp.recommend,zp.icon,zp.module moduleId,zm.name moduleName,zp.formula,
+        zp.creator,zp.created,zp.modifier,zp.modified
+        FROM zh_module zm
+        left join zh_product zp on zm.id = zp.module
+        where zm.deleted =0
+          and zp.deleted =0
+        order by zm.id , zp.id
+    </select>
+
+</mapper>

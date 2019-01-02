@@ -4,7 +4,8 @@ import com.zhonghua.comfortable.home.domain.*;
 import com.zhonghua.comfortable.home.service.ProductService;
 import com.zhonghua.comfortable.home.service.QuoteCalculatorService;
 import org.apache.commons.lang3.*;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +20,7 @@ import java.util.*;
  **/
 @Service
 public class QuoteCalculatorServiceImpl implements QuoteCalculatorService {
-    private static final Logger logger = Logger.getLogger(QuoteCalculatorServiceImpl.class);
+    private static final Logger logger = LoggerFactory.getLogger(QuoteCalculatorServiceImpl.class);
 
     @Autowired
     private ProductService productService;
@@ -111,10 +112,13 @@ public class QuoteCalculatorServiceImpl implements QuoteCalculatorService {
             if (chooseProductPrice == null || chooseProductPrice.size() == 0) {
                 throw new Exception("计算报价失败，请正确填写房屋信息！");
             }
+
+            userChooseProduct.setProductIds(StringUtils.join(chooseProductIdList.toArray()));
+
             if (chooseProductPrice.size() == 1) {
                 userChooseProduct.setCostMin(chooseProductPrice.get(0));
                 userChooseProduct.setCostMax(chooseProductPrice.get(0));
-            } else if (chooseProductPrice.size() > 1) {
+            } else {
                 userChooseProduct.setCostMin(chooseProductPrice.get(0));
                 userChooseProduct.setCostMax(chooseProductPrice.get(1));
             }
@@ -229,7 +233,7 @@ public class QuoteCalculatorServiceImpl implements QuoteCalculatorService {
 
         //先判断是否符合范围，符合范围，则先根据单价计算，如果单价是空，则根据单价范围计算
         for (DefProductPrice productPrice : productPrices) {
-            if (productPrice.getAreaRangeMin() < b && b < productPrice.getAreaRangeMax()) {
+            if (productPrice.getAreaRangeMin() <= b && b < productPrice.getAreaRangeMax()) {
                 if (productPrice.getUnitPrice() != null && productPrice.getUnitPrice() > 0) {
                     rangePrice.add(productPrice.getBasicPrice() + partPrice);
                 } else {

@@ -46,7 +46,7 @@
         <property name="dataSource" ref="dataSource" />
         <property name="typeAliasesPackage" value="com.zhonghua.comfortable.home.domain"/>
         <!-- 自动扫描mapping.xml文件 -->
-        <property name="mapperLocations" value="classpath:com/zhonghua/*.xml"></property>
+        <property name="mapperLocations" value="classpath*:com/zhonghua/**/*.xml"/>
     </bean>
 
 

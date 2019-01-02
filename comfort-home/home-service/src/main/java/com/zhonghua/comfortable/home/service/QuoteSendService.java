@@ -1,5 +1,6 @@
 package com.zhonghua.comfortable.home.service;
 
+import com.zhonghua.comfortable.home.domain.UserHouse;
 import com.zhonghua.comfortable.home.domain.UserProjectPrice;
 
 /**
@@ -13,8 +14,8 @@ public interface QuoteSendService {
      * 发送报价
      *
      * @param projectPrice
-     * @param phoneNum
+     * @param userhousee
      * @throws Exception
      */
-    void sendQuoteToUser(UserProjectPrice projectPrice, String phoneNum) throws Exception;
+    void sendQuoteToUser(UserProjectPrice projectPrice, UserHouse userhousee) throws Exception;
 }

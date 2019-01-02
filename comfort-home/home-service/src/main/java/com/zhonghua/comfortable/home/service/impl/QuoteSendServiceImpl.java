@@ -1,15 +1,23 @@
 package com.zhonghua.comfortable.home.service.impl;
 
+import com.alibaba.fastjson.JSONObject;
+import com.aliyuncs.dysmsapi.model.v20170525.SendSmsResponse;
+import com.zhonghua.comfortable.home.dao.ZhSmsSendDao;
+import com.zhonghua.comfortable.home.dao.ZhUserChooseProductDao;
+import com.zhonghua.comfortable.home.dao.ZhUserInfoDao;
 import com.zhonghua.comfortable.home.domain.SmsContent;
 import com.zhonghua.comfortable.home.domain.UserChooseProduct;
+import com.zhonghua.comfortable.home.domain.UserHouse;
 import com.zhonghua.comfortable.home.domain.UserProjectPrice;
 import com.zhonghua.comfortable.home.service.QuoteSendService;
 import com.zhonghua.comfortable.home.service.SmsSenderService;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -20,20 +28,54 @@ import java.util.List;
  **/
 @Service
 public class QuoteSendServiceImpl implements QuoteSendService {
-    private static final Logger logger = Logger.getLogger(QuoteSendServiceImpl.class);
+    private static final Logger logger = LoggerFactory.getLogger(QuoteSendServiceImpl.class);
     @Autowired
     private SmsSenderService smsSenderService;
+    @Autowired
+    private ZhUserChooseProductDao zhUserChooseProductDao;
+    @Autowired
+    private ZhUserInfoDao zhUserInfoDao;
+    @Autowired
+    private ZhSmsSendDao zhSmsSendDao;
 
     @Override
-    public void sendQuoteToUser(UserProjectPrice projectPrice, String phoneNum) throws Exception {
+    @Transactional
+    public void sendQuoteToUser(UserProjectPrice projectPrice, UserHouse userhouse) throws Exception {
+        //保存用户信息
+        zhUserInfoDao.insert(userhouse);
+
+        //保存选购产品信息
+        if (projectPrice != null && projectPrice.getChooseProductList() != null && projectPrice.getChooseProductList().size() > 0) {
+            List<UserChooseProduct> products = projectPrice.getChooseProductList();
+            for (UserChooseProduct product : products) {
+                product.setUserId(userhouse.getId());
+                zhUserChooseProductDao.insert(product);
+            }
+        }
+
+        //保存短信内容
         SmsContent content = new SmsContent();
-        content.setPhoneNum(phoneNum);
+        content.setUserId(userhouse.getId());
+        content.setSendTme(new Date());
+        content.setSendResult("send");
+        content.setPhoneNum(userhouse.getPhoneNum());
         //组装发送短信内容
         String info = getDefaultQuoteSmsContent(projectPrice);
         content.setContent(info);
+        zhSmsSendDao.insert(content);
         //发送短信
-        smsSenderService.sendSms(content);
-        //记录发送结果
+        SendSmsResponse response = smsSenderService.sendSms(content);
+        if (response != null) {
+            //记录发送结果
+            content.setSendResult(response.getCode());
+            content.setSendMessage(response.getMessage());
+            content.setBizId(response.getBizId());
+            content.setRequestId(response.getRequestId());
+        } else {
+            content.setSendResult("error");
+            content.setSendMessage("未知原因");
+        }
+        zhSmsSendDao.updateStatusById(content);
     }
 
     /**
@@ -43,22 +85,19 @@ public class QuoteSendServiceImpl implements QuoteSendService {
      * @return
      */
     private String getDefaultQuoteSmsContent(UserProjectPrice projectPrice) {
+        JSONObject content = new JSONObject();
         //短信模板
-        String defaultTemplate = "[众华舒适家]亲爱的⽤用户，您的预估报价已新鲜出炉，%s 众华舒适家专业设计会在24⼩小时内给您回电，向您阐述不不同价格区间的差 异，祝您⽣生活愉快!";
         StringBuffer quoteInfo = new StringBuffer();
         List<UserChooseProduct> products = projectPrice.getChooseProductList();
         for (UserChooseProduct product : products) {
-            quoteInfo.append("获得");
-            quoteInfo.append(product.getModuleName());
-            quoteInfo.append("需");
+            String price = null;
             if (product.getCostMax() == product.getCostMin()) {
-                quoteInfo.append(product.getCostMin() + "元");
+                price = product.getCostMin() + "元";
             } else {
-                quoteInfo.append(product.getCostMin() + "-" + product.getCostMax() + "元");
+                price = product.getCostMin() + "-" + product.getCostMax() + "元";
             }
-            quoteInfo.append(";");
+            content.put("price" + product.getModuleId(), price);
         }
-        String content = String.format(defaultTemplate, quoteInfo.toString());
-        return content;
+        return content.toJSONString();
     }
 }

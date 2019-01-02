@@ -1,12 +1,15 @@
 package com.zhonghua.comfortable.home.service.impl;
 
+import com.zhonghua.comfortable.home.dao.ZhProductDao;
+import com.zhonghua.comfortable.home.dao.ZhProductPartDao;
+import com.zhonghua.comfortable.home.dao.ZhProductPriceDao;
 import com.zhonghua.comfortable.home.domain.DefProduct;
 import com.zhonghua.comfortable.home.domain.DefProductPart;
 import com.zhonghua.comfortable.home.domain.DefProductPrice;
 import com.zhonghua.comfortable.home.service.ProductService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.lang.ref.PhantomReference;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,9 +21,20 @@ import java.util.List;
  **/
 @Service
 public class ProductServiceImpl implements ProductService {
+    @Autowired
+    private ZhProductDao zhProductDao;
+    @Autowired
+    private ZhProductPartDao zhProductPartDao;
+    @Autowired
+    private ZhProductPriceDao zhProductPriceDao;
+
     @Override
     public List<DefProduct> getAllProductList() throws Exception {
-        List<DefProduct> productList = new ArrayList<DefProduct>();
+        List<DefProduct> productList = zhProductDao.selectProductBaseInfoList();
+        if (productList != null && productList.size() > 0) {
+            return productList;
+        }
+        productList = new ArrayList<>();
         DefProduct product = new DefProduct();
         product.setId(10001);
         product.setBrand("大金空调");
@@ -170,7 +184,13 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public List<DefProduct> getAllProductListWithPrice() throws Exception {
-        List<DefProduct> productList = getAllProductList();
+        List<DefProduct> productList = zhProductDao.selectAllProductList();
+
+        //静态数据
+        if (productList != null && productList.size() > 0) {
+            productList = getAllProductList();
+        }
+
         for (DefProduct defProduct : productList) {
             //todo 改为通过数据库读取
             defProduct.setProductPrices(getDefProductPriceList(defProduct.getId()));
@@ -186,8 +206,13 @@ public class ProductServiceImpl implements ProductService {
      * @param id
      * @return
      */
-    private List<DefProductPart> getDefPartsList(Integer id) {
-        List<DefProductPart> parts = new ArrayList<>();
+    private List<DefProductPart> getDefPartsList(Integer id) throws Exception {
+        List<DefProductPart> parts = zhProductPartDao.selectListByProductId(id);
+        if (parts != null && parts.size() > 0) {
+            return parts;
+        }
+        parts = new ArrayList<>();
+
         if (id.equals(10001) || id.equals(10002) || id.equals(10003) || id.equals(10004) || id.equals(10005)) {
             DefProductPart part = new DefProductPart();
             part.setCount(1);
@@ -218,8 +243,13 @@ public class ProductServiceImpl implements ProductService {
      * @param id
      * @return
      */
-    private List<DefProductPrice> getDefProductPriceList(Integer id) {
-        List<DefProductPrice> priceList = new ArrayList<>();
+    private List<DefProductPrice> getDefProductPriceList(Integer id) throws Exception {
+        List<DefProductPrice> priceList = zhProductPriceDao.selectListByProductId(id);
+
+        if (priceList != null && priceList.size() > 0) {
+            return priceList;
+        }
+        priceList = new ArrayList<>();
 
         DefProductPrice price = new DefProductPrice();
         if (id.equals(10001)) {

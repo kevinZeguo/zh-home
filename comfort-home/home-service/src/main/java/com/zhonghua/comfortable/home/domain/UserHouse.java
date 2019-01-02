@@ -8,6 +8,8 @@ package com.zhonghua.comfortable.home.domain;
  **/
 public class UserHouse {
     private Integer id;
+    private String phoneNum;//用户手机号
+    private String userName;//用户姓名
     private Integer type; //类型 1- 别墅 2-平层 3-复式
     private float floorage;//建筑面积
     private float usableArea; // 使用面积
@@ -70,5 +72,21 @@ public class UserHouse {
 
     public void setLiveCount(Integer liveCount) {
         this.liveCount = liveCount;
+    }
+
+    public String getPhoneNum() {
+        return phoneNum;
+    }
+
+    public void setPhoneNum(String phoneNum) {
+        this.phoneNum = phoneNum;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 }

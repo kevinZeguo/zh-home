@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zhonghua.comfortable.home.dao.ZhUserInfoDao">
+
+    <insert id="insert" parameterType="UserHouse">
+        <selectKey keyProperty="id" resultType="Integer">
+            SELECT @@IDENTITY AS id
+        </selectKey>
+        insert into zh_user_info (user_name,phone_num,type,floorage,usable_area,parlor_count,room_count,live_count,created)
+        values (#{userName},#{phoneNum},#{type},#{floorage},#{usableArea},#{parlorCount},#{roomCount},#{liveCount},now())
+    </insert>
+
+
+</mapper>

@@ -13,6 +13,9 @@ public class DefProduct {
     private Integer id;
     private String brand;//品牌
     private String model;//型号
+    private String name;
+    private String icon;
+    private String recommend;
     private Integer module;//归属模块  1-凉爽的夏⽇ 2-清新的空⽓ 3-洁净的⽔源 4-温暖的房间 5-24⼩小时热⽔ 6-智能的房⼦
     private String moduleName; // 模块名称
     private List<DefProductPrice> productPrices; //单价设置定义
@@ -82,5 +85,30 @@ public class DefProduct {
 
     public void setProductPartList(List<DefProductPart> productPartList) {
         this.productPartList = productPartList;
+    }
+
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getIcon() {
+        return icon;
+    }
+
+    public void setIcon(String icon) {
+        this.icon = icon;
+    }
+
+    public String getRecommend() {
+        return recommend;
+    }
+
+    public void setRecommend(String recommend) {
+        this.recommend = recommend;
     }
 }
