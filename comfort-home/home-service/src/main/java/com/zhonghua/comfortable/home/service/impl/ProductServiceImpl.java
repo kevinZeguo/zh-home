@@ -187,7 +187,7 @@ public class ProductServiceImpl implements ProductService {
         List<DefProduct> productList = zhProductDao.selectAllProductList();
 
         //静态数据
-        if (productList != null && productList.size() > 0) {
+        if (productList == null || productList.size() ==0) {
             productList = getAllProductList();
         }
 

@@ -6,8 +6,8 @@
         <selectKey keyProperty="id" resultType="Integer">
             SELECT @@IDENTITY AS id
         </selectKey>
-        insert into zh_user_choose_product (user_id,product_ids,moduleId,created)
-        values (#{userId}},#{productIds},#{moduleId},#{costMin},#{costMax},now())
+        insert into zh_user_choose_product (user_id,product_ids,moduleId,cost_min,cost_max,created)
+        values (#{userId},#{productIds},#{moduleId},#{costMin},#{costMax},now())
     </insert>
 
 </mapper>

@@ -72,7 +72,7 @@ public class QuoteCalculatorServiceImpl implements QuoteCalculatorService {
                 chooseProduct.setModuleId(product.getModule());
                 chooseProduct.setModuleName(product.getModuleName());
                 chooseProduct.setProductIdList(new ArrayList<Integer>());
-                chooseProductMap.put(product.getModule(), new UserChooseProduct());
+                chooseProductMap.put(product.getModule(), chooseProduct);
             }
             chooseProductMap.get(product.getModule()).getProductIdList().add(productId);
         }
@@ -148,11 +148,13 @@ public class QuoteCalculatorServiceImpl implements QuoteCalculatorService {
         Float minPrice = 0f;
         for (Integer prodId : chooseProductIdList) {
             if (!productMap.containsKey(prodId)) {
+                logger.error("未找到对应的产品定义[ " + prodId + " ] ！");
                 throw new Exception("您选择产品暂未上线，请选择其他产品！");
             }
             DefProduct product = productMap.get(prodId);
             List<Float> productPrice = calculateProductPrice(a, b, c, d, e, product);
             if (productPrice == null || productPrice.size() == 0) {
+                logger.error("产品[ " + prodId + " ] 未配置价格范围！");
                 throw new Exception("您选择产品暂未上线，请选择其他产品！");
             }
             if (productPrice.size() == 1) {
@@ -183,6 +185,7 @@ public class QuoteCalculatorServiceImpl implements QuoteCalculatorService {
      */
     private List<Float> calculateProductPrice(Integer A, float B, Integer C, Integer D, Integer E, DefProduct product) throws Exception {
         if (StringUtils.isBlank(product.getFormula())) {
+            logger.error("产品[ " + product.getId() + " ]未定义提供价格计算公式 ！");
             throw new Exception("您选择产品暂未上线，请选择其他产品！");
         }
 
@@ -221,6 +224,7 @@ public class QuoteCalculatorServiceImpl implements QuoteCalculatorService {
         List<Float> rangePrice = new ArrayList<>();
         List<DefProductPrice> productPrices = product.getProductPrices();
         if (productPrices == null || productPrices.size() == 0) {
+            logger.error("产品[ " + product.getId() + " ]未配置价格区间设置 ！");
             throw new Exception("您选择产品暂未上线，请选择其他产品！");
         }
 
@@ -234,11 +238,11 @@ public class QuoteCalculatorServiceImpl implements QuoteCalculatorService {
         //先判断是否符合范围，符合范围，则先根据单价计算，如果单价是空，则根据单价范围计算
         for (DefProductPrice productPrice : productPrices) {
             if (productPrice.getAreaRangeMin() <= b && b < productPrice.getAreaRangeMax()) {
-                if (productPrice.getUnitPrice() != null && productPrice.getUnitPrice() > 0) {
+                if (productPrice.getBasicPrice() != null && productPrice.getBasicPrice() > 0) {
                     rangePrice.add(productPrice.getBasicPrice() + partPrice);
                 } else {
-                    rangePrice.add(productPrice.getBasicPrice() + partPrice);
-                    rangePrice.add(productPrice.getBasicPrice() + partPrice);
+                    rangePrice.add(productPrice.getUnitPriceMin() * b + partPrice);
+                    rangePrice.add(productPrice.getUnitPriceMax() * b + partPrice);
                 }
                 return rangePrice;
             }
@@ -261,12 +265,13 @@ public class QuoteCalculatorServiceImpl implements QuoteCalculatorService {
         List<Float> rangePrice = new ArrayList<>();
         List<DefProductPrice> productPrices = product.getProductPrices();
         if (productPrices == null || productPrices.size() == 0) {
+            logger.error("产品[ " + product.getId() + " ]未配置价格区间设置 ！");
             throw new Exception("您选择产品暂未上线，请选择其他产品！");
         }
 
         //先判断是否符合范围，符合范围，则先根据单价计算，如果单价是空，则根据单价范围计算
         for (DefProductPrice productPrice : productPrices) {
-            if (productPrice.getAreaRangeMin() < b && b < productPrice.getAreaRangeMax()) {
+            if (productPrice.getAreaRangeMin() <= b && b < productPrice.getAreaRangeMax()) {
                 if (productPrice.getUnitPrice() != null && productPrice.getUnitPrice() > 0) {
                     rangePrice.add(productPrice.getBasicPrice() + productPrice.getUnitPrice() * b);
                 } else {
@@ -292,14 +297,16 @@ public class QuoteCalculatorServiceImpl implements QuoteCalculatorService {
         List<Float> rangePrice = new ArrayList<>();
         List<DefProductPrice> productPrices = product.getProductPrices();
         if (productPrices == null || productPrices.size() == 0) {
+            logger.error("产品[ " + product.getId() + " ]未配置价格区间设置 ！");
+
             throw new Exception("您选择产品暂未上线，请选择其他产品！");
         }
 
         //先判断是否符合范围，符合范围，则先根据单价计算，如果单价是空，则根据单价范围计算
         for (DefProductPrice productPrice : productPrices) {
-            if (productPrice.getAreaRangeMin() < b && b < productPrice.getAreaRangeMax()) {
-                if (productPrice.getUnitPrice() != null && productPrice.getUnitPrice() > 0) {
-                    rangePrice.add(productPrice.getUnitPrice());
+            if (productPrice.getAreaRangeMin() <= b && b < productPrice.getAreaRangeMax()) {
+                if (productPrice.getBasicPrice() != null && productPrice.getBasicPrice() > 0) {
+                    rangePrice.add(productPrice.getBasicPrice());
                 } else {
                     rangePrice.add(productPrice.getUnitPriceMin());
                     rangePrice.add(productPrice.getUnitPriceMax());
@@ -323,12 +330,13 @@ public class QuoteCalculatorServiceImpl implements QuoteCalculatorService {
         List<Float> rangePrice = new ArrayList<>();
         List<DefProductPrice> productPrices = product.getProductPrices();
         if (productPrices == null || productPrices.size() == 0) {
+            logger.error("产品[ " + product.getId() + " ]未配置价格区间设置 ！");
             throw new Exception("您选择产品暂未上线，请选择其他产品！");
         }
 
         //先判断是否符合范围，符合范围，则先根据单价计算，如果单价是空，则根据单价范围计算
         for (DefProductPrice productPrice : productPrices) {
-            if (productPrice.getAreaRangeMin() < b && b < productPrice.getAreaRangeMax()) {
+            if (productPrice.getAreaRangeMin() <= b && b < productPrice.getAreaRangeMax()) {
                 if (productPrice.getUnitPrice() != null && productPrice.getUnitPrice() > 0) {
                     rangePrice.add(productPrice.getUnitPrice() * b);
                 } else {

@@ -16,7 +16,7 @@
     </select>
 
     <select id="selectAllProductList" resultType="DefProduct">
-        SELECT zp.id,zp.name,zp.brand,zp.recommend,zp.icon,zp.module moduleId,zm.name moduleName,zp.formula,
+        SELECT zp.id,zp.name,zp.brand,zp.recommend,zp.icon,zp.module moduleId,zm.name moduleName,zp.formula formula,
         zp.creator,zp.created,zp.modifier,zp.modified
         FROM zh_module zm
         left join zh_product zp on zm.id = zp.module

@@ -6,7 +6,7 @@
     <sql id="Base_Column_List">
     </sql>
 
-    <select id="selectAllProductList" resultType="DefProductPrice">
+    <select id="selectListByProductId" resultType="DefProductPrice">
         select zpp.id,zpp.product_id productId,zpp.basic_price basicPrice,zpp.unit_price  unitPrice,zpp.unit_price_min unitPriceMin,
                zpp.unit_price_max unitPriceMax,zpp.area_range_min areaRangeMin,zpp.area_range_max areaRangeMax,zpp.creator,
                zpp.created,zpp.modified,zpp.modifier,zpp.deleted

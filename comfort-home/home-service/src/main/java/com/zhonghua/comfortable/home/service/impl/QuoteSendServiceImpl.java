@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.text.NumberFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -87,14 +88,16 @@ public class QuoteSendServiceImpl implements QuoteSendService {
     private String getDefaultQuoteSmsContent(UserProjectPrice projectPrice) {
         JSONObject content = new JSONObject();
         //短信模板
-        StringBuffer quoteInfo = new StringBuffer();
+        NumberFormat nf = NumberFormat.getInstance();
+
         List<UserChooseProduct> products = projectPrice.getChooseProductList();
         for (UserChooseProduct product : products) {
             String price = null;
+
             if (product.getCostMax() == product.getCostMin()) {
-                price = product.getCostMin() + "元";
+                price = nf.format(product.getCostMin()) + "元";
             } else {
-                price = product.getCostMin() + "-" + product.getCostMax() + "元";
+                price = nf.format(product.getCostMin()) + "-" + nf.format(product.getCostMax()) + "元";
             }
             content.put("price" + product.getModuleId(), price);
         }
