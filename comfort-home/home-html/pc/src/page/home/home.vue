@@ -436,7 +436,6 @@ export default {
                 margin-bottom: 10px;
                 height:28px;
                 font-size:20px;
-                font-family:PingFangSC-Light;
                 font-weight:300;
                 color:rgba(95,92,92,1);
                 line-height:28px;
@@ -879,7 +878,6 @@ export default {
                 height: 89px;
                 line-height: 89px;
                 background:rgba(131,124,124,0.66);
-                font-family:PingFangSC-Thin;
                 font-size:40px;
                 color: #fff;
                 text-align: center;

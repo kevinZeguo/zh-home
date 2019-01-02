@@ -490,7 +490,7 @@ export default {
         },
         async productQuote (params) {
             const res = await productQuote(params);
-
+            //console.log(JSON.stringify(res));
             if (res.data.success == true) {
                 this.dialogFormClose();
 
@@ -509,7 +509,7 @@ export default {
                 this.chooseForm.roomCount = '';
 
                 this.$message({
-                    message: '恭喜您，操作成功，报价信息已经发送至您的手机，请查收',
+                    message: '恭喜您，操作成功!',
                     type: 'success'
                 });
             } else {
