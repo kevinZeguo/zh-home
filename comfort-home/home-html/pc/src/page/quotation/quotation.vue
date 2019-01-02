@@ -491,6 +491,7 @@ export default {
             // console.log(JSON.stringify(res));
             if (res.data.success == true) {
                 this.dialogFormClose();
+                this.$refs['chooseForm'].resetFields();
 
                 this.oneStatus = null;
                 this.twoStatus = null;
