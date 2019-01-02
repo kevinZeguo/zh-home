@@ -186,7 +186,7 @@
                     <li><img src="../../assets/img/icon-logo-6.png" /></li>
                     <li><img src="../../assets/img/icon-logo-7.png" /></li>
                     <li><img src="../../assets/img/icon-logo-8.png" /></li>
-                    <li><img src="../../assets/img/icon-logo-8.png" /></li>
+                    <li><img src="../../assets/img/icon-logo-9.png" /></li>
                     <li><img src="../../assets/img/icon-logo-10.png" /></li>
                     <li><img src="../../assets/img/icon-logo-11.png" /></li>
                     <li><img src="../../assets/img/icon-logo-12.png" /></li>
@@ -405,7 +405,6 @@ export default {
             .tit {
                 height:1.9rem;
                 font-size:1.4rem;
-                font-family:PingFangSC-Light;
                 font-weight:300;
                 color:rgba(95,92,92,1);
                 line-height:1.9rem;

@@ -3,6 +3,7 @@
         <el-carousel height="680px">
             <el-carousel-item v-for="(item, index) in banners" :key="index">
                 <img :src="item.src" />
+                <div class="txt">舒适，<br />家的意义。</div>
             </el-carousel-item>
         </el-carousel>
         <div class="home-container bg1">
@@ -194,7 +195,7 @@
                         <li><img src="../../assets/img/icon-logo-6.png" /></li>
                         <li><img src="../../assets/img/icon-logo-7.png" /></li>
                         <li><img src="../../assets/img/icon-logo-8.png" /></li>
-                        <li><img src="../../assets/img/icon-logo-8.png" /></li>
+                        <li><img src="../../assets/img/icon-logo-9.png" /></li>
                         <li><img src="../../assets/img/icon-logo-10.png" /></li>
                         <li><img src="../../assets/img/icon-logo-11.png" /></li>
                         <li><img src="../../assets/img/icon-logo-12.png" /></li>
@@ -268,12 +269,23 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.el-carousel__item h3 {
-    color: #475669;
-    font-size: 14px;
-    opacity: 0.75;
-    line-height: 600px;
-    margin: 0;
+.el-carousel__item .txt {
+    padding: 0 0 0 36px;
+    width:520px;
+    height:280px;
+    line-height: 126px;
+    position: absolute;
+    top: 287px;
+    left: 50%;
+    z-index: 10;
+    -webkit-transform: translateX(-50%);
+    -moz-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    transform: translateX(-50%);
+    border: 10px solid #FCD202;
+    background:rgba(83,78,78,0.53);
+    font-size:90px;
+    color: #fff;
 }
 
 .el-carousel__item:nth-child(2n) {
@@ -424,7 +436,6 @@ export default {
                 margin-bottom: 10px;
                 height:28px;
                 font-size:20px;
-                font-family:PingFangSC-Light;
                 font-weight:300;
                 color:rgba(95,92,92,1);
                 line-height:28px;
@@ -867,7 +878,6 @@ export default {
                 height: 89px;
                 line-height: 89px;
                 background:rgba(131,124,124,0.66);
-                font-family:PingFangSC-Thin;
                 font-size:40px;
                 color: #fff;
                 text-align: center;
