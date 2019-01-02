@@ -10,5 +10,5 @@ export const productList = param => {
 
 // 获取报价
 export const productQuote = param => {
-	return req.get('home/quote.ajax', param);
+	return req.get('home/quote.ajax?' + param, '');
 };

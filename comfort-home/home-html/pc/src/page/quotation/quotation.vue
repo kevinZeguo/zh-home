@@ -395,7 +395,6 @@ export default {
             });
         },
         submitForm (formName) {
-                    
             this.$refs[formName].validate((valid) => {
                 if (valid) {
                     let ps = this.resultArrs[0][this.oneStatus].id + ',' +
@@ -416,10 +415,8 @@ export default {
                         userName: this.ruleForm.userName //用户姓名
                     }
 
-                    console.log(JSON.stringify(params));
+                    //console.log(JSON.stringify(params));
                     this.productQuote(params);
-                } else {
-                    console.log(123);
                 }
             });
         },
@@ -483,13 +480,14 @@ export default {
 
             if (res.data.success == true) { 
                 res.data.list.forEach((value, index) => {
-                    //console.log(index);
                     this.resultArrs[(value.module - 1)].push(value);
                 });
             }
         },
-        async productQuote (params) {
-            const res = await productQuote(params);
+        async productQuote (params) {            
+            let param = 'd=' + encodeURIComponent(JSON.stringify(params));
+
+            const res = await productQuote(param);
             // console.log(JSON.stringify(res));
             if (res.data.success == true) {
                 this.dialogFormClose();
@@ -514,7 +512,7 @@ export default {
                 });
             } else {
                 this.$message({
-                    message: '请求失败，请稍后再试',
+                    message: res.data.message,
                     type: 'error'
                 });
             }

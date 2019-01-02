@@ -578,7 +578,9 @@ export default {
             }
         },
         async productQuote (params, callback) {
-            const res = await productQuote(params);
+            let param = 'd=' + encodeURIComponent(JSON.stringify(params));
+            
+            const res = await productQuote(param);
             //console.log(JSON.stringify(res));
             if (res.data.success == true) {
                 callback();
@@ -608,7 +610,7 @@ export default {
                 });
             } else {
                 this.$toast({
-                    message: '请求失败，请稍后再试',
+                    message: res.data.message,
                     type: 'error'
                 });
             }
