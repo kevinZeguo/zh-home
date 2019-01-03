@@ -23,13 +23,13 @@
                 <p class="label">我家是</p>
                 <div class="select-box" style="margin-bottom: 1rem;">
                     <select v-model="chooseForm.roomCount">
-                        <option v-for="(item, index) in roomsType" :label="item.label" :value="item.value" :key="index"></option>
+                        <option v-for="(item, index) in roomsType" :label="item.label" :value="item.value" :key="index">{{ item.label }}</option>
                     </select>
                     <span class="txt" v-if="chooseForm.roomCount == ''">请选择卧室数量</span>
                 </div>
                 <div class="select-box">
                     <select v-model="chooseForm.parlorCount">
-                        <option v-for="(item, index) in hallsType" :label="item.label" :value="item.value" :key="index"></option>
+                        <option v-for="(item, index) in hallsType" :label="item.label" :value="item.value" :key="index">{{ item.label }}</option>
                     </select>
                     <span class="txt" v-if="chooseForm.parlorCount == ''">请选择客厅数量</span>
                 </div>
@@ -39,11 +39,11 @@
                     <input type="text" v-model="chooseForm.usableArea" placeholder="请填写使用面积" />
                     <span class="txt">㎡</span>
                 </div>
-            
+                
                 <p class="label">房屋户型</p>
                 <div class="select-box">
                     <select v-model="chooseForm.type">
-                        <option v-for="(item, index) in homeTypes" :label="item.label" :value="item.value" :key="index"></option>
+                        <option v-for="(item, index) in homeTypes" :label="item.label" :value="item.value" :key="index">{{ item.label }}</option>
                     </select>
                     <span class="txt" v-if="chooseForm.type == ''">请选择户型</span>
                 </div>
@@ -94,42 +94,42 @@
                    <ul v-if="activeStatus == 1">
                         <li :class="{active: oneStatus == index}" v-for="(item, index) in resultArrs[0]" @click="changeOnes(index)">
                             <p class="name">{{ item.brand }}</p>
-                            <p class="pic"><img src="../../assets/img/pic-160x160-1.png" /></p>
+                            <p class="pic"><img :src="imgUrl + 'home' + item.icon" /></p>
                             <p class="prop">{{ item.name }}</p>
                         </li>
                     </ul>
                     <ul v-if="activeStatus == 2">
                         <li :class="{active: twoStatus == index}" v-for="(item, index) in resultArrs[1]" @click="changeTwos(index)">
                             <p class="name">{{ item.brand }}</p>
-                            <p class="pic"><img src="../../assets/img/pic-160x160-1.png" /></p>
+                            <p class="pic"><img :src="imgUrl + 'home' + item.icon" /></p>
                             <p class="prop">{{ item.recommend }}</p>
                         </li>
                     </ul>
                     <ul v-if="activeStatus == 3">
                         <li :class="{active: threeStatus == index}" v-for="(item, index) in resultArrs[2]" @click="changeThrees(index)">
                             <p class="name">{{ item.brand }}</p>
-                            <p class="pic"><img src="../../assets/img/pic-160x160-1.png" /></p>
+                            <p class="pic"><img :src="imgUrl + 'home' + item.icon" /></p>
                             <p class="prop">{{ item.recommend }}</p>
                         </li>
                     </ul>
                     <ul v-if="activeStatus == 4">
                         <li :class="{active: fourStatus == index}" v-for="(item, index) in resultArrs[3]" @click="changeFours(index)">
                             <p class="name">{{ item.brand }}</p>
-                            <p class="pic"><img src="../../assets/img/pic-160x160-1.png" /></p>
+                            <p class="pic"><img :src="imgUrl + 'home' + item.icon" /></p>
                             <p class="prop">{{ item.recommend }}</p>
                         </li>
                     </ul>
                     <ul v-if="activeStatus == 5">
                         <li :class="{active: fiveStatus == index}" v-for="(item, index) in resultArrs[4]" @click="changeFives(index)">
                             <p class="name">{{ item.brand }}</p>
-                            <p class="pic"><img src="../../assets/img/pic-160x160-1.png" /></p>
+                            <p class="pic"><img :src="imgUrl + 'home' + item.icon" /></p>
                             <p class="prop">{{ item.recommend }}</p>
                         </li>
                     </ul>
                     <ul v-if="activeStatus == 6">
                         <li :class="{active: sixStatus == index}" v-for="(item, index) in resultArrs[5]" @click="changeSixs(index)">
                             <p class="name">{{ item.brand }}</p>
-                            <p class="pic"><img src="../../assets/img/pic-160x160-1.png" /></p>
+                            <p class="pic"><img :src="imgUrl + 'home' + item.icon" /></p>
                             <p class="prop">{{ item.recommend }}</p>
                         </li>
                     </ul>
@@ -170,6 +170,7 @@
 
 <script>
 import { isvalidPhone } from '../../config/utils';
+import { baseUrl } from '../../config/env';
 import { productList, productQuote } from '../../service/getData';
 
 export default {
@@ -185,6 +186,7 @@ export default {
         };
 
         return {
+            imgUrl: baseUrl,
             step: {
                 oneActive: true,
                 oneSelected: false,
@@ -338,7 +340,7 @@ export default {
                 [],
                 []
             ],
-            nowPhone: '15800001111'
+            nowPhone: '' //'15800001111'
         }
     },
     mounted () {
@@ -587,6 +589,8 @@ export default {
 
                 this.nowPhone = this.ruleForm.phoneNum + '';
 
+                this.activeStatus = 1;
+
                 this.ruleForm.phoneNum = ''; //手机号
                 this.ruleForm.userName = ''; //用户姓名
 
@@ -605,7 +609,7 @@ export default {
                 this.chooseForm.roomCount = '';
 
                 this.$toast({
-                    message: '恭喜您，操作成功，报价信息已经发送至您的手机，请查收',
+                    message: '恭喜您，操作成功，报价信息已经发送至您的手机，请注意查收',
                     type: 'success'
                 });
             } else {
@@ -914,9 +918,9 @@ export default {
 
                 li {
                     margin-bottom: 0.8rem;
-                    padding: 1.3rem 1rem 0 8rem;
+                    padding: 1.3rem 0.5rem 1.3rem 8rem;
                     width:100%;
-                    height:10.5rem;
+                    min-height: 11.8rem;
                     background:rgba(255,255,255,1);
                     border: 1px solid #D6D7D2;
                     border-radius:4px;
@@ -947,16 +951,17 @@ export default {
                     .name {
                         padding-bottom: 0.8rem;
                         color: #424242;
-                        font-size: 1.4rem;
+                        font-size: 1.3rem;
                         line-height: 1.9rem;
+                        text-align: justify;
                     }
 
                     .pic {
-                        width: 8rem;
+                        width: 7rem;
                         height: 6rem;
                         position: absolute;
                         top: 2.2rem;
-                        left: 0;
+                        left: 0.5rem;
 
                         img {
                             width: 100%;
@@ -967,6 +972,7 @@ export default {
                         line-height: 1.4rem;
                         color: #424242;
                         font-size:1rem;
+                        text-align: justify;
                     }
                 }
             }

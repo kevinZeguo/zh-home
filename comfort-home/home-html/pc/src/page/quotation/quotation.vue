@@ -96,42 +96,42 @@
                         <ul v-if="activeStatus == 1">
                             <li :class="{active: oneStatus == index}" v-for="(item, index) in resultArrs[0]" @click="changeOnes(index)">
                                 <p class="name">{{ item.brand }}</p>
-                                <p class="pic"><img src="../../assets/img/pic-160x160-1.png" /></p>
+                                <p class="pic"><img :src="imgUrl + 'home' + item.icon" /></p>
                                 <p class="prop">{{ item.name }}</p>
                             </li>
                         </ul>
                         <ul v-if="activeStatus == 2">
                             <li :class="{active: twoStatus == index}" v-for="(item, index) in resultArrs[1]" @click="changeTwos(index)">
                                 <p class="name">{{ item.brand }}</p>
-                                <p class="pic"><img src="../../assets/img/pic-160x160-1.png" /></p>
+                                <p class="pic"><img :src="imgUrl + 'home' + item.icon" /></p>
                                 <p class="prop">{{ item.recommend }}</p>
                             </li>
                         </ul>
                         <ul v-if="activeStatus == 3">
                             <li :class="{active: threeStatus == index}" v-for="(item, index) in resultArrs[2]" @click="changeThrees(index)">
                                 <p class="name">{{ item.brand }}</p>
-                                <p class="pic"><img src="../../assets/img/pic-160x160-1.png" /></p>
+                                <p class="pic"><img :src="imgUrl + 'home' + item.icon" /></p>
                                 <p class="prop">{{ item.recommend }}</p>
                             </li>
                         </ul>
                         <ul v-if="activeStatus == 4">
                             <li :class="{active: fourStatus == index}" v-for="(item, index) in resultArrs[3]" @click="changeFours(index)">
                                 <p class="name">{{ item.brand }}</p>
-                                <p class="pic"><img src="../../assets/img/pic-160x160-1.png" /></p>
+                                <p class="pic"><img :src="imgUrl + 'home' + item.icon" /></p>
                                 <p class="prop">{{ item.recommend }}</p>
                             </li>
                         </ul>
                         <ul v-if="activeStatus == 5">
                             <li :class="{active: fiveStatus == index}" v-for="(item, index) in resultArrs[4]" @click="changeFives(index)">
                                 <p class="name">{{ item.brand }}</p>
-                                <p class="pic"><img src="../../assets/img/pic-160x160-1.png" /></p>
+                                <p class="pic"><img :src="imgUrl + 'home' + item.icon" /></p>
                                 <p class="prop">{{ item.recommend }}</p>
                             </li>
                         </ul>
                         <ul v-if="activeStatus == 6">
                             <li :class="{active: sixStatus == index}" v-for="(item, index) in resultArrs[5]" @click="changeSixs(index)">
                                 <p class="name">{{ item.brand }}</p>
-                                <p class="pic"><img src="../../assets/img/pic-160x160-1.png" /></p>
+                                <p class="pic"><img :src="imgUrl + 'home' + item.icon" /></p>
                                 <p class="prop">{{ item.recommend }}</p>
                             </li>
                         </ul>
@@ -164,6 +164,7 @@
 
 <script>
 import { isvalidPhone } from '../../config/utils';
+import { baseUrl } from '../../config/env';
 import { productList, productQuote } from '../../service/getData';
 
 export default {
@@ -179,6 +180,7 @@ export default {
         };
 
         return {
+            imgUrl: baseUrl,
             dialogVisible: false,
             homeTypes: [
                 {
@@ -488,10 +490,12 @@ export default {
             let param = 'd=' + encodeURIComponent(JSON.stringify(params));
 
             const res = await productQuote(param);
-            // console.log(JSON.stringify(res));
+            //console.log(JSON.stringify(res));
             if (res.data.success == true) {
                 this.dialogFormClose();
                 this.$refs['chooseForm'].resetFields();
+
+                this.activeStatus = 1;
 
                 this.oneStatus = null;
                 this.twoStatus = null;
@@ -508,7 +512,7 @@ export default {
                 this.chooseForm.roomCount = '';
 
                 this.$message({
-                    message: '恭喜您，操作成功!',
+                    message: '恭喜您，操作成功，报价信息已经发送至您的手机，请注意查收',
                     type: 'success'
                 });
             } else {
@@ -711,22 +715,18 @@ export default {
                 position: relative;
 
                 ul {
-                    &:after {
-                        height: 0;
-                        content: " ";
-                        clear:both;
-                        display: block;
-                    }
+                    -webkit-display: flex;
+                    -moz-display: flex;
+                    -ms-display: flex;
+                    display: flex;
 
                     li {
                         margin-right: 40px;
-                        padding: 25px 20px 0;
+                        padding: 25px 20px;
                         width:200px;
-                        height:270px;
                         background:rgba(255,255,255,1);
                         border: 2px solid transparent;
                         border-radius:4px;
-                        float: left;
                         position: relative;
                         z-index: 10;
                         cursor: pointer;
@@ -755,11 +755,12 @@ export default {
                         }
 
                         .name {
-                            padding-bottom: 15px;
+                            padding-bottom: 10px;
                             color: #424242;
                             font-size: 16px;
                             text-align: center;
                             line-height: 22px;
+                            text-align: justify;
                         }
 
                         .pic {
@@ -776,6 +777,7 @@ export default {
                             line-height: 20px;
                             color: #424242;
                             text-align: center;
+                            text-align: justify;
                         }
                     }
                 }
