@@ -36,10 +36,10 @@
             
                 <p class="label">实际使用面积</p>
                 <div class="field-box">
-                    <input type="text" v-model="chooseForm.usableArea" placeholder="请填写使用面积" />
+                    <input type="tel" v-model="chooseForm.usableArea" placeholder="请填写使用面积" />
                     <span class="txt">㎡</span>
                 </div>
-                
+
                 <p class="label">房屋户型</p>
                 <div class="select-box">
                     <select v-model="chooseForm.type">
@@ -50,7 +50,7 @@
             
                 <p class="label">我家里有</p>
                 <div class="field-box">
-                    <input type="text" v-model="chooseForm.liveCount" placeholder="请填写" />
+                    <input type="tel" v-model="chooseForm.liveCount" placeholder="请填写" />
                     <span class="txt">人</span>
                 </div>
             </div>
@@ -159,7 +159,7 @@
                 <p class="prop">报价结果将以短信形式发送至您手机</p>
                 <div class="quo-dialog-forms">
                     <input type="text" class="text" v-model="ruleForm.userName" placeholder="姓名" />
-                    <input type="text" class="text" v-model="ruleForm.phoneNum" placeholder="手机号" />
+                    <input type="tel" class="text" v-model="ruleForm.phoneNum" placeholder="手机号" />
                     <button type="submit" class="btn-submit" @click="threeClick">获取报价</button>
                 </div>
             </div>
@@ -407,6 +407,8 @@ export default {
             this.step.oneActive = false;
             this.step.oneSelected = true;
             this.step.twoActive = true;
+
+            document.body.scrollTop = 0;
         },
         twoClick () {
             if (this.oneStatus == null) {
@@ -464,6 +466,8 @@ export default {
             }
 
             this.dialogBln = true;
+
+            document.body.scrollTop = 0;
         },
         threeClick () {
 
@@ -608,10 +612,11 @@ export default {
                 this.chooseForm.parlorCount = '';
                 this.chooseForm.roomCount = '';
 
+                /*
                 this.$toast({
                     message: '恭喜您，操作成功，报价信息已经发送至您的手机，请注意查收',
                     type: 'success'
-                });
+                });*/
             } else {
                 this.$toast({
                     message: res.data.message,
@@ -625,6 +630,7 @@ export default {
 
 <style lang="scss" scoped>
 .quotation {
+    width: 100%;
     padding: 0 0.5rem;
     background: #fff;
 
@@ -997,7 +1003,7 @@ export default {
     }
 
     .view-result {
-        padding: 7.4rem 15%;
+        padding: 7.4rem 12%;
 
         .con {
             padding: 3rem 1.8rem;
@@ -1033,7 +1039,7 @@ export default {
         backface-visibility: hidden;
         -webkit-transition: .2s;
         transition: .2s;
-        z-index: 101;
+        z-index: 2001;
 
         .quo-dialog-hd {
             padding: 1.7rem 0 1.2rem;
@@ -1077,6 +1083,7 @@ export default {
                     margin-bottom: 1.7rem;
                     padding: 1rem;
                     width: 100%;
+                    background: transparent;
                     height: 3.4rem;
                     line-height: 1.4rem;
                     border: 1px solid #CECECE;
@@ -1109,7 +1116,7 @@ export default {
         height: 100%;
         opacity: 0.5;
         background: #000;
-        z-index: 100;
+        z-index: 2000;
     }
 }
 </style>
