@@ -11,7 +11,7 @@ const quotation = r => require.ensure([], () => r(require('../page/quotation/quo
 const solution = r => require.ensure([], () => r(require('../page/solution/solution')), 'solution');
 const customerCase = r => require.ensure([], () => r(require('../page/customer-case/customer-case')), 'customerCase');
 const about = r => require.ensure([], () => r(require('../page/about/about')), 'about');
-
+const enrol = r => require.ensure([], () => r(require('../page/enrol/enrol')), 'enrol');
 
 const routes = [
     {
@@ -46,6 +46,10 @@ const routes = [
                 path: 'about',
                 component: about
             },
+            {
+                path: 'enrol',
+                component: enrol
+            }
         ]
     },
     {
