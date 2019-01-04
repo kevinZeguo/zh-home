@@ -17,24 +17,42 @@
                 <span class="txt">交给我们</span>
             </div>
 
-            <ul>
-                <li>定位打孔</li>
-                <li>铺设管路</li>
-                <li>安装暖气片</li>
+            <ul class="en-nums">
+                <li>
+                    <div class="num">1</div>
+                    <div class="txt">定位打孔</div>
+                </li>
+                <li>
+                    <div class="num">2</div>
+                    <div class="txt">铺设管路</div>
+                </li>
+                <li>
+                    <div class="num">3</div>
+                    <div class="txt">安装暖气片</div>
+                </li>
             </ul>
-            <ul>
+            <ul class="en-intros">
                 <li>专业设计师精准定位，并采用无尘打孔，地面铺设保护膜，不会对室内家具和装修产生影响。</li>
                 <li>照事先设计的安装位置来确定管路的线路，布管线路一般是在吊顶、踢脚线等隐蔽的地方，明管的铺设尽量不影响到室内的装修或占用太多的空间。</li>
                 <li>安装暖气片在安装暖气片的过程中要将暖气片放置平稳，而且要使用水平尺进行测量，看是否安装平稳，然后把阀门连接件和进出水口阀门相连接，检查无误后，用管钳进行加固。</li>
             </ul>
 
-            <ul>
-                <li>安装壁挂炉</li>
-                <li>压力测试</li>
-                <li>验收使用</li>
+            <ul class="en-nums">
+                <li>
+                    <div class="num">4</div>
+                    <div class="txt">安装壁挂炉</div>
+                </li>
+                <li>
+                    <div class="num">5</div>
+                    <div class="txt">压力测试</div>
+                </li>
+                <li>
+                    <div class="num">6</div>
+                    <div class="txt">验收使用</div>
+                </li>
             </ul>
 
-            <ul>
+            <ul class="en-intros">
                 <li>壁挂炉的安装需要注意与明线和电气设备隔开，也不能将易燃易爆物品放在其周围，具体来说，壁挂炉与燃气表和燃气灶的距离应该超过750px。</li>
                 <li>验收施工人员在对管道进行冲压测试时,没有出现跑、冒、漏、滴等现象。一般测试3-5分钟无渗漏为合格。</li>
                 <li>在您检查确认后便可以验收，等待暖冬的到来！</li>
@@ -44,6 +62,66 @@
                 <span class="name">6大优势</span>
                 <span class="line"></span>
                 <span class="txt">专业放心</span>
+            </div>
+
+            <ul class="en-goods">
+                <li>
+                    <span class="num">1</span>
+                    <p class="name">安装快捷</p>
+                    <p class="into">一天即可完工</p>
+                    <p class="prop">明装的管路主要是简单铺设，无开挖，不回填，因而铺设周期很短，一天就可完成安装、调试，基本不影响家庭日常起居。</p>
+                </li>
+                <li>
+                    <span class="num">2</span>
+                    <p class="name">工艺美观</p>
+                    <p class="into">不影响室内装修</p>
+                    <p class="prop">明装采暖管道走踢脚线、阴角线、吊顶或者窗帘、家具后面等隐蔽位置，横平竖直，无开挖无回填，完全不用担心会破坏原有的装修格局</p>
+                </li>
+                <li>
+                    <span class="num">3</span>
+                    <p class="name">使用舒适</p>
+                    <p class="into">没有热风和扬尘</p>
+                    <p class="prop">明装暖气属于水暖，比较温润，没有空调那样的热风干燥，不会吹起室内扬尘。人体感觉更舒适，使用方便， 能自由调温，舒适性高，制热不干燥。</p>
+                </li>
+                <li>
+                    <span class="num">4</span>
+                    <p class="name">服务周到</p>
+                    <p class="into">不给生活添麻烦</p>
+                    <p class="prop">安装保障，专业团队施工，为客户提供最周到的服务。</p>
+                </li>
+                <li>
+                    <span class="num">5</span>
+                    <p class="name">使用节省</p>
+                    <p class="into">想开就开升温快</p>
+                    <p class="prop">明装暖气片采暖，室内温暖可控制在18-22度，独立控制每个房间的温度，控制采暖时间。</p>
+                </li>
+                <li>
+                    <span class="num">6</span>
+                    <p class="name">德国精湛工艺</p>
+                    <p class="into">采暖热水兼顾</p>
+                    <p class="prop">原采用燃气热水器用户，一举双得，取暖同时解决全屋热水，专业节能。</p>
+                </li>
+            </ul>
+
+            <div class="en-forms">
+                <h2 class="tit">立即预约，免费设计</h2>
+                <h3 class="tit-sub">尊享服务：免费上门设计＋专业团队施工</h3>
+                <div class="en-forms-con">
+                    <p class="name">冬日暖暖的爱和家人分享</p>
+                    <ul class="forms-list">
+                        <li>
+                            <p class="f-name">姓名</p>
+                            <input type="text" class="f-text" placeholder="" />
+                        </li>
+                        <li>
+                            <p class="f-name">手机号码</p>
+                            <input type="text" class="f-text" placeholder="" />
+                        </li>
+                    </ul>
+                    <div class="btns-box">
+                        <button type="button">立即预约</button>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -416,7 +494,7 @@ export default {
 
     .en-container {
         margin: 0 auto;
-        width: 1000px;
+        width: 1002px;
         background:rgba(255,255,255,1);
         box-shadow:0px 2px 4px 0px rgba(0,0,0,0.5);
         border:1px solid rgba(151,151,151,1);
@@ -511,7 +589,216 @@ export default {
             }
         }
             
-        
+        .en-nums {
+            padding: 40px 0 30px 40px;
+            width: 1000px;
+
+            &:after {
+                height: 0;
+                content: " ";
+                clear: both;
+                display: block;
+            }
+
+            li {
+                margin-right: 40px;
+                width:  280px;
+                float: left;
+                height: 50px;
+                position: relative;
+
+                .num {
+                    width: 30px;
+                    height: 30px;
+                    background: #01AFEB;
+                    color: #fff;
+                    text-align: center;
+                    line-height: 30px;
+                    border-radius: 30px;
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    margin: -15px 0 0 -95px;
+                }
+
+                .txt {
+                    margin: 0 auto;
+                    width: 160px;
+                    height: 50px;
+                    line-height: 50px;
+                    border: 2px solid #01AFEB;
+                    text-align: center;
+                    color: #5F5C5C;
+                    font-size: 16px;
+                    text-align: center;
+                    font-weight: 300;
+                }
+            }
+        }
+
+        .en-intros {
+            padding: 0 0 0 40px;
+            width: 1000px;
+
+            &:after {
+                height: 0;
+                content: " ";
+                clear: both;
+                display: block;
+            }
+
+            li {
+                margin-right: 40px;
+                width:  280px;
+                float: left;
+                line-height: 20px;
+                position: relative;
+                color: #5F5C5C;
+            }
+        }
+
+        .en-goods {
+            padding: 50px 15px 60px;
+            -webkit-display: flex;
+            -moz-display: flex;
+            -ms-display: flex;
+            display: flex;
+            -webkit-justify-content: space-between;
+            -moz-justify-content: space-between;
+            -ms-justify-content: space-between;
+            justify-content: space-between;
+
+            li {
+                width: 160px;
+                background: #009CD2;
+                position: relative;
+                color: #fff;
+                border-radius: 4px;
+                
+                .num {
+                    color: #83BD84;
+                    line-height: 70px;
+                    position: absolute;
+                    font-size: 50px;
+                    top: 0;
+                    left: 4px;
+                    z-index: 1;
+                }
+
+                .name {
+                    padding: 16px 0 0;
+                    line-height: 28px;
+                    text-align: center;
+                    position: relative;
+                    font-size: 20px;
+                    z-index: 2;
+                }
+
+                .into {
+                    padding: 8px 0 0;
+                    line-height: 20px;
+                    text-align: center;
+                    position: relative;
+                    font-size: 14px;
+                    z-index: 2;
+                }
+
+                .prop {
+                    padding: 47px 10px 20px;
+                    line-height: 17px;
+                    font-size: 12px;
+                    text-align: justify;
+                }
+            }
+        }
+
+        .en-forms {
+            padding-top: 50px;
+            width: 1000px;
+            height: 530px;
+            background: #ddd;
+            color:#fff;
+
+            .tit {
+                font-size:30px;
+                font-weight:500;
+                line-height:42px;
+                text-align: center;
+            }
+
+            .tit-sub {
+                padding: 10px 0 33px;
+                font-size:20px;
+                font-weight:100;
+                line-height:28px;
+                text-align: center;
+            }
+
+            .en-forms-con {
+                margin: 0 auto;
+                padding: 35px 55px 0;
+                width: 576px;
+                height: 326px;
+                background: rgba(255, 255, 255, 0.8);
+
+                .name {
+                    padding-bottom: 47px;
+                    font-size:26px;
+                    font-weight:300;
+                    color:#464545;
+                    line-height:37px;
+                    text-align: center;
+                }
+
+                .forms-list {
+                    -webkit-display: flex;
+                    -moz-display: flex;
+                    -ms-display: flex;
+                    display: flex;
+                    -webkit-justify-content: space-between;
+                    -moz-justify-content: space-between;
+                    -ms-justify-content: space-between;
+                    justify-content: space-between;
+
+                    li {
+                        width: 224px;
+
+                        .f-name {
+                            font-size:16px;
+                            color:#424242;
+                            line-height:26px;
+                        }
+
+                        .f-text {
+                            padding: 10px;
+                            line-height: 30px;
+                            width:224px;
+                            height:50px;
+                            background:rgba(252,252,252,1);
+                            border-radius:4px;
+                            border:1px solid rgba(194,194,194,1);
+                        }
+                    }
+                }
+
+                .btns-box {
+                    padding-top: 42px;
+                    text-align: center;
+
+                    button {
+                        width:255px;
+                        height:50px;
+                        background:rgba(233,197,14,1);
+                        box-shadow:0px 2px 4px 0px rgba(0,0,0,0.5);
+                        border-radius:20px;
+                        border: 0;
+                        font-size: 20px;
+                        color: #fff;
+                        cursor: pointer;
+                    }
+                }
+            }
+        }
     }
 
     .quo-dialog {
