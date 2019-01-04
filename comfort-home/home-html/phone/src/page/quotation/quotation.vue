@@ -21,6 +21,20 @@
         <div v-if="step.oneActive">
             <div class="quo-selects">
                 <p class="label">我家是</p>
+                <div class="select-box">
+                    <select v-model="chooseForm.type">
+                        <option v-for="(item, index) in homeTypes" :label="item.label" :value="item.value" :key="index">{{ item.label }}</option>
+                    </select>
+                    <span class="txt" v-if="chooseForm.type == ''">请选择户型</span>
+                </div>
+            
+                <p class="label">实际使用面积</p>
+                <div class="field-box">
+                    <input type="tel" v-model="chooseForm.usableArea" placeholder="请填写使用面积" />
+                    <span class="txt">㎡</span>
+                </div>
+
+                <p class="label">房屋户型</p>
                 <div class="select-box" style="margin-bottom: 1rem;">
                     <select v-model="chooseForm.roomCount">
                         <option v-for="(item, index) in roomsType" :label="item.label" :value="item.value" :key="index">{{ item.label }}</option>
@@ -32,20 +46,6 @@
                         <option v-for="(item, index) in hallsType" :label="item.label" :value="item.value" :key="index">{{ item.label }}</option>
                     </select>
                     <span class="txt" v-if="chooseForm.parlorCount == ''">请选择客厅数量</span>
-                </div>
-            
-                <p class="label">实际使用面积</p>
-                <div class="field-box">
-                    <input type="tel" v-model="chooseForm.usableArea" placeholder="请填写使用面积" />
-                    <span class="txt">㎡</span>
-                </div>
-
-                <p class="label">房屋户型</p>
-                <div class="select-box">
-                    <select v-model="chooseForm.type">
-                        <option v-for="(item, index) in homeTypes" :label="item.label" :value="item.value" :key="index">{{ item.label }}</option>
-                    </select>
-                    <span class="txt" v-if="chooseForm.type == ''">请选择户型</span>
                 </div>
             
                 <p class="label">我家里有</p>
@@ -127,7 +127,7 @@
                         </li>
                     </ul>
                     <ul v-if="activeStatus == 6">
-                        <li :class="{active: sixStatus == index}" v-for="(item, index) in resultArrs[5]" @click="changeSixs(index)">
+                        <li :class="{active: item.status}" v-for="(item, index) in resultArrs[5]" @click="changeSixs(index)">
                             <p class="name">{{ item.brand }}</p>
                             <p class="pic"><img :src="imgUrl + 'home' + item.icon" /></p>
                             <p class="prop">{{ item.recommend }}</p>
@@ -331,7 +331,7 @@ export default {
             threeStatus: null,
             fourStatus: null,
             fiveStatus: null,
-            sixStatus: null,
+            sixStatus: [],
             resultArrs: [
                 [],
                 [],
@@ -411,60 +411,6 @@ export default {
             document.body.scrollTop = 0;
         },
         twoClick () {
-            if (this.oneStatus == null) {
-                this.$toast({
-                    message: '请选择凉爽的夏日',
-                    type: 'warning'
-                });
-
-                return false;
-            }
-
-            if (this.twoStatus == null) {
-                this.$toast({
-                    message: '请选择清新的空气',
-                    type: 'warning'
-                });
-                
-                return false;
-            }
-
-            if (this.threeStatus == null) {
-                this.$toast({
-                    message: '请选择洁净的水源',
-                    type: 'warning'
-                });
-                
-                return false;
-            }
-
-            if (this.fourStatus == null) {
-                this.$toast({
-                    message: '请选择温暖的房间',
-                    type: 'warning'
-                });
-                
-                return false;
-            }
-
-            if (this.fiveStatus == null) {
-                this.$toast({
-                    message: '请选择24小时热水',
-                    type: 'warning'
-                });
-                
-                return false;
-            }
-
-            if (this.sixStatus == null) {
-                this.$toast({
-                    message: '请选择智能的房子',
-                    type: 'warning'
-                });
-                
-                return false;
-            }
-
             this.dialogBln = true;
 
             document.body.scrollTop = 0;
@@ -494,15 +440,34 @@ export default {
                 return false;
             }
 
-            let ps = this.resultArrs[0][this.oneStatus].id + ',' +
-                     this.resultArrs[1][this.twoStatus].id + ',' +
-                     this.resultArrs[2][this.threeStatus].id + ',' +
-                     this.resultArrs[3][this.fourStatus].id + ',' +
-                     this.resultArrs[4][this.fiveStatus].id + ',' +
-                     this.resultArrs[5][this.sixStatus].id;
+            let ps = [];
+
+            if (this.oneStatus != null) {
+                ps.push(this.resultArrs[0][this.oneStatus].id);
+            }
+
+            if (this.twoStatus != null) {
+                 ps.push(this.resultArrs[1][this.twoStatus].id);
+            }
+
+            if (this.threeStatus != null) {
+                ps.push(this.resultArrs[2][this.threeStatus].id);
+            }
+
+            if (this.fourStatus != null) {
+                ps.push(this.resultArrs[3][this.fourStatus].id);
+            }
+
+            if (this.fiveStatus != null) {
+                ps.push(this.resultArrs[4][this.fiveStatus].id);
+            }
+
+            if (this.sixStatus.length > 0) {
+                ps.push.apply(ps, this.sixStatus);
+            }
 
             let params = {
-                ps: ps, //产品Id，多个以逗号分割
+                ps: ps.length > 0 ? ps.join(',') : '', //产品Id，多个以逗号分割
                 type: this.chooseForm.type, //房间类型 1-别墅 2-平层 3-复式
                 usableArea: this.chooseForm.usableArea, //使用面积
                 liveCount: this.chooseForm.liveCount, //居住人数
@@ -512,7 +477,8 @@ export default {
                 userName: this.ruleForm.userName //用户姓名
             }
 
-            //console.log(JSON.stringify(params));
+            // console.log(JSON.stringify(params));
+
             this.productQuote(params, () => {
 
                 this.dialogBln = false;
@@ -567,18 +533,27 @@ export default {
                 this.fiveStatus = index; 
             }
         },
-        changeSixs (index) {
-            if (this.sixStatus == index) {
-                this.sixStatus = null;
-            } else {
-                this.sixStatus = index; 
-            }
+        changeSixs (num) {
+            this.resultArrs[5][num].status = !this.resultArrs[5][num].status;
+            
+            this.sixStatus = [];
+
+            this.resultArrs[5].forEach((value, index) => {
+                if (value.status) {
+                    this.sixStatus.push(value.id);
+                }
+            });
         },
         async productList () {
             const res = await productList('');
 
             if (res.data.success == true) { 
                 res.data.list.forEach((value, index) => {
+
+                    if ((value.module - 1) == 5) {
+                        value.status = false;
+                    }
+
                     this.resultArrs[(value.module - 1)].push(value);
                 });
             }
@@ -603,7 +578,7 @@ export default {
                 this.threeStatus = null;
                 this.fourStatus = null;
                 this.fiveStatus = null;
-                this.sixStatus = null;
+                this.sixStatus = [];
 
                 this.chooseForm.ps = '';
                 this.chooseForm.type = '';

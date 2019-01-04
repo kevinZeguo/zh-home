@@ -12,7 +12,22 @@
                 <el-row :gutter="60">
                     <el-col :span="6">
                         <p class="tit">我家是</p>
-
+                        <el-form-item prop="type">
+                            <el-select v-model="chooseForm.type" placeholder="请选择户型">
+                                <el-option v-for="(item, index) in homeTypes" :label="item.label" :value="item.value" :key="index"></el-option>
+                            </el-select>
+                        </el-form-item>
+                    </el-col>
+                    <el-col :span="6">
+                        <p class="tit">实际使用面积</p>
+                        <el-form-item prop="usableArea">
+                            <el-input v-model.number="chooseForm.usableArea" placeholder="请填写使用面积">
+                                <template slot="append">㎡</template>
+                            </el-input>
+                        </el-form-item>
+                    </el-col>
+                    <el-col :span="6">
+                        <p class="tit">房屋户型</p>
                         <el-row :gutter="10">
                             <el-col :span="12">
                                 <el-form-item prop="roomCount">
@@ -31,25 +46,9 @@
                         </el-row>
                     </el-col>
                     <el-col :span="6">
-                        <p class="tit">实际使用面积</p>
-                        <el-form-item prop="usableArea">
-                            <el-input v-model.number="chooseForm.usableArea" placeholder="请填写使用面积">
-                                <template slot="append">㎡</template>
-                            </el-input>
-                        </el-form-item>
-                    </el-col>
-                    <el-col :span="6">
-                        <p class="tit">房屋户型</p>
-                        <el-form-item prop="type">
-                            <el-select v-model="chooseForm.type" placeholder="请选择户型">
-                                <el-option v-for="(item, index) in homeTypes" :label="item.label" :value="item.value" :key="index"></el-option>
-                            </el-select>
-                        </el-form-item>
-                    </el-col>
-                    <el-col :span="6">
                         <p class="tit">我家里有</p>
                         <el-form-item prop="liveCount">
-                            <el-input v-model.number="chooseForm.liveCount" placeholder="请选择">
+                            <el-input v-model.number="chooseForm.liveCount" placeholder="请输入">
                                 <template slot="append">人</template>
                             </el-input>
                         </el-form-item>
@@ -97,7 +96,7 @@
                             <li :class="{active: oneStatus == index}" v-for="(item, index) in resultArrs[0]" @click="changeOnes(index)">
                                 <p class="name">{{ item.brand }}</p>
                                 <p class="pic"><img :src="imgUrl + 'home' + item.icon" /></p>
-                                <p class="prop">{{ item.name }}</p>
+                                <p class="prop">{{ item.recommend }}</p>
                             </li>
                         </ul>
                         <ul v-if="activeStatus == 2">
@@ -129,7 +128,7 @@
                             </li>
                         </ul>
                         <ul v-if="activeStatus == 6">
-                            <li :class="{active: sixStatus == index}" v-for="(item, index) in resultArrs[5]" @click="changeSixs(index)">
+                            <li :class="{active: item.status}" v-for="(item, index) in resultArrs[5]" @click="changeSixs(index)">
                                 <p class="name">{{ item.brand }}</p>
                                 <p class="pic"><img :src="imgUrl + 'home' + item.icon" /></p>
                                 <p class="prop">{{ item.recommend }}</p>
@@ -144,6 +143,7 @@
             </div>
         </el-form>
 
+        <!--
         <el-dialog title="提示" :visible.sync="dialogVisible" width="500px" :before-close="handleClose">
             <el-form :model="ruleForm" :rules="rulesForm" ref="ruleForm" label-width="100px">
                 <el-form-item label="用户姓名" prop="userName">
@@ -158,7 +158,29 @@
                 <el-button type="primary" @click="submitForm('ruleForm')">确 定</el-button>
             </span>
         </el-dialog>
+        -->
 
+        <div class="quo-dialog" v-if="dialogVisible">
+            <div class="quo-dialog-hd">
+                <div class="tit">获取报价</div>
+                <span class="icon-close" @click="closeClick">close</span>
+            </div>
+
+            <div class="quo-dialog-bd">
+                <p class="prop">报价结果将以短信形式发送至您手机</p>
+                
+                <el-form class="quo-dialog-forms mt30" :model="ruleForm" :rules="rulesForm" ref="ruleForm">
+                    <el-form-item prop="userName">
+                        <el-input v-model="ruleForm.userName" placeholder="姓名"></el-input>
+                    </el-form-item>
+                    <el-form-item prop="phoneNum">
+                        <el-input v-model="ruleForm.phoneNum" placeholder="手机号"></el-input>
+                    </el-form-item>
+                    <button type="button" class="btn-submit" @click="submitForm('ruleForm')">获取报价</button>
+                </el-form>
+            </div>
+        </div>
+        <div class="quo-modal" v-if="dialogVisible"></div>
     </div>
 </template>
 
@@ -317,7 +339,7 @@ export default {
             threeStatus: null,
             fourStatus: null,
             fiveStatus: null,
-            sixStatus: null,
+            sixStatus: [],
             resultArrs: [
                 [],
                 [],
@@ -338,76 +360,42 @@ export default {
         openDialog (formName) {
             this.$refs[formName].validate((valid) => {
                 if (valid) {
-                    if (this.oneStatus == null) {
-                        this.$message({
-                            message: '请选择凉爽的夏日',
-                            type: 'warning'
-                        });
-
-                        return false;
-                    }
-
-                    if (this.twoStatus == null) {
-                        this.$message({
-                            message: '请选择清新的空气',
-                            type: 'warning'
-                        });
-                        
-                        return false;
-                    }
-
-                    if (this.threeStatus == null) {
-                        this.$message({
-                            message: '请选择洁净的水源',
-                            type: 'warning'
-                        });
-                        
-                        return false;
-                    }
-
-                    if (this.fourStatus == null) {
-                        this.$message({
-                            message: '请选择温暖的房间',
-                            type: 'warning'
-                        });
-                        
-                        return false;
-                    }
-
-                    if (this.fiveStatus == null) {
-                        this.$message({
-                            message: '请选择24小时热水',
-                            type: 'warning'
-                        });
-                        
-                        return false;
-                    }
-
-                    if (this.sixStatus == null) {
-                        this.$message({
-                            message: '请选择智能的房子',
-                            type: 'warning'
-                        });
-                        
-                        return false;
-                    }
-
                     this.dialogVisible = true;
                 }
             });
         },
         submitForm (formName) {
             this.$refs[formName].validate((valid) => {
+
                 if (valid) {
-                    let ps = this.resultArrs[0][this.oneStatus].id + ',' +
-                             this.resultArrs[1][this.twoStatus].id + ',' +
-                             this.resultArrs[2][this.threeStatus].id + ',' +
-                             this.resultArrs[3][this.fourStatus].id + ',' +
-                             this.resultArrs[4][this.fiveStatus].id + ',' +
-                             this.resultArrs[5][this.sixStatus].id;
+                    let ps = [];
+
+                    if (this.oneStatus != null) {
+                        ps.push(this.resultArrs[0][this.oneStatus].id);
+                    }
+
+                    if (this.twoStatus != null) {
+                         ps.push(this.resultArrs[1][this.twoStatus].id);
+                    }
+
+                    if (this.threeStatus != null) {
+                        ps.push(this.resultArrs[2][this.threeStatus].id);
+                    }
+
+                    if (this.fourStatus != null) {
+                        ps.push(this.resultArrs[3][this.fourStatus].id);
+                    }
+
+                    if (this.fiveStatus != null) {
+                        ps.push(this.resultArrs[4][this.fiveStatus].id);
+                    }
+
+                    if (this.sixStatus.length > 0) {
+                        ps.push.apply(ps, this.sixStatus);
+                    }
 
                     let params = {
-                        ps: ps, //产品Id，多个以逗号分割
+                        ps: ps.length > 0 ? ps.join(',') : '', //产品Id，多个以逗号分割
                         type: this.chooseForm.type, //房间类型 1-别墅 2-平层 3-复式
                         usableArea: this.chooseForm.usableArea, //使用面积
                         liveCount: this.chooseForm.liveCount, //居住人数
@@ -417,7 +405,7 @@ export default {
                         userName: this.ruleForm.userName //用户姓名
                     }
 
-                    //console.log(JSON.stringify(params));
+                    // console.log(JSON.stringify(params));
                     this.productQuote(params);
                 }
             });
@@ -457,23 +445,22 @@ export default {
                 this.fiveStatus = index; 
             }
         },
-        changeSixs (index) {
-            if (this.sixStatus == index) {
-                this.sixStatus = null;
-            } else {
-                this.sixStatus = index; 
-            }
+        changeSixs (num) {
+            this.resultArrs[5][num].status = !this.resultArrs[5][num].status;
+            
+            this.sixStatus = [];
+
+            this.resultArrs[5].forEach((value, index) => {
+                if (value.status) {
+                    this.sixStatus.push(value.id);
+                }
+            });
         },
-        dialogFormClose () {
+        closeClick () {
             this.dialogVisible = false;
             this.$refs['ruleForm'].resetFields();
             this.ruleForm.phoneNum = ''; //手机号
             this.ruleForm.userName = ''; //用户姓名
-        },
-        handleClose (done) {
-            done();
-
-            this.dialogFormClose();
         },
         async productList () {
             const res = await productList('');
@@ -482,6 +469,11 @@ export default {
 
             if (res.data.success == true) { 
                 res.data.list.forEach((value, index) => {
+
+                    if ((value.module - 1) == 5) {
+                        value.status = false;
+                    }
+
                     this.resultArrs[(value.module - 1)].push(value);
                 });
             }
@@ -492,7 +484,7 @@ export default {
             const res = await productQuote(param);
             //console.log(JSON.stringify(res));
             if (res.data.success == true) {
-                this.dialogFormClose();
+                this.closeClick();
                 this.$refs['chooseForm'].resetFields();
 
                 this.activeStatus = 1;
@@ -502,7 +494,7 @@ export default {
                 this.threeStatus = null;
                 this.fourStatus = null;
                 this.fiveStatus = null;
-                this.sixStatus = null;
+                this.sixStatus = [];
 
                 this.chooseForm.ps = '';
                 this.chooseForm.type = '';
@@ -775,9 +767,10 @@ export default {
 
                         .prop {
                             line-height: 20px;
-                            color: #424242;
+                            color: #8a8a8a;
                             text-align: center;
                             text-align: justify;
+                            font-size: 12px;
                         }
                     }
                 }
@@ -801,6 +794,89 @@ export default {
             font-size:20px;
             cursor: pointer;
         }
+    }
+
+    .quo-dialog {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        -webkit-transform: translate3d(-50%, -50%, 0);
+        transform: translate3d(-50%, -50%, 0);
+        background-color: #fff;
+        width: 400px;
+        border-radius: 3px;
+        font-size: 16px;
+        -webkit-user-select: none;
+        overflow: hidden;
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+        -webkit-transition: .2s;
+        transition: .2s;
+        z-index: 2001;
+
+        .quo-dialog-hd {
+            padding: 17px 0 12px;
+            line-height: 38px;
+            text-align: center;
+            position: relative;
+
+            .tit {
+                line-height: 38px;
+                color: #4f4f4f;
+                font-size: 20px;
+            }
+
+            .icon-close {
+                width: 48px;
+                height: 48px;
+                background: url(../../assets/img/icon-close-f0f.png) no-repeat center center;
+                background-size: 24px 24px;
+                position: absolute;
+                top: 0;
+                right: 0;
+                text-indent: -999em;
+                overflow: hidden;
+                cursor: pointer;
+            }
+        }
+
+
+        .quo-dialog-bd {
+            .prop {
+                padding-bottom: 42px;
+                line-height: 15px;
+                font-size: 14px;
+                color: #424242;
+                text-align: center;
+            }
+
+            .quo-dialog-forms {
+                padding: 0 45px 39px;
+
+                .btn-submit {
+                    width:100%;
+                    height:50px;
+                    background:rgba(233,197,14,1);
+                    box-shadow:0px 2px 4px 0px rgba(0,0,0,0.5);
+                    border-radius:20px;
+                    border: 0;
+                    color: #fff;
+                    font-size:20px;
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+
+    .quo-modal {
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0.5;
+        background: #000;
+        z-index: 2000;
     }
 }
 </style>

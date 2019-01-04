@@ -167,7 +167,7 @@
                     </li>
                 </ul>
 
-                <div class="btns-box"><button type="submit">1分钟免费报价</button></div>
+                <div class="btns-box"><button type="submit" @click="$router.push({path: '/quotation'})">1分钟免费报价</button></div>
             </div>
         </div>
 
@@ -506,9 +506,9 @@ export default {
                 z-index: 1;
 
                 li {
-                    padding: 2.9rem 4.8rem;
+                    padding: 2rem 4.8rem;
                     width:100%;
-                    height:11.6rem;
+                    height: 11.6rem;
                     line-height:1.9rem;
                     background:#fff;
                     box-shadow:0.3rem -0.2rem 0.7rem 0 rgba(254,209,2,1);
@@ -542,15 +542,15 @@ export default {
                     }
 
                     .prop {
-                        height: 6.6rem;
+                        height: 7.6rem;
                         display: table;
 
                         p {
                             display: table-cell; 
                             vertical-align:middle;
-                            line-height: 2.2rem;
-                            font-size:1.6rem;
+                            font-size:1.5rem;
                             color:#212121;
+                            text-align: justify;
                         }
                     }
                 }

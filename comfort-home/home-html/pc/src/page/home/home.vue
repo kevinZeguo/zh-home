@@ -2,7 +2,7 @@
     <div class="home">
         <el-carousel height="680px">
             <el-carousel-item v-for="(item, index) in banners" :key="index">
-                <img :src="item.src" />
+                <div class="pic" :style="{backgroundImage: 'url(' + item.src +')'}"></div>
                 <div class="txt">舒适，<br />家的意义。</div>
             </el-carousel-item>
         </el-carousel>
@@ -173,7 +173,7 @@
                         </li>
                     </ul>
 
-                    <div class="btns-box"><button type="submit">1分钟免费报价</button></div>
+                    <div class="btns-box"><button type="submit" @click="$router.push({path: '/quotation'})">1分钟免费报价</button></div>
                     <p class="info">舒适的家，没那么难</p>
                 </div>
             </div>
@@ -254,7 +254,7 @@ export default {
                     src: require('../../assets/img/pic-banner-1.jpg')
                 },
                 {
-                    src: require('../../assets/img/pic-banner-2.jpg')
+                    src:  require('../../assets/img/pic-banner-2.jpg')
                 }
             ]
         }
@@ -269,23 +269,32 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.el-carousel__item .txt {
-    padding: 0 0 0 36px;
-    width:520px;
-    height:280px;
-    line-height: 126px;
-    position: absolute;
-    top: 287px;
-    left: 50%;
-    z-index: 10;
-    -webkit-transform: translateX(-50%);
-    -moz-transform: translateX(-50%);
-    -ms-transform: translateX(-50%);
-    transform: translateX(-50%);
-    border: 10px solid #FCD202;
-    background:rgba(83,78,78,0.53);
-    font-size:90px;
-    color: #fff;
+.el-carousel__item { 
+    .pic {
+        width: 100%;
+        height: 680px;
+        background-repeat: no-repeat;
+        background-position: center center;
+    }
+
+    .txt {
+        padding: 0 0 0 36px;
+        width:520px;
+        height:280px;
+        line-height: 126px;
+        position: absolute;
+        top: 287px;
+        left: 50%;
+        z-index: 10;
+        -webkit-transform: translateX(-50%);
+        -moz-transform: translateX(-50%);
+        -ms-transform: translateX(-50%);
+        transform: translateX(-50%);
+        border: 10px solid #FCD202;
+        background:rgba(83,78,78,0.53);
+        font-size:90px;
+        color: #fff;
+    }
 }
 
 .el-carousel__item:nth-child(2n) {
@@ -695,6 +704,7 @@ export default {
                     position: relative;
                     z-index: 2;
                     font-size: 20px;
+                    cursor: pointer;
                 }
             }
 
@@ -708,7 +718,7 @@ export default {
 
         .home-six {
             margin: 50px 0 0;
-            padding: 0 110px 60px;
+            padding: 0 160px 60px;
 
             ul {
                 &:after {
@@ -720,12 +730,17 @@ export default {
 
                 li {
                     margin: 0 20px 20px 0;
-                    width: 180px;
-                    height: 90px;
+                    width: 160px;
+                    height: 80px;
                     float: left;
                     background: #eee;
                     position: relative;
                     color: #fff;
+
+                    img {
+                        width: 160px;
+                        height: 80px;
+                    }
 
                     &:nth-child(5n) {
                         margin-right: 0;
@@ -866,6 +881,7 @@ export default {
                     position: relative;
                     z-index: 2;
                     font-size: 20px;
+                    cursor: pointer;
                 }
             }
         }
