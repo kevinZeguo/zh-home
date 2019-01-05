@@ -4,17 +4,17 @@
 
         <div class="en-container">
             <div class="en-hd">
-                <h2 class="tit">把德国采暖系统搬回家</h2>
-                <h3 class="tit-sub">众华舒适家，送您一个温暖的冬天</h3>
-                <p class="prop">安装快捷，一天即可完工<br />工艺美观，不影响室内装修<br />使用节省，想开就开升温快</p>
-                <div class="btns-box"><button type="button">快速获取冬天采暖报价</button></div>
-                <p class="prop-btn"><button type="button">立即预约安装</button></p>
+                <div class="en-hd-box">
+                    <h2 class="tit">把德国采暖系统搬回家</h2>
+                    <h3 class="tit-sub">众华舒适家，送您一个温暖的冬天</h3>
+                    <div class="btns-box"><button type="button">快速获取冬天采暖报价</button></div>
+                </div>
             </div>
 
             <div class="en-tits">
-                <span class="name">6步施工</span>
+                <p class="name">6步施工</p>
                 <span class="line"></span>
-                <span class="txt">交给我们</span>
+                <p class="txt">交给我们，不用您动手</p>
             </div>
 
             <ul class="en-nums">
@@ -30,14 +30,6 @@
                     <div class="num">3</div>
                     <div class="txt">安装暖气片</div>
                 </li>
-            </ul>
-            <ul class="en-intros">
-                <li>专业设计师精准定位，并采用无尘打孔，地面铺设保护膜，不会对室内家具和装修产生影响。</li>
-                <li>照事先设计的安装位置来确定管路的线路，布管线路一般是在吊顶、踢脚线等隐蔽的地方，明管的铺设尽量不影响到室内的装修或占用太多的空间。</li>
-                <li>安装暖气片在安装暖气片的过程中要将暖气片放置平稳，而且要使用水平尺进行测量，看是否安装平稳，然后把阀门连接件和进出水口阀门相连接，检查无误后，用管钳进行加固。</li>
-            </ul>
-
-            <ul class="en-nums">
                 <li>
                     <div class="num">4</div>
                     <div class="txt">安装壁挂炉</div>
@@ -52,16 +44,10 @@
                 </li>
             </ul>
 
-            <ul class="en-intros">
-                <li>壁挂炉的安装需要注意与明线和电气设备隔开，也不能将易燃易爆物品放在其周围，具体来说，壁挂炉与燃气表和燃气灶的距离应该超过750px。</li>
-                <li>验收施工人员在对管道进行冲压测试时,没有出现跑、冒、漏、滴等现象。一般测试3-5分钟无渗漏为合格。</li>
-                <li>在您检查确认后便可以验收，等待暖冬的到来！</li>
-            </ul>
-
             <div class="en-tits">
-                <span class="name">6大优势</span>
+                <p class="name">6大优势</p>
                 <span class="line"></span>
-                <span class="txt">专业放心</span>
+                <p class="txt">专业放心，从此告别寒冷</p>
             </div>
 
             <ul class="en-goods">
@@ -69,53 +55,45 @@
                     <span class="num">1</span>
                     <p class="name">安装快捷</p>
                     <p class="into">一天即可完工</p>
-                    <p class="prop">明装的管路主要是简单铺设，无开挖，不回填，因而铺设周期很短，一天就可完成安装、调试，基本不影响家庭日常起居。</p>
                 </li>
                 <li>
                     <span class="num">2</span>
                     <p class="name">工艺美观</p>
                     <p class="into">不影响室内装修</p>
-                    <p class="prop">明装采暖管道走踢脚线、阴角线、吊顶或者窗帘、家具后面等隐蔽位置，横平竖直，无开挖无回填，完全不用担心会破坏原有的装修格局</p>
                 </li>
                 <li>
                     <span class="num">3</span>
                     <p class="name">使用舒适</p>
                     <p class="into">没有热风和扬尘</p>
-                    <p class="prop">明装暖气属于水暖，比较温润，没有空调那样的热风干燥，不会吹起室内扬尘。人体感觉更舒适，使用方便， 能自由调温，舒适性高，制热不干燥。</p>
                 </li>
                 <li>
                     <span class="num">4</span>
                     <p class="name">服务周到</p>
                     <p class="into">不给生活添麻烦</p>
-                    <p class="prop">安装保障，专业团队施工，为客户提供最周到的服务。</p>
                 </li>
                 <li>
                     <span class="num">5</span>
                     <p class="name">使用节省</p>
                     <p class="into">想开就开升温快</p>
-                    <p class="prop">明装暖气片采暖，室内温暖可控制在18-22度，独立控制每个房间的温度，控制采暖时间。</p>
                 </li>
                 <li>
                     <span class="num">6</span>
                     <p class="name">德国精湛工艺</p>
                     <p class="into">采暖热水兼顾</p>
-                    <p class="prop">原采用燃气热水器用户，一举双得，取暖同时解决全屋热水，专业节能。</p>
                 </li>
             </ul>
 
             <div class="en-forms">
-                <h2 class="tit">立即预约，免费设计</h2>
-                <h3 class="tit-sub">尊享服务：免费上门设计＋专业团队施工</h3>
+                <h2 class="tit">立即预约，<strong>免费</strong>设计</h2>
+                <h3 class="tit-sub">尊享服务免<br />费上门设计＋专业团队施工</h3>
                 <div class="en-forms-con">
                     <p class="name">冬日暖暖的爱和家人分享</p>
                     <ul class="forms-list">
                         <li>
-                            <p class="f-name">姓名</p>
-                            <input type="text" class="f-text" placeholder="" />
+                            <input type="text" class="f-text" placeholder="姓名" />
                         </li>
                         <li>
-                            <p class="f-name">手机号码</p>
-                            <input type="text" class="f-text" placeholder="" />
+                            <input type="text" class="f-text" placeholder="手机号码" />
                         </li>
                     </ul>
                     <div class="btns-box">
@@ -168,317 +146,12 @@ export default {
 
         return {
             imgUrl: baseUrl,
-            dialogVisible: false,
-            homeTypes: [
-                {
-                    value: 1,
-                    label:'别墅'
-                },
-                {
-                    value: 2,
-                    label: '平层'
-                },
-                {
-                    value: 3,
-                    label: '复式'
-                }
-            ],
-            roomsType: [
-                {
-                    value: 1,
-                    label:'1居'
-                },
-                {
-                    value: 2,
-                    label: '2居'
-                },
-                {
-                    value: 3,
-                    label: '3居'
-                },
-                {
-                    value: 4,
-                    label: '4居'
-                },
-                {
-                    value: 5,
-                    label: '5居'
-                },
-                {
-                    value: 6,
-                    label: '6居'
-                },
-                {
-                    value: 7,
-                    label: '7居'
-                },
-                {
-                    value: 8,
-                    label: '8居'
-                },
-                {
-                    value: 9,
-                    label: '9居'
-                }
-            ],
-            hallsType: [
-                {
-                    value: 1,
-                    label:'1厅'
-                },
-                {
-                    value: 2,
-                    label: '2厅'
-                },
-                {
-                    value: 3,
-                    label: '3厅'
-                },
-                {
-                    value: 4,
-                    label: '4厅'
-                },
-                {
-                    value: 5,
-                    label: '5厅'
-                },
-                {
-                    value: 6,
-                    label: '6厅'
-                },
-                {
-                    value: 7,
-                    label: '7厅'
-                },
-                {
-                    value: 8,
-                    label: '8厅'
-                },
-                {
-                    value: 9,
-                    label: '9厅'
-                }
-            ],
-            chooseForm: {
-                ps: '', //产品Id，多个以逗号分割
-                type: '', //房间类型 1-别墅 2-平层 3-复式
-                usableArea: '', //使用面积
-                liveCount: '', //居住人数
-                parlorCount: '', //客厅数量
-                roomCount: '' //卧室数量
-            },
-            rules: {
-                roomCount: [
-                    { required: true, message: '请选择卧室数量', trigger: 'change' }
-                ],
-                parlorCount: [
-                    { required: true, message: '请选择客厅数量', trigger: 'change' }
-                ],
-                usableArea: [
-                    { required: true, message: '使用面积不能为空'},
-                    { type: 'number', message: '使用面积必须为数字值'}
-                ],
-                type: [
-                    { required: true, message: '请选择房屋户型', trigger: 'change' }
-                ],
-                liveCount: [
-                    { required: true, message: '人数不能为空'},
-                    { type: 'number', message: '人数必须为数字值'}
-                ]
-            },
-            ruleForm: {
-                phoneNum: '', //手机号
-                userName: '' //用户姓名
-            },
-            rulesForm: {
-                userName: [
-                    { required: true, message: '用户姓名不能为空'}
-                ],
-                phoneNum: [
-                    { required: true, trigger: 'blur', validator: validPhone }
-                ]
-            },
-            activeStatus: 1,
-            oneStatus: null,
-            twoStatus: null,
-            threeStatus: null,
-            fourStatus: null,
-            fiveStatus: null,
-            sixStatus: [],
-            resultArrs: [
-                [],
-                [],
-                [],
-                [],
-                [],
-                []
-            ]
+            dialogVisible: false
         }
     },
     mounted () {
-        this.productList();
     },
     methods: {
-        changeTabs (index) {
-            this.activeStatus = index;
-        },
-        openDialog (formName) {
-            this.$refs[formName].validate((valid) => {
-                if (valid) {
-                    this.dialogVisible = true;
-                }
-            });
-        },
-        submitForm (formName) {
-            this.$refs[formName].validate((valid) => {
-
-                if (valid) {
-                    let ps = [];
-
-                    if (this.oneStatus != null) {
-                        ps.push(this.resultArrs[0][this.oneStatus].id);
-                    }
-
-                    if (this.twoStatus != null) {
-                         ps.push(this.resultArrs[1][this.twoStatus].id);
-                    }
-
-                    if (this.threeStatus != null) {
-                        ps.push(this.resultArrs[2][this.threeStatus].id);
-                    }
-
-                    if (this.fourStatus != null) {
-                        ps.push(this.resultArrs[3][this.fourStatus].id);
-                    }
-
-                    if (this.fiveStatus != null) {
-                        ps.push(this.resultArrs[4][this.fiveStatus].id);
-                    }
-
-                    if (this.sixStatus.length > 0) {
-                        ps.push.apply(ps, this.sixStatus);
-                    }
-
-                    let params = {
-                        ps: ps.length > 0 ? ps.join(',') : '', //产品Id，多个以逗号分割
-                        type: this.chooseForm.type, //房间类型 1-别墅 2-平层 3-复式
-                        usableArea: this.chooseForm.usableArea, //使用面积
-                        liveCount: this.chooseForm.liveCount, //居住人数
-                        parlorCount: this.chooseForm.parlorCount, //客厅数量
-                        roomCount: this.chooseForm.roomCount, //卧室数量
-                        phoneNum: this.ruleForm.phoneNum, //手机号
-                        userName: this.ruleForm.userName //用户姓名
-                    }
-
-                    // console.log(JSON.stringify(params));
-                    this.productQuote(params);
-                }
-            });
-        },
-        changeOnes (index) {
-            if (this.oneStatus == index) {
-                this.oneStatus = null;
-            } else {
-                this.oneStatus = index; 
-            }
-        },
-        changeTwos (index) {
-            if (this.twoStatus == index) {
-                this.twoStatus = null;
-            } else {
-                this.twoStatus = index; 
-            }
-        },
-        changeThrees (index) {
-            if (this.threeStatus == index) {
-                this.threeStatus = null;
-            } else {
-                this.threeStatus = index; 
-            }
-        },
-        changeFours (index) {
-            if (this.fourStatus == index) {
-                this.fourStatus = null;
-            } else {
-                this.fourStatus = index; 
-            }
-        },
-        changeFives (index) {
-            if (this.fiveStatus == index) {
-                this.fiveStatus = null;
-            } else {
-                this.fiveStatus = index; 
-            }
-        },
-        changeSixs (num) {
-            this.resultArrs[5][num].status = !this.resultArrs[5][num].status;
-            
-            this.sixStatus = [];
-
-            this.resultArrs[5].forEach((value, index) => {
-                if (value.status) {
-                    this.sixStatus.push(value.id);
-                }
-            });
-        },
-        closeClick () {
-            this.dialogVisible = false;
-            this.$refs['ruleForm'].resetFields();
-            this.ruleForm.phoneNum = ''; //手机号
-            this.ruleForm.userName = ''; //用户姓名
-        },
-        async productList () {
-            const res = await productList('');
-
-            // console.log(JSON.stringify(res));
-
-            if (res.data.success == true) { 
-                res.data.list.forEach((value, index) => {
-
-                    if ((value.module - 1) == 5) {
-                        value.status = false;
-                    }
-
-                    this.resultArrs[(value.module - 1)].push(value);
-                });
-            }
-        },
-        async productQuote (params) {            
-            let param = 'd=' + encodeURIComponent(JSON.stringify(params));
-
-            const res = await productQuote(param);
-            //console.log(JSON.stringify(res));
-            if (res.data.success == true) {
-                this.closeClick();
-                this.$refs['chooseForm'].resetFields();
-
-                this.activeStatus = 1;
-
-                this.oneStatus = null;
-                this.twoStatus = null;
-                this.threeStatus = null;
-                this.fourStatus = null;
-                this.fiveStatus = null;
-                this.sixStatus = [];
-
-                this.chooseForm.ps = '';
-                this.chooseForm.type = '';
-                this.chooseForm.usableArea = '';
-                this.chooseForm.liveCount = '';
-                this.chooseForm.parlorCount = '';
-                this.chooseForm.roomCount = '';
-
-                this.$message({
-                    message: '恭喜您，操作成功，报价信息已经发送至您的手机，请注意查收',
-                    type: 'success'
-                });
-            } else {
-                this.$message({
-                    message: res.data.message,
-                    type: 'error'
-                });
-            }
-        }
     }
 }
 </script>
@@ -492,103 +165,90 @@ export default {
     }
 
     .en-container {
-        
+        position: relative;
+        overflow: hidden;
 
         .en-hd {
-            margin: 0 auto;
+            margin: -50% auto 2.7rem;
+            padding-top: 100%;
             width: 100%;
-            padding-top: 50%;
-            height: 0;
-            border-radius: 0 0 100% 100%;
-            background:#fff;
+            position: relative;
+            border-radius:100%;
             box-shadow:0px 3px 10px 0px rgba(244,225,134,1);
-            color: #fff;
-            text-align: center;
 
-            .tit {
-                padding-top:70px;
-                font-size:30px;
-                font-weight: 100;
-                line-height:42px;
-            }
+            .en-hd-box {
+                width: 100%;
+                z-index:2;
+                position: absolute;
+                top: 50%;
+                left: 0;
+                text-align: center;
 
-            .tit-sub {
-                padding-top:10px;
-                font-size:20px;
-                font-weight:300;
-                line-height:28px;
-            }
-
-            .prop {
-                padding: 30px 0 40px;
-                line-height: 20px;
-                font-size: 14px;
-            }
-
-            .btns-box {
-                padding-bottom: 20px;
-
-                button {
-                    width:240px;
-                    height:50px;
-                    background: #01AFEB;
-                    border:1px solid rgba(255,255,255,1);
-                    border-radius: 20px;
-                    color: #fff;
-                    font-size: 20px;
-                    cursor: pointer;
+                .tit {
+                    padding-top:1.7rem;
+                    font-size:1.7rem;
+                    font-weight: 100;
+                    line-height:2.4rem;
+                    color:#01AFEB;
                 }
-            }
 
-            .prop-btn {
-                button {
-                    width:120px;
-                    height:28px;
-                    background: #01AFEB;
-                    border-radius: 20px;
-                    color: #fff;
-                    font-size: 20px;
-                    border: 0;
-                    cursor: pointer;
+                .tit-sub {
+                    padding-top:0.85rem;
+                    font-size:1.35rem;
+                    font-weight:300;
+                    line-height:1.9rem;
+                    color:#01AFEB;
+                }
+
+                .btns-box {
+                    padding-top: 2rem;
+
+                    button {
+                        width:15.35rem;
+                        height:3.4rem;
+                        background: #fff;
+                        border:0.15rem solid #F4E186;
+                        border-radius: 1.7rem;
+                        color: #303131;
+                        font-size: 1.2rem;
+                        cursor: pointer;
+                    }
                 }
             }
         }
 
         .en-tits {
-            margin: 60px auto 0;
-            width: 260px;
-            height: 50px;
-            background: #8FC323;
+            padding: 3.25rem 0 0 4.25rem;
             color: #fff;
-            line-height: 50px;
-            text-align: center;
-
+            position: relative;
 
             .name {
-                font-size: 26px;
-                vertical-align: middle;
-                display: inline-block;
+                padding-bottom: 0.1rem;
+                color: #5F5C5C;
+                font-size: 1.75rem;
+                line-height: 2.4rem;
             }
 
             .line {
-                margin: 0 10px 0 20px;
-                width: 5px;
-                height: 20px;
-                background: #fff;
-                display: inline-block;
-                vertical-align: middle;
+                width: 0.35rem;
+                height: 1rem;
+                background: #01AFEB;
+                position: absolute;
+                left: 4.25rem;
+                bottom: 0.3rem;
             }
 
             .txt {
-                font-size: 18px;
-                vertical-align: middle;
-                display: inline-block;
+                padding-left: 0.85rem;
+                color:#898888;
+                font-size: 1.2rem;
+                line-height: 1.7rem;
             }
         }
             
         .en-nums {
-            padding: 40px 0 30px 40px;
-            width: 1000px;
+            padding: 1.7rem 3.25rem 0 0;
+            width: 100%;
 
             &:after {
                 height: 0;
@@ -598,44 +258,44 @@ export default {
             }
 
             li {
-                margin-right: 40px;
-                width:  280px;
+                margin-bottom: 1.7rem;
+                padding-left: 4.25rem;
+                width:  50%;
                 float: left;
-                height: 50px;
+                height: 4.25rem;
                 position: relative;
 
                 .num {
-                    width: 30px;
-                    height: 30px;
+                    width: 1.7rem;
+                    height: 1.7rem;
                     background: #01AFEB;
                     color: #fff;
                     text-align: center;
-                    line-height: 30px;
-                    border-radius: 30px;
+                    line-height: 1.7rem;
+                    font-size: 1.7rem;
+                    border-radius: 1.7rem;
                     position: absolute;
                     top: 50%;
-                    left: 50%;
-                    margin: -15px 0 0 -95px;
+                    left: 3.4rem;
+                    margin: -0.85rem 0 0;
                 }
 
                 .txt {
-                    margin: 0 auto;
-                    width: 160px;
-                    height: 50px;
-                    line-height: 50px;
-                    border: 2px solid #01AFEB;
+                    width: 100%;
+                    height: 4.25rem;
+                    line-height: 4.25rem;
+                    border: 0.15rem solid #C0DAE3;
                     text-align: center;
                     color: #5F5C5C;
-                    font-size: 16px;
+                    font-size: 1.35rem;
                     text-align: center;
                     font-weight: 300;
                 }
             }
         }
 
-        .en-intros {
-            padding: 0 0 0 40px;
-            width: 1000px;
+        .en-goods {
+            padding: 0 0 2.95rem;
 
             &:after {
                 height: 0;
@@ -645,149 +305,110 @@ export default {
             }
 
             li {
-                margin-right: 40px;
-                width:  280px;
+                padding: 2.95rem 0 0;
+                width: 33.3333333%;
+                position: relative;
+                color:#5F5C5C;
                 float: left;
-                line-height: 20px;
-                position: relative;
-                color: #5F5C5C;
-            }
-        }
-
-        .en-goods {
-            padding: 50px 15px 60px;
-            -webkit-display: flex;
-            -moz-display: flex;
-            -ms-display: flex;
-            display: flex;
-            -webkit-justify-content: space-between;
-            -moz-justify-content: space-between;
-            -ms-justify-content: space-between;
-            justify-content: space-between;
-
-            li {
-                width: 160px;
-                background: #009CD2;
-                position: relative;
-                color: #fff;
-                border-radius: 4px;
                 
                 .num {
-                    color: #83BD84;
-                    line-height: 70px;
+                    color: #FCD202;
+                    line-height: 4.25rem;
                     position: absolute;
-                    font-size: 50px;
-                    top: 0;
-                    left: 4px;
+                    font-size: 4.25rem;
+                    top: 2.75rem;
+                    left: 0.7rem;
                     z-index: 1;
                 }
 
                 .name {
-                    padding: 16px 0 0;
-                    line-height: 28px;
+                    line-height: 2.4rem;
                     text-align: center;
                     position: relative;
-                    font-size: 20px;
+                    font-size: 1.7rem;
                     z-index: 2;
                 }
 
                 .into {
-                    padding: 8px 0 0;
-                    line-height: 20px;
+                    padding: 1.7rem 0 0;
+                    line-height: 1.7rem;
                     text-align: center;
                     position: relative;
-                    font-size: 14px;
+                    font-size: 1.2rem;
                     z-index: 2;
-                }
-
-                .prop {
-                    padding: 47px 10px 20px;
-                    line-height: 17px;
-                    font-size: 12px;
-                    text-align: justify;
                 }
             }
         }
 
         .en-forms {
-            padding-top: 50px;
-            width: 1000px;
-            height: 530px;
-            background: #ddd;
-            color:#fff;
+            border-top: 1px solid #DEDDDD;
+            padding: 2.4rem 0 3.4rem;
+            width: 100%;
 
             .tit {
-                font-size:30px;
-                font-weight:500;
-                line-height:42px;
+                padding-bottom: 1.35rem;
+                font-size:1.7rem;
+                font-weight:bold;
+                line-height:2.8rem;
                 text-align: center;
+                color:#464545;
+
+                strong {
+                    font-size: 2.0rem;
+                    color:#01AFEB;
+                }
             }
 
             .tit-sub {
-                padding: 10px 0 33px;
-                font-size:20px;
+                padding: 0 0 2.95rem;
+                font-size:1.35rem;
                 font-weight:100;
-                line-height:28px;
+                line-height:1.9rem;
                 text-align: center;
+                color:#464545
             }
 
             .en-forms-con {
-                margin: 0 auto;
-                padding: 35px 55px 0;
-                width: 576px;
-                height: 326px;
-                background: rgba(255, 255, 255, 0.8);
+                padding: 2.15rem 4.5rem 2.4rem;
+                width: 100%;
+                background: #999;
 
                 .name {
-                    padding-bottom: 47px;
-                    font-size:26px;
-                    font-weight:300;
-                    color:#464545;
-                    line-height:37px;
+                    padding-bottom: 2rem;
+                    font-size:1.35rem;
+                    font-weight:100;
+                    color:#fff;
+                    line-height:1.9rem;
                     text-align: center;
                 }
 
                 .forms-list {
-                    -webkit-display: flex;
-                    -moz-display: flex;
-                    -ms-display: flex;
-                    display: flex;
-                    -webkit-justify-content: space-between;
-                    -moz-justify-content: space-between;
-                    -ms-justify-content: space-between;
-                    justify-content: space-between;
-
+                    
                     li {
-                        width: 224px;
-
-                        .f-name {
-                            font-size:16px;
-                            color:#424242;
-                            line-height:26px;
-                        }
+                        padding-bottom: 1.7rem;
+                        width: 100%;
 
                         .f-text {
-                            padding: 10px;
-                            line-height: 30px;
-                            width:224px;
-                            height:50px;
-                            background:rgba(252,252,252,1);
-                            border-radius:4px;
-                            border:1px solid rgba(194,194,194,1);
+                            padding: 0.5rem;
+                            line-height: 2.4rem;
+                            width:100%;
+                            height:3.4rem;
+                            background: #fff;
+                            border-radius:0.35rem;
+                            border:0;
                         }
                     }
                 }
 
                 .btns-box {
-                    padding-top: 42px;
                     text-align: center;
 
                     button {
-                        width:255px;
-                        height:50px;
+                        width:100%;
+                        height:4.25rem;
                         background:rgba(233,197,14,1);
-                        box-shadow:0px 2px 4px 0px rgba(0,0,0,0.5);
-                        border-radius:20px;
+                        box-shadow:0px 3px 7px 0px rgba(0,0,0,0.5);
+                        border-radius:34px;
                         border: 0;
                         font-size: 20px;
                         color: #fff;
