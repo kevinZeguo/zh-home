@@ -1,6 +1,16 @@
 <template>
     <div class="enrol">
-        <div class="banner"></div>
+        <div class="banner">
+            <div class="infos">
+                <div class="infos-box">
+                    <h1>家里暖气不热？</h1>
+                    <p>老房没有接入集中供暖接口？</p>
+                    <p>供热站供暖老是烧不暖？</p>
+                    <p>屋里暖气忽冷忽热？</p>
+                    <p>家里有老人孩子，很多时候需<br />要温度要求更高一些？</p>
+                </div>
+            </div>
+        </div>
 
         <div class="en-container">
             <div class="en-hd">
@@ -57,6 +67,10 @@
                 <li>验收施工人员在对管道进行冲压测试时,没有出现跑、冒、漏、滴等现象。一般测试3-5分钟无渗漏为合格。</li>
                 <li>在您检查确认后便可以验收，等待暖冬的到来！</li>
             </ul>
+
+            <div class="videos">
+                <iframe frameborder="0" src="https://v.qq.com/txp/iframe/player.html?vid=q1328ksebit" allowFullScreen="true" style="width: 800px;height: 450px;"></iframe>
+            </div>
 
             <div class="en-tits">
                 <span class="name">6大优势</span>
@@ -169,316 +183,12 @@ export default {
         return {
             imgUrl: baseUrl,
             dialogVisible: false,
-            homeTypes: [
-                {
-                    value: 1,
-                    label:'别墅'
-                },
-                {
-                    value: 2,
-                    label: '平层'
-                },
-                {
-                    value: 3,
-                    label: '复式'
-                }
-            ],
-            roomsType: [
-                {
-                    value: 1,
-                    label:'1居'
-                },
-                {
-                    value: 2,
-                    label: '2居'
-                },
-                {
-                    value: 3,
-                    label: '3居'
-                },
-                {
-                    value: 4,
-                    label: '4居'
-                },
-                {
-                    value: 5,
-                    label: '5居'
-                },
-                {
-                    value: 6,
-                    label: '6居'
-                },
-                {
-                    value: 7,
-                    label: '7居'
-                },
-                {
-                    value: 8,
-                    label: '8居'
-                },
-                {
-                    value: 9,
-                    label: '9居'
-                }
-            ],
-            hallsType: [
-                {
-                    value: 1,
-                    label:'1厅'
-                },
-                {
-                    value: 2,
-                    label: '2厅'
-                },
-                {
-                    value: 3,
-                    label: '3厅'
-                },
-                {
-                    value: 4,
-                    label: '4厅'
-                },
-                {
-                    value: 5,
-                    label: '5厅'
-                },
-                {
-                    value: 6,
-                    label: '6厅'
-                },
-                {
-                    value: 7,
-                    label: '7厅'
-                },
-                {
-                    value: 8,
-                    label: '8厅'
-                },
-                {
-                    value: 9,
-                    label: '9厅'
-                }
-            ],
-            chooseForm: {
-                ps: '', //产品Id，多个以逗号分割
-                type: '', //房间类型 1-别墅 2-平层 3-复式
-                usableArea: '', //使用面积
-                liveCount: '', //居住人数
-                parlorCount: '', //客厅数量
-                roomCount: '' //卧室数量
-            },
-            rules: {
-                roomCount: [
-                    { required: true, message: '请选择卧室数量', trigger: 'change' }
-                ],
-                parlorCount: [
-                    { required: true, message: '请选择客厅数量', trigger: 'change' }
-                ],
-                usableArea: [
-                    { required: true, message: '使用面积不能为空'},
-                    { type: 'number', message: '使用面积必须为数字值'}
-                ],
-                type: [
-                    { required: true, message: '请选择房屋户型', trigger: 'change' }
-                ],
-                liveCount: [
-                    { required: true, message: '人数不能为空'},
-                    { type: 'number', message: '人数必须为数字值'}
-                ]
-            },
-            ruleForm: {
-                phoneNum: '', //手机号
-                userName: '' //用户姓名
-            },
-            rulesForm: {
-                userName: [
-                    { required: true, message: '用户姓名不能为空'}
-                ],
-                phoneNum: [
-                    { required: true, trigger: 'blur', validator: validPhone }
-                ]
-            },
-            activeStatus: 1,
-            oneStatus: null,
-            twoStatus: null,
-            threeStatus: null,
-            fourStatus: null,
-            fiveStatus: null,
-            sixStatus: [],
-            resultArrs: [
-                [],
-                [],
-                [],
-                [],
-                [],
-                []
-            ]
+           
         }
     },
     mounted () {
-        this.productList();
     },
     methods: {
-        changeTabs (index) {
-            this.activeStatus = index;
-        },
-        openDialog (formName) {
-            this.$refs[formName].validate((valid) => {
-                if (valid) {
-                    this.dialogVisible = true;
-                }
-            });
-        },
-        submitForm (formName) {
-            this.$refs[formName].validate((valid) => {
-
-                if (valid) {
-                    let ps = [];
-
-                    if (this.oneStatus != null) {
-                        ps.push(this.resultArrs[0][this.oneStatus].id);
-                    }
-
-                    if (this.twoStatus != null) {
-                         ps.push(this.resultArrs[1][this.twoStatus].id);
-                    }
-
-                    if (this.threeStatus != null) {
-                        ps.push(this.resultArrs[2][this.threeStatus].id);
-                    }
-
-                    if (this.fourStatus != null) {
-                        ps.push(this.resultArrs[3][this.fourStatus].id);
-                    }
-
-                    if (this.fiveStatus != null) {
-                        ps.push(this.resultArrs[4][this.fiveStatus].id);
-                    }
-
-                    if (this.sixStatus.length > 0) {
-                        ps.push.apply(ps, this.sixStatus);
-                    }
-
-                    let params = {
-                        ps: ps.length > 0 ? ps.join(',') : '', //产品Id，多个以逗号分割
-                        type: this.chooseForm.type, //房间类型 1-别墅 2-平层 3-复式
-                        usableArea: this.chooseForm.usableArea, //使用面积
-                        liveCount: this.chooseForm.liveCount, //居住人数
-                        parlorCount: this.chooseForm.parlorCount, //客厅数量
-                        roomCount: this.chooseForm.roomCount, //卧室数量
-                        phoneNum: this.ruleForm.phoneNum, //手机号
-                        userName: this.ruleForm.userName //用户姓名
-                    }
-
-                    // console.log(JSON.stringify(params));
-                    this.productQuote(params);
-                }
-            });
-        },
-        changeOnes (index) {
-            if (this.oneStatus == index) {
-                this.oneStatus = null;
-            } else {
-                this.oneStatus = index; 
-            }
-        },
-        changeTwos (index) {
-            if (this.twoStatus == index) {
-                this.twoStatus = null;
-            } else {
-                this.twoStatus = index; 
-            }
-        },
-        changeThrees (index) {
-            if (this.threeStatus == index) {
-                this.threeStatus = null;
-            } else {
-                this.threeStatus = index; 
-            }
-        },
-        changeFours (index) {
-            if (this.fourStatus == index) {
-                this.fourStatus = null;
-            } else {
-                this.fourStatus = index; 
-            }
-        },
-        changeFives (index) {
-            if (this.fiveStatus == index) {
-                this.fiveStatus = null;
-            } else {
-                this.fiveStatus = index; 
-            }
-        },
-        changeSixs (num) {
-            this.resultArrs[5][num].status = !this.resultArrs[5][num].status;
-            
-            this.sixStatus = [];
-
-            this.resultArrs[5].forEach((value, index) => {
-                if (value.status) {
-                    this.sixStatus.push(value.id);
-                }
-            });
-        },
-        closeClick () {
-            this.dialogVisible = false;
-            this.$refs['ruleForm'].resetFields();
-            this.ruleForm.phoneNum = ''; //手机号
-            this.ruleForm.userName = ''; //用户姓名
-        },
-        async productList () {
-            const res = await productList('');
-
-            // console.log(JSON.stringify(res));
-
-            if (res.data.success == true) { 
-                res.data.list.forEach((value, index) => {
-
-                    if ((value.module - 1) == 5) {
-                        value.status = false;
-                    }
-
-                    this.resultArrs[(value.module - 1)].push(value);
-                });
-            }
-        },
-        async productQuote (params) {            
-            let param = 'd=' + encodeURIComponent(JSON.stringify(params));
-
-            const res = await productQuote(param);
-            //console.log(JSON.stringify(res));
-            if (res.data.success == true) {
-                this.closeClick();
-                this.$refs['chooseForm'].resetFields();
-
-                this.activeStatus = 1;
-
-                this.oneStatus = null;
-                this.twoStatus = null;
-                this.threeStatus = null;
-                this.fourStatus = null;
-                this.fiveStatus = null;
-                this.sixStatus = [];
-
-                this.chooseForm.ps = '';
-                this.chooseForm.type = '';
-                this.chooseForm.usableArea = '';
-                this.chooseForm.liveCount = '';
-                this.chooseForm.parlorCount = '';
-                this.chooseForm.roomCount = '';
-
-                this.$message({
-                    message: '恭喜您，操作成功，报价信息已经发送至您的手机，请注意查收',
-                    type: 'success'
-                });
-            } else {
-                this.$message({
-                    message: res.data.message,
-                    type: 'error'
-                });
-            }
-        }
     }
 }
 </script>
@@ -488,8 +198,39 @@ export default {
     .banner {
         width: 100%;
         min-width: 1200px;
-        height:680px;
-        background: url(../../assets/img/pic-banner-2.jpg) no-repeat center center;
+        height:600px;
+        background: url(../../assets/img/pic-enrol-banner.jpg) no-repeat center center;
+
+        .infos {
+            width: 1200px;
+            margin: 0 auto;
+            padding: 203px 0 0 91px;
+
+            .infos-box {
+                padding: 40px 40px 0;
+                width: 360px;
+                height:360px;
+                background: rgba(255, 255, 255, 0.8);
+                color: #D69C16;
+
+                h1 {
+                    margin-bottom: 8px;
+                    border-top: 6px solid #D69C16;
+                    border-bottom: 6px solid #D69C16;
+                    line-height: 68px;
+                    text-align: center;
+                    color: #D69C16;
+                    font-size:40px;
+                }
+
+                p {
+                    padding: 10px 0;
+                    line-height:28px;
+                    text-align: center;
+                    font-size:20px;
+                }
+            }
+        }
     }
 
     .en-container {
@@ -657,6 +398,10 @@ export default {
             }
         }
 
+        .videos {
+            padding: 20px 100px 0;
+        }
+
         .en-goods {
             padding: 50px 15px 60px;
             -webkit-display: flex;
@@ -713,10 +458,11 @@ export default {
         }
 
         .en-forms {
+            margin-bottom: 20px;
             padding-top: 50px;
             width: 1000px;
             height: 530px;
-            background: #ddd;
+            background: url(../../assets/img/pic-enrol-bg.jpg) no-repeat center center;
             color:#fff;
 
             .tit {

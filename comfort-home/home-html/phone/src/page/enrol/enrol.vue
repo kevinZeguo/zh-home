@@ -44,6 +44,10 @@
                 </li>
             </ul>
 
+            <div>
+                <iframe frameborder="0" src="https://v.qq.com/txp/iframe/player.html?vid=q1328ksebit" allowFullScreen="true" style="width: 100%;height: 18rem;"></iframe>
+            </div>
+
             <div class="en-tits">
                 <p class="name">6大优势</p>
                 <span class="line"></span>
@@ -383,7 +387,7 @@ export default {
                 }
 
                 .forms-list {
-                    
+
                     li {
                         padding-bottom: 1.7rem;
                         width: 100%;
