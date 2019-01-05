@@ -13,3 +13,7 @@ export const productQuote = param => {
 	return req.get('home/quote.ajax?' + param, '');
 };
 
+// enrolReg
+export const enrolReg = param => {
+	return req.get('home/register.ajax?' + param, '');
+};

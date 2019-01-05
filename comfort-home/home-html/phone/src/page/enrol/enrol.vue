@@ -1,6 +1,16 @@
 <template>
     <div class="enrol">
-        <div class="banner"></div>
+        <div class="banner">
+            <div class="infos">
+                <div class="infos-box">
+                    <h1>家里暖气不热？</h1>
+                    <p>老房没有接入集中供暖接口？</p>
+                    <p>供热站供暖老是烧不暖？</p>
+                    <p>屋里暖气忽冷忽热？</p>
+                    <p>家里有老人孩子，很多时候需<br />要温度要求更高一些？</p>
+                </div>
+            </div>
+        </div>
 
         <div class="en-container">
             <div class="en-hd">
@@ -87,6 +97,11 @@
                 </li>
             </ul>
 
+            <ul class="pro-pics">
+                <li><img src="../../assets/img/pic-600x460-1.jpg" /></li>
+                <li><img src="../../assets/img/pic-600x460-2.jpg" /></li>
+            </ul>
+
             <div class="en-forms">
                 <h2 class="tit">立即预约，<strong>免费</strong>设计</h2>
                 <h3 class="tit-sub">尊享服务免<br />费上门设计＋专业团队施工</h3>
@@ -94,47 +109,24 @@
                     <p class="name">冬日暖暖的爱和家人分享</p>
                     <ul class="forms-list">
                         <li>
-                            <input type="text" class="f-text" placeholder="姓名" />
+                            <input type="text" v-model="ruleForm.userName" class="f-text" placeholder="姓名" />
                         </li>
                         <li>
-                            <input type="text" class="f-text" placeholder="手机号码" />
+                            <input type="tel" v-model="ruleForm.phoneNum" class="f-text" placeholder="手机号码" />
                         </li>
                     </ul>
                     <div class="btns-box">
-                        <button type="button">立即预约</button>
+                        <button type="button" @click="submitForm('ruleForm')">立即预约</button>
                     </div>
                 </div>
             </div>
         </div>
-
-        <div class="quo-dialog" v-if="dialogVisible">
-            <div class="quo-dialog-hd">
-                <div class="tit">获取报价</div>
-                <span class="icon-close" @click="closeClick">close</span>
-            </div>
-
-            <div class="quo-dialog-bd">
-                <p class="prop">报价结果将以短信形式发送至您手机</p>
-                
-                <el-form class="quo-dialog-forms mt30" :model="ruleForm" :rules="rulesForm" ref="ruleForm">
-                    <el-form-item prop="userName">
-                        <el-input v-model="ruleForm.userName" placeholder="姓名"></el-input>
-                    </el-form-item>
-                    <el-form-item prop="phoneNum">
-                        <el-input v-model="ruleForm.phoneNum" placeholder="手机号"></el-input>
-                    </el-form-item>
-                    <button type="button" class="btn-submit" @click="submitForm('ruleForm')">获取报价</button>
-                </el-form>
-            </div>
-        </div>
-        <div class="quo-modal" v-if="dialogVisible"></div>
     </div>
 </template>
 
 <script>
 import { isvalidPhone } from '../../config/utils';
-import { baseUrl } from '../../config/env';
-import { productList, productQuote } from '../../service/getData';
+import { enrolReg } from '../../service/getData';
 
 export default {
     data () {
@@ -149,13 +141,70 @@ export default {
         };
 
         return {
-            imgUrl: baseUrl,
-            dialogVisible: false
+            dialogVisible: false,
+            ruleForm: {
+                phoneNum: '', //手机号
+                userName: '' //用户姓名
+            },
+            rulesForm: {
+                userName: [
+                    { required: true, message: '用户姓名不能为空'}
+                ],
+                phoneNum: [
+                    { required: true, trigger: 'blur', validator: validPhone }
+                ]
+            }
         }
     },
     mounted () {
     },
     methods: {
+        submitForm (formName) {
+
+            //用户姓名
+            if (this.ruleForm.userName == '' ) {
+                this.$toast({
+                    message: '请填写用户姓名'
+                });
+                return false;
+            }
+
+            //手机号
+            if (this.ruleForm.phoneNum == '' ) {
+                this.$toast({
+                    message: '请填写手机号'
+                });
+
+                return false;
+            }
+
+            if (!isvalidPhone(this.ruleForm.phoneNum)) {
+                this.$toast({
+                    message: '请输入正确的11位手机号码'
+                });
+
+                return false;
+            }
+            
+            let params = 'userName=' + encodeURIComponent(this.ruleForm.userName) + '&phoneNum=' + this.ruleForm.phoneNum;
+
+            this.enrolReg(params);
+        },
+        async enrolReg (params) {
+            const res = await enrolReg(params);
+
+            if (res.data.success == true) {
+                this.$message({
+                    message: '恭喜您，预约成功！',
+                    type: 'success'
+                });
+            } else {
+                this.$message({
+                    message: res.data.message,
+                    type: 'error'
+                });
+            }
+        }
     }
 }
 </script>
@@ -164,8 +213,34 @@ export default {
 .enrol {
     .banner {
         width: 100%;
-        height:280px;
-        background: url(../../assets/img/pic-banner-2.jpg) no-repeat center center;
+        background: url(../../assets/img/pic-enrol-banner.jpg) no-repeat center center;
+        background-size: auto 100%;
+
+        .infos {
+            padding: 2.15rem 0 1.1rem;
+
+            .infos-box {
+                padding: 1.7rem 1.3rem 0.85rem;
+                width: 19.5rem;
+                background: rgba(255, 255, 255, 0.8);
+                color: #D69C16;
+
+                h1 {
+                    margin-bottom: 1rem;
+                    border-top: 0.5rem solid #D69C16;
+                    border-bottom: 0.5rem solid #D69C16;
+                    line-height: 3.6rem;
+                    color: #D69C16;
+                    font-size:2.55rem;
+                }
+
+                p {
+                    padding: 0.35rem 0;
+                    line-height:1.7rem;
+                    font-size:1.2rem;
+                }
+            }
+        }
     }
 
     .en-container {
@@ -205,10 +280,10 @@ export default {
                 }
 
                 .btns-box {
-                    padding-top: 2rem;
+                    padding-top: 1rem;
 
                     button {
-                        width:15.35rem;
+                        padding: 0 2rem;
                         height:3.4rem;
                         background: #fff;
                         border:0.15rem solid #F4E186;
@@ -344,6 +419,23 @@ export default {
             }
         }
 
+        .pro-pics {
+            padding-bottom:2.2rem;
+            -webkit-display: flex;
+            -moz-display: flex;
+            -ms-display: flex;
+            display: flex;
+
+            li {
+                padding: 0 0.5rem;
+                width: 50%;
+
+                img {
+                    width: 100%;
+                }
+            }
+        }
+
         .en-forms {
             border-top: 1px solid #DEDDDD;
             padding: 2.4rem 0 3.4rem;
@@ -375,7 +467,8 @@ export default {
             .en-forms-con {
                 padding: 2.15rem 4.5rem 2.4rem;
                 width: 100%;
-                background: #999;
+                background: url(../../assets/img/pic-enrol-bg.jpg) no-repeat center center;
+                background-size: auto 100%;
 
                 .name {
                     padding-bottom: 2rem;
@@ -399,7 +492,12 @@ export default {
                             height:3.4rem;
                             background: #fff;
                             border-radius:0.35rem;
+                            font-size: 1.2rem;
                             border:0;
+
+                            &::placeholder {
+                                color:#ACA7A7;
+                            }
                         }
                     }
                 }

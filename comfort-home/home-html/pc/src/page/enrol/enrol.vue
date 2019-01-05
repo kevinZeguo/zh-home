@@ -122,51 +122,35 @@
                 <h3 class="tit-sub">尊享服务：免费上门设计＋专业团队施工</h3>
                 <div class="en-forms-con">
                     <p class="name">冬日暖暖的爱和家人分享</p>
-                    <ul class="forms-list">
-                        <li>
-                            <p class="f-name">姓名</p>
-                            <input type="text" class="f-text" placeholder="" />
-                        </li>
-                        <li>
-                            <p class="f-name">手机号码</p>
-                            <input type="text" class="f-text" placeholder="" />
-                        </li>
-                    </ul>
+
+                    <el-form class="forms-list" :model="ruleForm" :rules="rulesForm" ref="ruleForm">
+                        <ul>
+                            <li>
+                                <p class="f-name">姓名</p>
+                                <el-form-item prop="userName">
+                                    <el-input v-model="ruleForm.userName"></el-input>
+                                </el-form-item>
+                            </li>
+                            <li>
+                                <p class="f-name">手机号码</p>
+                                <el-form-item prop="phoneNum">
+                                    <el-input v-model="ruleForm.phoneNum"></el-input>
+                                </el-form-item>
+                            </li>
+                        </ul>
+                    </el-form>
                     <div class="btns-box">
-                        <button type="button">立即预约</button>
+                        <button type="button" @click="submitForm('ruleForm')">立即预约</button>
                     </div>
                 </div>
             </div>
         </div>
-
-        <div class="quo-dialog" v-if="dialogVisible">
-            <div class="quo-dialog-hd">
-                <div class="tit">获取报价</div>
-                <span class="icon-close" @click="closeClick">close</span>
-            </div>
-
-            <div class="quo-dialog-bd">
-                <p class="prop">报价结果将以短信形式发送至您手机</p>
-                
-                <el-form class="quo-dialog-forms mt30" :model="ruleForm" :rules="rulesForm" ref="ruleForm">
-                    <el-form-item prop="userName">
-                        <el-input v-model="ruleForm.userName" placeholder="姓名"></el-input>
-                    </el-form-item>
-                    <el-form-item prop="phoneNum">
-                        <el-input v-model="ruleForm.phoneNum" placeholder="手机号"></el-input>
-                    </el-form-item>
-                    <button type="button" class="btn-submit" @click="submitForm('ruleForm')">获取报价</button>
-                </el-form>
-            </div>
-        </div>
-        <div class="quo-modal" v-if="dialogVisible"></div>
     </div>
 </template>
 
 <script>
 import { isvalidPhone } from '../../config/utils';
-import { baseUrl } from '../../config/env';
-import { productList, productQuote } from '../../service/getData';
+import { enrolReg } from '../../service/getData';
 
 export default {
     data () {
@@ -181,14 +165,50 @@ export default {
         };
 
         return {
-            imgUrl: baseUrl,
             dialogVisible: false,
-           
+            ruleForm: {
+                phoneNum: '', //手机号
+                userName: '' //用户姓名
+            },
+            rulesForm: {
+                userName: [
+                    { required: true, message: '用户姓名不能为空'}
+                ],
+                phoneNum: [
+                    { required: true, trigger: 'blur', validator: validPhone }
+                ]
+            }
         }
     },
     mounted () {
     },
     methods: {
+        submitForm (formName) {
+            this.$refs[formName].validate((valid) => {
+
+                if (valid) {
+                    let params = 'userName=' + encodeURIComponent(this.ruleForm.userName) + '&phoneNum=' + this.ruleForm.phoneNum;
+
+                    console.log(params);
+                    this.enrolReg(params);
+                }
+            });
+        },
+        async enrolReg (params) {
+            const res = await enrolReg(params);
+
+            if (res.data.success == true) {
+                this.$message({
+                    message: '恭喜您，预约成功！',
+                    type: 'success'
+                });
+            } else {
+                this.$message({
+                    message: res.data.message,
+                    type: 'error'
+                });
+            }
+        }
     }
 }
 </script>
@@ -497,38 +517,41 @@ export default {
                 }
 
                 .forms-list {
-                    -webkit-display: flex;
-                    -moz-display: flex;
-                    -ms-display: flex;
-                    display: flex;
-                    -webkit-justify-content: space-between;
-                    -moz-justify-content: space-between;
-                    -ms-justify-content: space-between;
-                    justify-content: space-between;
 
-                    li {
-                        width: 224px;
+                    ul {
+                        -webkit-display: flex;
+                        -moz-display: flex;
+                        -ms-display: flex;
+                        display: flex;
+                        -webkit-justify-content: space-between;
+                        -moz-justify-content: space-between;
+                        -ms-justify-content: space-between;
+                        justify-content: space-between;
 
-                        .f-name {
-                            font-size:16px;
-                            color:#424242;
-                            line-height:26px;
-                        }
+                        li {
+                            width: 224px;
 
-                        .f-text {
-                            padding: 10px;
-                            line-height: 30px;
-                            width:224px;
-                            height:50px;
-                            background:rgba(252,252,252,1);
-                            border-radius:4px;
-                            border:1px solid rgba(194,194,194,1);
+                            .f-name {
+                                font-size:16px;
+                                color:#424242;
+                                line-height:26px;
+                            }
+
+                            .f-text {
+                                padding: 10px;
+                                line-height: 30px;
+                                width:224px;
+                                height:50px;
+                                background:rgba(252,252,252,1);
+                                border-radius:4px;
+                                border:1px solid rgba(194,194,194,1);
+                            }
                         }
                     }
                 }
 
                 .btns-box {
-                    padding-top: 42px;
+                    padding-top: 22px;
                     text-align: center;
 
                     button {

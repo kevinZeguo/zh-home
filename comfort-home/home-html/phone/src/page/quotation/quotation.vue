@@ -430,6 +430,8 @@ export default {
                 this.$toast({
                     message: '请输入正确的11位手机号码'
                 });
+
+                return false;
             }
 
             //用户姓名
