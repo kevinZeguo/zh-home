@@ -98,8 +98,8 @@
             </ul>
 
             <ul class="pro-pics">
-                <li><img src="../../assets/img/pic-600x460-1.jpg" /></li>
-                <li><img src="../../assets/img/pic-600x460-2.jpg" /></li>
+                <li><img src="../../assets/img/pic-360x232-1.jpg" /></li>
+                <li><img src="../../assets/img/pic-360x232-2.jpg" /></li>
             </ul>
 
             <div class="en-forms">
