@@ -13,13 +13,16 @@ import com.aliyuncs.profile.DefaultProfile;
 import com.aliyuncs.profile.IClientProfile;
 import com.zhonghua.comfortable.home.domain.SmsContent;
 import com.zhonghua.comfortable.home.service.SmsSenderService;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @program: cf-home
@@ -42,6 +45,15 @@ public class SmsSenderServiceImpl implements SmsSenderService {
     private static final String accessKeySecret = "Dk424UF4f1sCleHrxFnl4pQnJFOTc5";
     @Value("${ali.yun.sms.templateCode}")
     private String templateCode = "SMS_153993418";
+
+
+    @Value("${ali.yun.sms.templateCodes}")
+    private String templateCodes;
+
+    @Value("${ali.yun.sms.register.templateCode}")
+    private String registerTemplateCode = "SMS_153993418";
+
+    private List<String> templateCodeList = null;
     //    @Value("${ali.yun.sms.signName}")
     private static final String signName = "众华舒适家";
     //    @Value("${ali.yun.sms.outId}")
@@ -53,6 +65,11 @@ public class SmsSenderServiceImpl implements SmsSenderService {
 
     @Override
     public SendSmsResponse sendSms(SmsContent content) {
+        String templateCode = getTemplateCode(content.getContent());
+        return this.sendSms(content, templateCode);
+    }
+
+    private SendSmsResponse sendSms(SmsContent content, String templateCode) {
         SendSmsResponse sendSmsResponse = null;
         try {
             //可自助调整超时时间
@@ -80,7 +97,7 @@ public class SmsSenderServiceImpl implements SmsSenderService {
             //request.setSmsUpExtendCode("90997");
             //可选:outId为提供给业务方扩展字段,最终在短信回执消息中将此值带回给调用者
             request.setOutId(outId);
-            logger.warn("向用户[" + content.getPhoneNum() + "],开始发送短信内容:" + content.getContent());
+            logger.warn("向用户[" + content.getPhoneNum() + "],开始发送短信内容:" + content.getContent() + "，使用模板：[" + templateCode + "]");
             if (open) {
                 //hint 此处可能会抛出异常，注意catch
                 sendSmsResponse = acsClient.getAcsResponse(request);
@@ -97,29 +114,33 @@ public class SmsSenderServiceImpl implements SmsSenderService {
             sendSmsResponse.setCode("ERROR");
             logger.error("短信发送失败，请求参数：[" + JSONObject.toJSONString(content) + "]", e);
         }
-
         return sendSmsResponse;
+    }
+
+    /**
+     * 获取模板代码
+     *
+     * @param content
+     * @return
+     */
+    private String getTemplateCode(String content) {
+        initTemplateCodeList();
+        if (StringUtils.isBlank(content)) {
+            return templateCode;
+        }
+        JSONObject contentObj = JSONObject.parseObject(content);
+        return templateCodeList.get(contentObj.size() / 2 - 1);
+    }
+
+    private void initTemplateCodeList() {
+        if (templateCodeList == null || templateCodeList.size() == 0) {
+            templateCodeList = new ArrayList<>();
+            for (String code : templateCodes.split(",")) {
+                templateCodeList.add(code);
+            }
+        }
 
 
-//        HttpClient client = new HttpClient();
-//        PostMethod post = new PostMethod(smsAddress);
-//        // PostMethod post = new PostMethod("http://sms.webchinese.cn/web_api/");
-//        post.addRequestHeader("Content-Type", "application/x-www-form-urlencoded;charset=gbk");// 在头文件中设置转码
-//        NameValuePair[] data = {new NameValuePair("Uid", user),// 注册的用户名
-//                new NameValuePair("Key", password),// 注册成功后,登录网站后得到的密钥
-//                new NameValuePair("smsMob", content.getPhoneNum()),// 手机号码
-//                new NameValuePair("smsText", content.getContent())};// 短信内容
-//        post.setRequestBody(data);
-//
-//        client.executeMethod(post);
-//        Header[] headers = post.getResponseHeaders();
-//        int statusCode = post.getStatusCode();
-//        logger.warn("向用户:[" + content.getPhoneNum() + "]发送短信 -- > statusCode:" + statusCode);
-//        for (Header h : headers) {
-//            logger.warn("向用户:[" + content.getPhoneNum() + "]发送短信 -- > 消息头:[" + h.toString() + "]");
-//        }
-//        String result = new String(post.getResponseBodyAsString().getBytes("gbk"));
-//        logger.warn("向用户:[" + content.getPhoneNum() + "]发送短信:[" + content.getContent() + "],发送返回信息:[" + result + "]");
     }
 
 
@@ -151,6 +172,11 @@ public class SmsSenderServiceImpl implements SmsSenderService {
         //hint 此处可能会抛出异常，注意catch
         QuerySendDetailsResponse querySendDetailsResponse = acsClient.getAcsResponse(request);
         return querySendDetailsResponse;
+    }
+
+    @Override
+    public SendSmsResponse sendRegisterSms(SmsContent content) throws Exception {
+        return this.sendSms(content, registerTemplateCode);
     }
 
 

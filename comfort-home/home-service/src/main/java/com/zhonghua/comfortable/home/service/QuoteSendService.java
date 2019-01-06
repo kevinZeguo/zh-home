@@ -18,4 +18,12 @@ public interface QuoteSendService {
      * @throws Exception
      */
     void sendQuoteToUser(UserProjectPrice projectPrice, UserHouse userhousee) throws Exception;
+
+    /**
+     * 发送通知
+     * @param userName
+     * @param phoneNum
+     * @throws Exception
+     */
+    void sendRegister2User(String userName, String phoneNum)throws Exception;
 }

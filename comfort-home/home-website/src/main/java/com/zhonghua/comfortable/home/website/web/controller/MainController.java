@@ -8,6 +8,8 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.fasterxml.jackson.annotation.JsonAlias;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -31,10 +33,7 @@ import com.zhonghua.comfortable.home.service.QuoteSendService;
  * @date 2018-12-24 22:50
  * 首页控制类
  */
-@CrossOrigin(
-        origins = "*",
-        maxAge = 3600
-)
+@CrossOrigin(origins = "*", maxAge = 3600)
 @Controller
 @RequestMapping("/")
 public class MainController {
@@ -62,10 +61,7 @@ public class MainController {
      * @return
      */
     @ResponseBody
-    @RequestMapping(
-            value = "product.ajax",
-            method = RequestMethod.GET
-    )
+    @RequestMapping(value = "product.ajax", method = RequestMethod.GET)
     public JSONObject getModuleList(HttpServletRequest request, HttpServletResponse response) {
         JSONObject result = new JSONObject();
 
@@ -115,6 +111,42 @@ public class MainController {
             result.put("message", "请求成功！");
         } catch (Exception e) {
             logger.error("获取报价失败，请求信息【" + d + "】！", e);
+            result.put("success", false);
+            result.put("message", e.getMessage());
+        }
+
+        return result;
+    }
+
+
+    /**
+     * 获取报价
+     *
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "register", method = RequestMethod.GET)
+    public JSONObject register(String userName, String phoneNum) {
+        JSONObject result = new JSONObject();
+        try {
+            if (StringUtils.isBlank(userName)) {
+                result.put("success", false);
+                result.put("message", "请填写用户姓名！");
+            }
+
+            if (StringUtils.isBlank(phoneNum)) {
+                result.put("success", false);
+                result.put("message", "请填写正确的手机号！");
+            }
+
+            userName = URLDecoder.decode(userName, "utf-8");
+
+            // 发送报价
+            quoteSendService.sendRegister2User(userName, phoneNum);
+            result.put("success", true);
+            result.put("message", "请求成功！");
+        } catch (Exception e) {
+            logger.error("发送通知失败，请求信息【" + phoneNum + "】！", e);
             result.put("success", false);
             result.put("message", e.getMessage());
         }
