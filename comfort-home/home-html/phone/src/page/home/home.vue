@@ -1,8 +1,10 @@
 <template>
     <div class="home">
-        <mt-swipe :auto="4000" style="height:19rem;">
+        <mt-swipe :auto="4000" style="height:19rem;" class="home-banner">
             <mt-swipe-item v-for="(item, index) in banners" :key="index">
-                <img :src="item.src" width="100%" />
+                <!--<img :src="item.src" width="100%" />-->
+                <div class="pic" :style="{backgroundImage: 'url(' + item.src +')'}"></div>
+                <div class="txt">舒适，<br />家的意义。</div>
             </mt-swipe-item>
         </mt-swipe>
         <div class="home-container bg1">
@@ -55,7 +57,7 @@
                 <ul>
                     <li>
                         <p class="name">100+</p>
-                        <p class="prop">1000+专业服务团队</p>
+                        <p class="prop">100+专业服务团队</p>
                     </li>
                     <li>
                         <p class="name">10年</p>
@@ -177,23 +179,36 @@
                 <p>联合德国威能、德国瑞好、德国卡洛、瑞士森德、美国霍尼韦尔、美国怡口净水、美国约克、荷兰飞利浦、日本林内、日本能率、日本大金空调、日本日立空调、格力电器、老板电器、安泊橱柜等世界知名品牌为用户定制高端舒适家居系统解决方案</p>
             </div>
             <div class="home-six">
-                <ul>
-                    <li><img src="../../assets/img/icon-logo-1.png" /></li>
-                    <li><img src="../../assets/img/icon-logo-2.png" /></li>
-                    <li><img src="../../assets/img/icon-logo-3.png" /></li>
-                    <li><img src="../../assets/img/icon-logo-4.png" /></li>
-                    <li><img src="../../assets/img/icon-logo-5.png" /></li>
-                    <li><img src="../../assets/img/icon-logo-6.png" /></li>
-                    <li><img src="../../assets/img/icon-logo-7.png" /></li>
-                    <li><img src="../../assets/img/icon-logo-8.png" /></li>
-                    <li><img src="../../assets/img/icon-logo-9.png" /></li>
-                    <li><img src="../../assets/img/icon-logo-10.png" /></li>
-                    <li><img src="../../assets/img/icon-logo-11.png" /></li>
-                    <li><img src="../../assets/img/icon-logo-12.png" /></li>
-                    <li><img src="../../assets/img/icon-logo-13.png" /></li>
-                    <li><img src="../../assets/img/icon-logo-14.png" /></li>
-                    <li><img src="../../assets/img/icon-logo-15.png" /></li>
-                </ul>
+                <mt-swipe :auto="4000" style="height: 11rem;">
+                    <mt-swipe-item>
+                        <ul>
+                            <li><img src="../../assets/img/icon-logo-1.png" /></li>
+                            <li><img src="../../assets/img/icon-logo-2.png" /></li>
+                            <li><img src="../../assets/img/icon-logo-3.png" /></li>
+                            <li><img src="../../assets/img/icon-logo-4.png" /></li>
+                            <li><img src="../../assets/img/icon-logo-5.png" /></li>
+                            <li><img src="../../assets/img/icon-logo-6.png" /></li>
+                        </ul>
+                    </mt-swipe-item>
+                    <mt-swipe-item>
+                        <ul>
+                            <li><img src="../../assets/img/icon-logo-7.png" /></li>
+                            <li><img src="../../assets/img/icon-logo-8.png" /></li>
+                            <li><img src="../../assets/img/icon-logo-9.png" /></li>
+                            <li><img src="../../assets/img/icon-logo-10.png" /></li>
+                            <li><img src="../../assets/img/icon-logo-11.png" /></li>
+                            <li><img src="../../assets/img/icon-logo-12.png" /></li>
+                        </ul>
+                    </mt-swipe-item>
+                    <mt-swipe-item>
+                        <ul>
+                            <li><img src="../../assets/img/icon-logo-13.png" /></li>
+                            <li><img src="../../assets/img/icon-logo-14.png" /></li>
+                            <li><img src="../../assets/img/icon-logo-15.png" /></li>
+                        </ul>
+                    </mt-swipe-item>
+                </mt-swipe>
+                
             </div>
         </div>
 
@@ -270,6 +285,46 @@ export default {
 
 <style lang="scss" scoped>
 .home {
+    .home-banner {
+        position: relative;
+
+        .pic {
+            width: 100%;
+            height: 19rem;
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-size: auto 100%;
+        }
+
+        .txt {
+            padding: 0.85rem 0 1.5rem 1.9rem;
+            width:70%;
+            line-height: 4.8rem;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            z-index: 10;
+            -webkit-transform: translate(-50%, -50%);
+            -moz-transform: translate(-50%, -50%);
+            -ms-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+            border: 10px solid #F8CF2A;
+            background:rgba(83,78,78,0.53);
+            font-size:3.4rem;
+            font-weight:bold;
+            color: #fff;
+        }
+
+        /deep/ .mint-swipe-indicator {
+            background: #ABA9A9;
+            opacity: 1;
+
+            &.is-active {
+                background:#fff;
+            }
+        }
+    }
+
     .home-container {
         width: 100%;
 
@@ -746,6 +801,15 @@ export default {
                     img {
                         width: 100%;
                     }
+                }
+            }
+
+            /deep/ .mint-swipe-indicator {
+                background: #D2D0D0;
+                opacity: 1;
+
+                &.is-active {
+                    background:#000;
                 }
             }
         }

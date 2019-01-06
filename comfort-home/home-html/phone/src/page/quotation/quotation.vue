@@ -62,40 +62,48 @@
 
         <div v-if="step.twoActive">
             <div class="quo-choose">
-                <ul class="tab-ul">
-                    <li :class="{active: activeStatus == 1}" @click="changeTabs(1)">
-                        <div class="icons icon-home-five-5"></div>
-                        <p class="name">凉爽的夏日</p>
-                    </li>
-                    <li :class="{active: activeStatus == 2}" @click="changeTabs(2)">
-                        <div class="icons icon-home-five-3"></div>
-                        <p class="name">清新的空气</p>
-                        <!--<p class="sel-result">已选 | 森得新风<span class="sel-btn-close"></span></p>-->
-                    </li>
-                    <li :class="{active: activeStatus == 3}" @click="changeTabs(3)">
-                        <div class="icons icon-home-five-2"></div>
-                        <p class="name">洁净的水源</a></p>
-                    </li>
-                    <li :class="{active: activeStatus == 4}" @click="changeTabs(4)">
-                        <div class="icons icon-home-five-1"></div>
-                        <p class="name">温暖的房间</p>
-                    </li>
-                    <li :class="{active: activeStatus == 5}" @click="changeTabs(5)">
-                        <div class="icons icon-home-five-4"></div>
-                        <p class="name">24小时热水</p>
-                    </li>
-                    <li :class="{active: activeStatus == 6}" @click="changeTabs(6)">
-                        <div class="icons icon-home-five-6"></div>
-                        <p class="name">智能的房子</p>
-                    </li>
-                </ul>
+                <div class="tab-ul">
+                    <p class="tit">我想要：</p>
+                    <ul>
+                        <li :class="{active: activeStatus == 1}" @click="changeTabs(1)">
+                            <div class="icons icon-home-five-5"></div>
+                            <p class="name">凉爽的夏日</p>
+                            <span class="sel-result" v-if="oneStatus != null">1</span>
+                        </li>
+                        <li :class="{active: activeStatus == 2}" @click="changeTabs(2)">
+                            <div class="icons icon-home-five-3"></div>
+                            <p class="name">清新的空气</p>
+                            <span class="sel-result" v-if="twoStatus != null">1</span>
+                        </li>
+                        <li :class="{active: activeStatus == 3}" @click="changeTabs(3)">
+                            <div class="icons icon-home-five-2"></div>
+                            <p class="name">洁净的水源</a></p>
+                            <span class="sel-result" v-if="threeStatus != null">1</span>
+                        </li>
+                        <li :class="{active: activeStatus == 4}" @click="changeTabs(4)">
+                            <div class="icons icon-home-five-1"></div>
+                            <p class="name">温暖的房间</p>
+                            <span class="sel-result" v-if="fourStatus != null">1</span>
+                        </li>
+                        <li :class="{active: activeStatus == 5}" @click="changeTabs(5)">
+                            <div class="icons icon-home-five-4"></div>
+                            <p class="name">24小时热水</p>
+                            <span class="sel-result" v-if="fiveStatus != null">1</span>
+                        </li>
+                        <li :class="{active: activeStatus == 6}" @click="changeTabs(6)">
+                            <div class="icons icon-home-five-6"></div>
+                            <p class="name">智能的房子</p>
+                            <span class="sel-result" v-if="sixStatus.length > 0">{{ sixStatus.length }}</span>
+                        </li>
+                    </ul>
+                </div>
 
                 <div class="pro-list">
                    <ul v-if="activeStatus == 1">
                         <li :class="{active: oneStatus == index}" v-for="(item, index) in resultArrs[0]" @click="changeOnes(index)">
                             <p class="name">{{ item.brand }}</p>
                             <p class="pic"><img :src="imgUrl + 'home' + item.icon" /></p>
-                            <p class="prop">{{ item.name }}</p>
+                            <p class="prop">{{ item.recommend }}</p>
                         </li>
                     </ul>
                     <ul v-if="activeStatus == 2">
@@ -133,6 +141,7 @@
                             <p class="prop">{{ item.recommend }}</p>
                         </li>
                     </ul>
+                    <p class="more-check" v-if="activeStatus == 6">*产品可多选</p>
                 </div>
             </div>
 
@@ -143,7 +152,7 @@
 
         <div class="view-result" v-if="step.threeActive">
             <div class="con">
-                <p>报价短信已发送至您的手机 {{ nowPhone.substring(0, 3) }}****{{ nowPhone.substring(7) }}，请查收。 我们的客户经理将尽快与您联系。</p>
+                <p>报价短信已发送至您的手机 {{ nowPhone.substring(0, 3) }}****{{ nowPhone.substring(7) }}，请查收。 我们的舒适顾问将尽快与您联系。</p>
                 <p>也欢迎您随时致电： 022-84127996</p>
                 <p>众华舒适家</p>
             </div>
@@ -773,120 +782,127 @@ export default {
         display: flex;
 
         .tab-ul {
-            padding: 1rem 0 1rem 0.2rem;
             width: 30%;
             background: #90C421;
 
-            &:after {
-                height: 0;
-                content: " ";
-                clear:both;
-                display: block;
+            .tit {
+                padding: 0.5rem 0 0 1.5rem;
+                color: #fff;
+                font-size: 1.2rem;
+                line-height:1.7rem;
+                text-align: center;
             }
 
-            li {
+            ul {
+                padding: 0.5rem 0 1rem 0.2rem;
                 width: 100%;
-                height: 3.05rem;
-                position: relative;
-                color: #fff;
+                
 
-                &.active {
-                    background: #fff;
+                &:after {
+                    height: 0;
+                    content: " ";
+                    clear:both;
+                    display: block;
+                }
+
+                li {
+                    width: 100%;
+                    height: 3.05rem;
+                    position: relative;
+                    color: #fff;
+                    cursor: pointer;
+
+                    &.active {
+                        background: #fff;
+                        .icons {
+                            &.icon-home-five-1 {
+                                background-image: url(../../assets/img/icon-temperature-blue.png);
+                            }
+
+                            &.icon-home-five-2 {
+                                background-image: url(../../assets/img/icon-water-blue.png);
+                            }
+
+                            &.icon-home-five-3 {
+                                background-image: url(../../assets/img/icon-air-blue.png);
+                            }
+
+                            &.icon-home-five-4 {
+                                background-image: url(../../assets/img/icon-hotwater-blue.png);
+                            }
+
+                            &.icon-home-five-5 {
+                                background-image: url(../../assets/img/icon-summer-blue.png);
+                            }
+
+                            &.icon-home-five-6 {
+                                background-image: url(../../assets/img/icon-lamp-blue.png);
+                            }
+                        }
+
+                        .name {
+                            color: #696868;
+                        }
+                    }
+
                     .icons {
+                        width: 1.6rem;
+                        height: 3.05rem;
+                        text-align:center;
+                        color: #15A3C2;
+                        background-repeat: no-repeat;
+                        background-position: center center;
+                        background-size: 1.2rem 1.2rem;
+                        position: absolute;
+                        left: 0;
+                        top: 0;
+
                         &.icon-home-five-1 {
-                            background-image: url(../../assets/img/icon-temperature-blue.png);
+                            background-image: url(../../assets/img/icon-temperature-white.png);
                         }
 
                         &.icon-home-five-2 {
-                            background-image: url(../../assets/img/icon-water-blue.png);
+                            background-image: url(../../assets/img/icon-water-white.png);
                         }
 
                         &.icon-home-five-3 {
-                            background-image: url(../../assets/img/icon-air-blue.png);
+                            background-image: url(../../assets/img/icon-air-white.png);
                         }
 
                         &.icon-home-five-4 {
-                            background-image: url(../../assets/img/icon-hotwater-blue.png);
+                            background-image: url(../../assets/img/icon-hotwater-white.png);
                         }
 
                         &.icon-home-five-5 {
-                            background-image: url(../../assets/img/icon-summer-blue.png);
+                            background-image: url(../../assets/img/icon-summer-white.png);
                         }
 
                         &.icon-home-five-6 {
-                            background-image: url(../../assets/img/icon-lamp-blue.png);
+                            background-image: url(../../assets/img/icon-lamp-white.png);
                         }
                     }
 
                     .name {
-                        color: #696868;
-                    }
-                }
-
-                .icons {
-                    width: 1.6rem;
-                    height: 3.05rem;
-                    text-align:center;
-                    color: #15A3C2;
-                    background-repeat: no-repeat;
-                    background-position: center center;
-                    background-size: 1.2rem 1.2rem;
-                    position: absolute;
-                    left: 0;
-                    top: 0;
-
-                    &.icon-home-five-1 {
-                        background-image: url(../../assets/img/icon-temperature-white.png);
+                        padding: 0 0 0 1rem;
+                        line-height:3.05rem;
+                        text-align: center;
+                        color: #fff;
+                        font-size: 1.1rem;
                     }
 
-                    &.icon-home-five-2 {
-                        background-image: url(../../assets/img/icon-water-white.png);
-                    }
-
-                    &.icon-home-five-3 {
-                        background-image: url(../../assets/img/icon-air-white.png);
-                    }
-
-                    &.icon-home-five-4 {
-                        background-image: url(../../assets/img/icon-hotwater-white.png);
-                    }
-
-                    &.icon-home-five-5 {
-                        background-image: url(../../assets/img/icon-summer-white.png);
-                    }
-
-                    &.icon-home-five-6 {
-                        background-image: url(../../assets/img/icon-lamp-white.png);
-                    }
-                }
-
-                .name {
-                    padding: 0 0 0 1rem;
-                    line-height:3.05rem;
-                    text-align: center;
-                    color: #fff;
-                    font-size: 1.1rem;
-                }
-
-                .sel-result {
-                    display: none;
-                    padding: 0 0 0 5px;
-                    background: #90C422;
-                    color: #fff;
-                    line-height: 26px;
-                    position: relative;
-                    font-size: 12px;
-
-                    .sel-btn-close {
-                        width: 24px;
-                        height: 24px;
-                        display: inline-block;
-                        background: url(../../assets/img/icon-close.png) no-repeat center center;
-                        background-size: 16px 16px;
+                    .sel-result {
+                        width: 1.2rem;
+                        height: 1.2rem;
+                        border-radius:1.2rem;
+                        font-size: 1rem;
+                        text-align: center;
+                        line-height:1rem;
+                        background:#E9C50E;
+                        color:#fff;
                         position: absolute;
-                        top: 1px;
-                        right: 0;
-                        cursor: pointer;
+                        top: 0.5rem;
+                        right: 0.5rem;
+                        z-index:10;
                     }
                 }
             }
@@ -910,6 +926,7 @@ export default {
                     float: left;
                     position: relative;
                     z-index: 10;
+                    cursor: pointer;
 
                     &:last-child {
                         margin-right: 0;
@@ -958,6 +975,11 @@ export default {
                         text-align: justify;
                     }
                 }
+            }
+
+            .more-check {
+                font-size: 1rem;
+                color: #424242;
             }
         }
     }
