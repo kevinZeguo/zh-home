@@ -28,4 +28,12 @@ public interface SmsSenderService {
      * @throws ClientException
      */
     QuerySendDetailsResponse querySendDetails(String bizId) throws ClientException;
+
+    /**
+     * 发送报告短信
+     * @param content
+     * @return
+     * @throws Exception
+     */
+    SendSmsResponse sendRegisterSms(SmsContent content)throws Exception;
 }

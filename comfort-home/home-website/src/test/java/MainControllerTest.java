@@ -18,7 +18,6 @@ public class MainControllerTest {
     private static final String host = "http://59.110.152.117/home/";
 
 
-
     public void testProductList() {
         String result = HttpUtils.sendGet(host + "product.ajax", "");
         logger.warn(result);
@@ -38,11 +37,30 @@ public class MainControllerTest {
         logger.warn("ps:[ " + ps + " ] , usableArea :[ " + usableArea + " ],result：" + result);
     }
 
+    public void tesRegister() throws UnsupportedEncodingException {
+        StringBuffer object = new StringBuffer();
+        object.append("phoneNum=18910328375");
+        object.append("&");
+        object.append("userName=" + URLEncoder.encode("马泽国", "UTF-8"));
+        String result = HttpUtils.sendGet(host + "register", object.toString());
+        logger.warn("result：" + result);
+    }
+
+
     public static void main(String[] args) throws Exception {
         MainControllerTest test = new MainControllerTest();
 //        test.testProductList();
 
-        test.testQuote("10001,20001,30001,40001,50001,60001", 80); //28950--40500，
+//        test.testQuote("10001", 80); //28950--40500，
+//        test.testQuote("10001,10002", 80); //28950--40500，
+//        test.testQuote("10001,20001", 80); //28950--40500，
+//        test.testQuote("10001,10002,20001,30001", 80); //28950--40500，
+//        test.testQuote("10001,20001,30001,40001", 80); //28950--40500，
+//        test.testQuote("10001,20001,30001,40001,50001", 80); //28950--40500，
+//        test.testQuote("10001,20001,30001,40001,50001,60001", 80); //28950--40500，
+
+        test.tesRegister();
+
 
 //        test.testQuote("10002,20002,30001,40002,50002,60002",80);
 //

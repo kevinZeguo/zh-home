@@ -48,9 +48,9 @@
     <!-- 静态资源映射 -->
     <mvc:resources mapping="/static/**" location="/WEB-INF/static/"/>
 
-    <mvc:cors>
-        <mvc:mapping path="/**"/>
-    </mvc:cors>
+    <!--<mvc:cors>-->
+        <!--<mvc:mapping path="/**"/>-->
+    <!--</mvc:cors>-->
 
     
 </beans>

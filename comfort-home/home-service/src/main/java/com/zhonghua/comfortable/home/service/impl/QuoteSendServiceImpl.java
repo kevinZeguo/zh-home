@@ -79,6 +79,39 @@ public class QuoteSendServiceImpl implements QuoteSendService {
         zhSmsSendDao.updateStatusById(content);
     }
 
+    @Override
+    @Transactional
+    public void sendRegister2User(String userName, String phoneNum) throws Exception {
+        UserHouse userHouse = new UserHouse();
+        userHouse.setUserName(userName);
+        userHouse.setPhoneNum(phoneNum);
+        //保存用户信息
+        zhUserInfoDao.insert(userHouse);
+
+
+        //保存短信内容
+        SmsContent content = new SmsContent();
+        content.setUserId(userHouse.getId());
+        content.setSendTme(new Date());
+        content.setSendResult("send");
+        content.setPhoneNum(userHouse.getPhoneNum());
+        content.setContent("");
+        zhSmsSendDao.insert(content);
+        //发送短信
+        SendSmsResponse response = smsSenderService.sendRegisterSms(content);
+        if (response != null) {
+            //记录发送结果
+            content.setSendResult(response.getCode());
+            content.setSendMessage(response.getMessage());
+            content.setBizId(response.getBizId());
+            content.setRequestId(response.getRequestId());
+        } else {
+            content.setSendResult("error");
+            content.setSendMessage("未知原因");
+        }
+        zhSmsSendDao.updateStatusById(content);
+    }
+
     /**
      * 拼装短信内容
      *
@@ -89,15 +122,15 @@ public class QuoteSendServiceImpl implements QuoteSendService {
         JSONObject content = new JSONObject();
         //短信模板
         NumberFormat nf = NumberFormat.getInstance();
-
         List<UserChooseProduct> products = projectPrice.getChooseProductList();
         for (UserChooseProduct product : products) {
             String price = null;
+            content.put("model" + product.getModuleId(), product.getModuleName());
 
             if (product.getCostMax() == product.getCostMin()) {
-                price = nf.format(product.getCostMin()) + "元";
+                price = nf.format(product.getCostMin());
             } else {
-                price = nf.format(product.getCostMin()) + "-" + nf.format(product.getCostMax()) + "元";
+                price = nf.format(product.getCostMin()) + "元-" + nf.format(product.getCostMax());
             }
             content.put("price" + product.getModuleId(), price);
         }
