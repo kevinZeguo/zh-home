@@ -18,7 +18,7 @@
                 <h3 class="tit-sub">众华舒适家，送您一个温暖的冬天</h3>
                 <p class="prop">安装快捷，一天即可完工<br />工艺美观，不影响室内装修<br />使用节省，想开就开升温快</p>
                 <div class="btns-box"><button type="button">快速获取冬天采暖报价</button></div>
-                <p class="prop-btn"><button type="button">立即预约安装</button></p>
+                <p class="prop-btn"><a href="#forms">立即预约安装</a></p>
             </div>
 
             <div class="en-tits">
@@ -117,7 +117,7 @@
                 </li>
             </ul>
 
-            <div class="en-forms">
+            <div class="en-forms" id="forms">
                 <h2 class="tit">立即预约，免费设计</h2>
                 <h3 class="tit-sub">尊享服务：免费上门设计＋专业团队施工</h3>
                 <div class="en-forms-con">
@@ -189,15 +189,27 @@ export default {
                 if (valid) {
                     let params = 'userName=' + encodeURIComponent(this.ruleForm.userName) + '&phoneNum=' + this.ruleForm.phoneNum;
 
-                    console.log(params);
+                    // console.log(params);
                     this.enrolReg(params);
                 }
             });
         },
         async enrolReg (params) {
+
+            const loading = this.$loading({
+                lock: true,
+                background: 'rgba(0, 0, 0, 0.7)'
+            });
+
             const res = await enrolReg(params);
 
+            loading.close();
+
             if (res.data.success == true) {
+                this.$refs['ruleForm'].resetFields();
+                this.ruleForm.phoneNum = ''; //手机号
+                this.ruleForm.userName = ''; //用户姓名
+
                 this.$message({
                     message: '恭喜您，预约成功！',
                     type: 'success'
@@ -305,7 +317,7 @@ export default {
             }
 
             .prop-btn {
-                button {
+                a {
                     width:120px;
                     height:28px;
                     background: #01AFEB;
@@ -314,6 +326,10 @@ export default {
                     font-size: 20px;
                     border: 0;
                     cursor: pointer;
+
+                    &:hover {
+                        background: #01AFEB;
+                    }
                 }
             }
         }

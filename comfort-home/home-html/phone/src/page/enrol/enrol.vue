@@ -116,7 +116,8 @@
                         </li>
                     </ul>
                     <div class="btns-box">
-                        <button type="button" @click="submitForm('ruleForm')">立即预约</button>
+                        <button type="button" @click="submitForm('ruleForm')" v-if="loadingBtn">立即预约</button>
+                        <button type="button" v-if="!loadingBtn"><mt-spinner type="triple-bounce" color="rgb(255, 255, 255)"></mt-spinner></button>
                     </div>
                 </div>
             </div>
@@ -142,6 +143,7 @@ export default {
 
         return {
             dialogVisible: false,
+            loadingBtn: true,
             ruleForm: {
                 phoneNum: '', //手机号
                 userName: '' //用户姓名
@@ -191,15 +193,22 @@ export default {
             this.enrolReg(params);
         },
         async enrolReg (params) {
+            this.loadingBtn = false;
+
             const res = await enrolReg(params);
 
+            this.loadingBtn = true;
+
             if (res.data.success == true) {
-                this.$message({
+                this.ruleForm.phoneNum = ''; //手机号
+                this.ruleForm.userName = ''; //用户姓名
+
+                this.$toast({
                     message: '恭喜您，预约成功！',
                     type: 'success'
                 });
             } else {
-                this.$message({
+                this.$toast({
                     message: res.data.message,
                     type: 'error'
                 });
