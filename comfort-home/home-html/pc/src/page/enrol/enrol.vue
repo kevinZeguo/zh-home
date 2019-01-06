@@ -391,9 +391,9 @@ export default {
         },
         async productQuote (params) {            
             let param = 'd=' + encodeURIComponent(JSON.stringify(params));
-console.log(param);
+            //console.log(param);
             const res = await productQuote(param);
-            console.log(JSON.stringify(res));
+            //console.log(JSON.stringify(res));
             if (res.data.success == true) {
                 this.closeClick();
 
