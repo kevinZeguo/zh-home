@@ -1016,7 +1016,7 @@ export default {
         backface-visibility: hidden;
         -webkit-transition: .2s;
         transition: .2s;
-        z-index: 2001;
+        z-index: 201;
 
         .quo-dialog-hd {
             padding: 1.7rem 0 1.2rem;
@@ -1093,7 +1093,7 @@ export default {
         height: 100%;
         opacity: 0.5;
         background: #000;
-        z-index: 2000;
+        z-index: 200;
     }
 }
 </style>

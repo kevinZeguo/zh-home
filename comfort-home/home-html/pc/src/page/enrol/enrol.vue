@@ -17,7 +17,7 @@
                 <h2 class="tit">把德国采暖系统搬回家</h2>
                 <h3 class="tit-sub">众华舒适家，送您一个温暖的冬天</h3>
                 <p class="prop">安装快捷，一天即可完工<br />工艺美观，不影响室内装修<br />使用节省，想开就开升温快</p>
-                <div class="btns-box"><button type="button">快速获取冬天采暖报价</button></div>
+                <div class="btns-box"><button type="button" @click="dialogVisible = true">快速获取冬天采暖报价</button></div>
                 <p class="prop-btn"><a href="#forms">立即预约安装</a></p>
             </div>
 
@@ -145,12 +145,56 @@
                 </div>
             </div>
         </div>
+
+        <div class="quo-dialog" v-if="dialogVisible">
+            <div class="quo-dialog-hd">
+                <div class="tit">获取报价</div>
+                <span class="icon-close" @click="closeClick">close</span>
+            </div>
+
+            <div class="quo-dialog-bd">
+                <p class="prop">报价结果将以短信形式发送至您手机</p>
+                
+                <el-form class="quo-dialog-forms mt30" :model="chooseForm" :rules="chooseRules" ref="chooseForm">
+                    <p class="tit">我家是</p>
+                    <el-row :gutter="10">
+                        <el-col :span="12">
+                            <el-form-item prop="roomCount">
+                                <el-select v-model="chooseForm.roomCount" placeholder="卧室数量">
+                                    <el-option v-for="(item, index) in roomsType" :label="item.label" :value="item.value" :key="index"></el-option>
+                                </el-select>
+                            </el-form-item>
+                        </el-col>
+                        <el-col :span="12">
+                            <el-form-item prop="parlorCount">
+                                <el-select v-model="chooseForm.parlorCount" placeholder="客厅数量">
+                                    <el-option v-for="(item, index) in hallsType" :label="item.label" :value="item.value" :key="index"></el-option>
+                                </el-select>
+                            </el-form-item>
+                        </el-col>
+                    </el-row>
+                    <el-form-item prop="usableArea">
+                        <el-input v-model.number="chooseForm.usableArea" placeholder="请填写使用面积">
+                            <template slot="append">㎡</template>
+                        </el-input>
+                    </el-form-item>
+                    <el-form-item prop="userName">
+                        <el-input v-model="chooseForm.userName" placeholder="姓名"></el-input>
+                    </el-form-item>
+                    <el-form-item prop="phoneNum">
+                        <el-input v-model="chooseForm.phoneNum" placeholder="手机号"></el-input>
+                    </el-form-item>
+                    <button type="button" class="btn-submit" @click="chooseFormValidate('chooseForm')">获取报价</button>
+                </el-form>
+            </div>
+        </div>
+        <div class="quo-modal" v-if="dialogVisible"></div>
     </div>
 </template>
 
 <script>
 import { isvalidPhone } from '../../config/utils';
-import { enrolReg } from '../../service/getData';
+import { enrolReg, productQuote } from '../../service/getData';
 
 export default {
     data () {
@@ -166,6 +210,108 @@ export default {
 
         return {
             dialogVisible: false,
+            roomsType: [
+                {
+                    value: 1,
+                    label:'1居'
+                },
+                {
+                    value: 2,
+                    label: '2居'
+                },
+                {
+                    value: 3,
+                    label: '3居'
+                },
+                {
+                    value: 4,
+                    label: '4居'
+                },
+                {
+                    value: 5,
+                    label: '5居'
+                },
+                {
+                    value: 6,
+                    label: '6居'
+                },
+                {
+                    value: 7,
+                    label: '7居'
+                },
+                {
+                    value: 8,
+                    label: '8居'
+                },
+                {
+                    value: 9,
+                    label: '9居'
+                }
+            ],
+            hallsType: [
+                {
+                    value: 1,
+                    label:'1厅'
+                },
+                {
+                    value: 2,
+                    label: '2厅'
+                },
+                {
+                    value: 3,
+                    label: '3厅'
+                },
+                {
+                    value: 4,
+                    label: '4厅'
+                },
+                {
+                    value: 5,
+                    label: '5厅'
+                },
+                {
+                    value: 6,
+                    label: '6厅'
+                },
+                {
+                    value: 7,
+                    label: '7厅'
+                },
+                {
+                    value: 8,
+                    label: '8厅'
+                },
+                {
+                    value: 9,
+                    label: '9厅'
+                }
+            ],
+            chooseForm: {
+                ps: '40002', //产品Id，多个以逗号分割
+                usableArea: '', //使用面积
+                parlorCount: '', //客厅数量
+                roomCount: '', //卧室数量
+                phoneNum: '', //手机号
+                userName: '' //用户姓名
+            },
+            chooseRules: {
+                roomCount: [
+                    { required: true, message: '请选择卧室数量', trigger: 'change' }
+                ],
+                parlorCount: [
+                    { required: true, message: '请选择客厅数量', trigger: 'change' }
+                ],
+                usableArea: [
+                    { required: true, message: '使用面积不能为空'},
+                    { type: 'number', message: '使用面积必须为数字值'}
+                ],
+                userName: [
+                    { required: true, message: '用户姓名不能为空'}
+                ],
+                phoneNum: [
+                    { required: true, trigger: 'blur', validator: validPhone }
+                ]
+            },
             ruleForm: {
                 phoneNum: '', //手机号
                 userName: '' //用户姓名
@@ -183,6 +329,28 @@ export default {
     mounted () {
     },
     methods: {
+        closeClick () {
+            this.dialogVisible = false;
+
+            this.$refs['chooseForm'].resetFields();
+
+            this.chooseForm.ps = '40002';
+            this.chooseForm.parlorCount = ''; //客厅数量
+            this.chooseForm.roomCount = ''; //卧室数量
+            this.chooseForm.usableArea = null; //使用面积
+            this.chooseForm.phoneNum = ''; //手机号
+            this.chooseForm.userName = ''; //用户姓名
+        },
+        chooseFormValidate (formName) {
+            this.$refs[formName].validate((valid) => {
+
+                if (valid) {
+
+                    // console.log(JSON.stringify(params));
+                    this.productQuote(this.chooseForm);
+                }
+            });
+        },
         submitForm (formName) {
             this.$refs[formName].validate((valid) => {
 
@@ -212,6 +380,25 @@ export default {
 
                 this.$message({
                     message: '恭喜您，预约成功！',
+                    type: 'success'
+                });
+            } else {
+                this.$message({
+                    message: res.data.message,
+                    type: 'error'
+                });
+            }
+        },
+        async productQuote (params) {            
+            let param = 'd=' + encodeURIComponent(JSON.stringify(params));
+console.log(param);
+            const res = await productQuote(param);
+            console.log(JSON.stringify(res));
+            if (res.data.success == true) {
+                this.closeClick();
+
+                this.$message({
+                    message: '恭喜您，操作成功，报价信息已经发送至您的手机，请注意查收',
                     type: 'success'
                 });
             } else {
@@ -633,7 +820,7 @@ export default {
 
         .quo-dialog-bd {
             .prop {
-                padding-bottom: 42px;
+                padding-bottom: 20px;
                 line-height: 15px;
                 font-size: 14px;
                 color: #424242;
