@@ -1,10 +1,15 @@
 <template>
     <div class="home">
         <mt-swipe :auto="4000" style="height:19rem;" class="home-banner">
-            <mt-swipe-item v-for="(item, index) in banners" :key="index">
-                <!--<img :src="item.src" width="100%" />-->
-                <div class="pic" :style="{backgroundImage: 'url(' + item.src +')'}"></div>
+            <mt-swipe-item>
+                <div class="pic" :style="{backgroundImage: 'url(' + banners[0].src +')'}"></div>
                 <div class="txt">舒适，<br />家的意义。</div>
+            </mt-swipe-item>
+            <mt-swipe-item >
+                <router-link to="/enrol" style="width: 100%;display: block;">
+                    <div class="pic" :style="{backgroundImage: 'url(' + banners[1].src +')'}"></div>
+                    <div class="txt">舒适，<br />家的意义。</div>
+                </router-link>
             </mt-swipe-item>
         </mt-swipe>
         <div class="home-container bg1">

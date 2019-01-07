@@ -1,9 +1,15 @@
 <template>
     <div class="home">
         <el-carousel height="680px">
-            <el-carousel-item v-for="(item, index) in banners" :key="index">
-                <div class="pic" :style="{backgroundImage: 'url(' + item.src +')'}"></div>
+            <el-carousel-item>
+                <div class="pic" :style="{backgroundImage: 'url(' + banners[0].src +')'}"></div>
                 <div class="txt">舒适，<br />家的意义。</div>
+            </el-carousel-item>
+            <el-carousel-item>
+                <router-link to="/enrol" style="width: 100%;display: block;">
+                    <div class="pic" :style="{backgroundImage: 'url(' + banners[1].src +')'}"></div>
+                    <div class="txt">舒适，<br />家的意义。</div>
+                </router-link>
             </el-carousel-item>
         </el-carousel>
         <div class="home-container bg1">
