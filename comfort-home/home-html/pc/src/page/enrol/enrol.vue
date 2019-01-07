@@ -392,7 +392,15 @@ export default {
         async productQuote (params) {            
             let param = 'd=' + encodeURIComponent(JSON.stringify(params));
             //console.log(param);
+
+            const loading = this.$loading({
+                lock: true,
+                background: 'rgba(0, 0, 0, 0.7)'
+            });
+
             const res = await productQuote(param);
+
+            loading.close();
             //console.log(JSON.stringify(res));
             if (res.data.success == true) {
                 this.closeClick();

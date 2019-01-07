@@ -152,7 +152,8 @@
                     </div>
                     <input type="text" class="text" v-model="chooseForm.userName" placeholder="姓名" />
                     <input type="tel" class="text" v-model="chooseForm.phoneNum" placeholder="手机号" />
-                    <button type="submit" class="btn-submit" @click="chooseFormValidate">获取报价</button>
+                    <button type="submit" class="btn-submit" @click="chooseFormValidate" v-if="enrolPriceBtn">获取报价</button>
+                    <button type="submit" class="btn-submit" v-if="!enrolPriceBtn"><mt-spinner type="triple-bounce" color="rgb(255, 255, 255)"></mt-spinner></button>
                 </div>
             </div>
         </div>
@@ -179,6 +180,7 @@ export default {
         return {
             dialogBln: false,
             loadingBtn: true,
+            enrolPriceBtn: true,
             roomsType: [
                 {
                     value: 1,
@@ -282,6 +284,7 @@ export default {
     methods: {
         closeClick () {
             this.dialogBln = false;
+            this.enrolPriceBtn = true;
 
             this.chooseForm.ps = '40002';
             this.chooseForm.parlorCount = ''; //客厅数量
@@ -407,7 +410,11 @@ export default {
         async productQuote (params) {
             let param = 'd=' + encodeURIComponent(JSON.stringify(params));
             
+            this.enrolPriceBtn = false;
+
             const res = await productQuote(param);
+
+            this.enrolPriceBtn = true;
             // console.log(JSON.stringify(res));
             if (res.data.success == true) {
 
@@ -457,7 +464,7 @@ export default {
                     border-bottom: 0.5rem solid #D69C16;
                     line-height: 3.6rem;
                     color: #D69C16;
-                    font-size:2.55rem;
+                    font-size:2.4rem;
                 }
 
                 p {
