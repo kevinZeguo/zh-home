@@ -8,7 +8,8 @@
             <el-carousel-item>
                 <router-link to="/enrol" style="width: 100%;display: block;">
                     <div class="pic" :style="{backgroundImage: 'url(' + banners[1].src +')'}"></div>
-                    <div class="txt">舒适，<br />家的意义。</div>
+                    <div class="txt">这个冬天，<br />告别寒冷。</div>
+                    <div class="btns-box"><button type="button">明装采暖在线报名</button></div>
                 </router-link>
             </el-carousel-item>
         </el-carousel>
@@ -260,7 +261,7 @@ export default {
                     src: require('../../assets/img/pic-banner-1.jpg')
                 },
                 {
-                    src:  require('../../assets/img/pic-banner-2.jpg')
+                    src:  require('../../assets/img/pic-banner-3.jpg')
                 }
             ]
         }
@@ -300,6 +301,44 @@ export default {
         background:rgba(83,78,78,0.53);
         font-size:90px;
         color: #fff;
+    }
+
+    .btns-box {
+        width: 255px;
+        text-align: center;
+        height:50px;
+        position: absolute;
+        top: 580px;
+        left: 50%;
+        z-index: 11;
+
+        button {
+            padding: 0 40px 0 20px;
+            height:50px;
+            line-height: 50px;
+            background:rgba(233,197,14,1);
+            box-shadow:0px 2px 4px 0px rgba(0,0,0,0.5);
+            border-radius:20px;
+            border: 0;
+            color: #fff;
+            font-size:20px;
+            cursor: pointer;
+            position: relative;
+
+            &:after {
+                margin-left: 5px;
+                width: 0;
+                height: 0;
+                content: " ";
+                border-color: transparent transparent transparent #fff;
+                border-style: dashed dashed dashed solid;
+                border-width: 5px 0 5px 8px;
+                position: absolute;
+                right: 25px;
+                top: 50%;
+                margin-top: -5px;
+            }
+        }
     }
 }
 
