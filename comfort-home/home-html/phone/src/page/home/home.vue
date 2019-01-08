@@ -8,7 +8,8 @@
             <mt-swipe-item >
                 <router-link to="/enrol" style="width: 100%;display: block;">
                     <div class="pic" :style="{backgroundImage: 'url(' + banners[1].src +')'}"></div>
-                    <div class="txt">舒适，<br />家的意义。</div>
+                    <div class="txt">这个冬天，<br />告别寒冷。</div>
+                    <div class="btns-box"><button type="button">明装采暖在线报名</button></div>
                 </router-link>
             </mt-swipe-item>
         </mt-swipe>
@@ -256,7 +257,7 @@ export default {
                     src: require('../../assets/img/pic-banner-1.jpg')
                 },
                 {
-                    src: require('../../assets/img/pic-banner-2.jpg')
+                    src: require('../../assets/img/pic-banner-3.jpg')
                 }
             ],
             homeThreeMenu: [
@@ -298,13 +299,13 @@ export default {
             height: 19rem;
             background-repeat: no-repeat;
             background-position: center center;
-            background-size: auto 100%;
+            background-size: cover;
         }
 
         .txt {
-            padding: 0.85rem 0 1.5rem 1.9rem;
+            padding: 0.65rem 0 1.3rem 1.9rem;
             width:70%;
-            line-height: 4.8rem;
+            line-height: 3.8rem;
             position: absolute;
             top: 50%;
             left: 50%;
@@ -320,6 +321,32 @@ export default {
             color: #fff;
         }
 
+        .btns-box {
+            text-align: center;
+            position: absolute;
+            bottom: 0.4rem;
+            left: 50%;
+            z-index: 11;
+            -webkit-transform: translatex(-50%);
+            -moz-transform: translate(-50%, -50%);
+            -ms-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+            
+
+            button {
+                padding: 0 1rem;
+                width:100%;
+                height:2.2rem;
+                background:rgba(233,197,14,1);
+                border-radius:1.7rem;
+                border: 0;
+                color: #fff;
+                font-size:1rem;
+                cursor: pointer;
+                position: relative;
+            }
+        }
+
         /deep/ .mint-swipe-indicator {
             background: #ABA9A9;
             opacity: 1;
@@ -327,6 +354,10 @@ export default {
             &.is-active {
                 background:#fff;
             }
+        }
+
+        /deep/ .mint-swipe-indicators {
+            bottom: 0;
         }
     }
 
