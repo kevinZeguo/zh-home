@@ -3,8 +3,8 @@
         <div class="layout">
             <div class="copy">
                 <div class="logo"></div>
-                <p>津ICP备案号 13000000000</p>
-                <p>Copyright&copy;2009-2018 众华舒适环境科技（天津）有限公司版权所有</p>
+                <p>津ICP备19000153号</p>
+                <p>&copy;2009-2018 众华舒适环境科技（天津）有限公司版权所有</p>
             </div>
 
             <div class="menu">
