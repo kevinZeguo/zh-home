@@ -15,3 +15,4 @@ npm run build-prod             打包生产环境代码
 
 组件引用列表和说明
 1. http://mint-ui.github.io/#!/zh-cn  mint-ui组件api
+2. https://github.com/MeCKodo/vue-tap

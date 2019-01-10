@@ -13,6 +13,9 @@ import Mint from 'mint-ui';      //固定路径，类似vuerouter
 import 'mint-ui/lib/style.css';
 Vue.use(Mint);
 
+import vueTap from 'v-tap';
+Vue.use(vueTap);
+
 import './assets/css/app.dev.scss';
 
 (function(win,doc){

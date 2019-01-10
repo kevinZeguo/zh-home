@@ -17,7 +17,7 @@
                 <div class="en-hd-box">
                     <h2 class="tit">把德国采暖系统搬回家</h2>
                     <h3 class="tit-sub">众华舒适家，送您一个温暖的冬天</h3>
-                    <div class="btns-box"><button type="button" @click="dialogBln = true">快速获取冬天采暖报价</button></div>
+                    <div class="btns-box"><button type="button" v-tap="{ methods: openEnrol}">快速获取冬天采暖报价</button></div>
                 </div>
             </div>
 
@@ -116,7 +116,7 @@
                         </li>
                     </ul>
                     <div class="btns-box">
-                        <button type="button" @click="submitForm('ruleForm')" v-if="loadingBtn">立即预约</button>
+                        <button type="button" v-tap="{ methods: submitForm }" v-if="loadingBtn">立即预约</button>
                         <button type="button" v-if="!loadingBtn"><mt-spinner type="triple-bounce" color="rgb(255, 255, 255)"></mt-spinner></button>
                     </div>
                 </div>
@@ -152,7 +152,7 @@
                     </div>
                     <input type="text" class="text" v-model="chooseForm.userName" placeholder="姓名" />
                     <input type="tel" class="text" v-model="chooseForm.phoneNum" placeholder="手机号" />
-                    <button type="submit" class="btn-submit" @click="chooseFormValidate" v-if="enrolPriceBtn">获取报价</button>
+                    <button type="submit" class="btn-submit" v-tap="{ methods: chooseFormValidate }" v-if="enrolPriceBtn">获取报价</button>
                     <button type="submit" class="btn-submit" v-if="!enrolPriceBtn"><mt-spinner type="triple-bounce" color="rgb(255, 255, 255)"></mt-spinner></button>
                 </div>
             </div>
@@ -282,6 +282,9 @@ export default {
     mounted () {
     },
     methods: {
+        openEnrol () {
+            this.dialogBln = true;
+        },
         closeClick () {
             this.dialogBln = false;
             this.enrolPriceBtn = true;
@@ -354,7 +357,7 @@ export default {
 
             this.productQuote(this.chooseForm);
         },
-        submitForm (formName) {
+        submitForm () {
 
             //用户姓名
             if (this.ruleForm.userName == '' ) {
