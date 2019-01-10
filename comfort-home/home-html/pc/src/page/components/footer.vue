@@ -87,7 +87,7 @@ export default {
             margin-bottom: 20px;
             width: 200px;
             height: 47px;
-            background: url(../../assets/img/logo.png) no-repeat;
+            background: url(../../assets/img/logo-min.png) no-repeat;
             background-size: 100% 100%;
         }
 
@@ -170,7 +170,8 @@ export default {
         width: 250px;
         height: 130px;
         float: left;
-        background: url(../../assets/img/icon-code.png) no-repeat left top;
+        background: url(../../assets/img/icon-code.jpg) no-repeat left top;
+        background-size: 118px 118px;
     }
 }
 </style>

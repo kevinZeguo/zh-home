@@ -142,7 +142,7 @@ export default {
         }
 
         .tit2 {
-            padding: 3.4rem 0 1.7rem;
+            margin: 3.4rem 0 1.7rem;
             line-height: 2.4rem;
             position: relative;
             font-size: 1.7rem;
@@ -156,7 +156,7 @@ export default {
                 content: " ";
                 position: absolute;
                 left: -1.05rem;
-                top: 2.25em;
+                top: 0.35rem;
             }
         }
 

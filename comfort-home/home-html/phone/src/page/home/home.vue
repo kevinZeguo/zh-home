@@ -314,10 +314,9 @@ export default {
             -moz-transform: translate(-50%, -50%);
             -ms-transform: translate(-50%, -50%);
             transform: translate(-50%, -50%);
-            border: 10px solid #F8CF2A;
+            border: 0.3rem solid #F8CF2A;
             background:rgba(83,78,78,0.53);
             font-size:3.4rem;
-            font-weight:bold;
             color: #fff;
         }
 

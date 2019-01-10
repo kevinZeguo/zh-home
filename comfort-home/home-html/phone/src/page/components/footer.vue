@@ -77,7 +77,7 @@ export default {
         margin-bottom: 1.8rem;
         width: 8.6rem;
         height: 2rem;
-        background: url(../../assets/img/logo.png) no-repeat;
+        background: url(../../assets/img/logo-min.png) no-repeat;
         background-size: 100% 100%;
     }
 
