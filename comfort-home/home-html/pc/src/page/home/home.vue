@@ -2,12 +2,12 @@
     <div class="home">
         <el-carousel height="680px">
             <el-carousel-item>
-                <div class="pic" :style="{backgroundImage: 'url(' + banners[0].src +')'}"></div>
+                <img class="pic" :src="banners[0].src" />
                 <div class="txt">舒适，<br />家的意义。</div>
             </el-carousel-item>
             <el-carousel-item>
                 <router-link to="/enrol" style="width: 100%;display: block;">
-                    <div class="pic" :style="{backgroundImage: 'url(' + banners[1].src +')'}"></div>
+                    <img class="pic" :src="banners[1].src" />
                     <div class="txt">这个冬天，<br />告别寒冷。</div>
                     <div class="btns-box"><button type="button">明装采暖在线报名</button></div>
                 </router-link>
@@ -265,23 +265,19 @@ export default {
                 }
             ]
         }
-    },
-    mounted () {
-        
-    },
-    methods: {
     }
-
 }
 </script>
 
 <style lang="scss" scoped>
 .el-carousel__item { 
     .pic {
-        width: 100%;
-        height: 680px;
-        background-repeat: no-repeat;
-        background-position: center center;
+        margin-left: -960px;
+        width: 1920px;
+        position: absolute;
+        top: 0;
+        left: 50%;
+        z-index: 1;
     }
 
     .txt {
