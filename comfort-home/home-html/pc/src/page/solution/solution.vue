@@ -5,28 +5,38 @@
             <div class="banner-con">
                 <div class="radius radius1">
                     <div class="bg"></div>
-                    <p class="prop">湿度维持在<br />40%-65%</p>
-                    <p class="name">恒湿</p>
+                    <div class="txt-box">
+                        <p class="prop">湿度维持在<br />40%-65%</p>
+                        <p class="name">恒湿</p>
+                    </div>
                 </div>
                 <div class="radius radius2">
                     <div class="bg"></div>
-                    <p class="prop">室温维持在<br />20℃-26℃</p>
-                    <p class="name">恒温</p>
+                    <div class="txt-box">
+                        <p class="prop">室温维持在<br />20℃-26℃</p>
+                        <p class="name">恒温</p>
+                    </div>
                 </div>
                 <div class="radius radius3">
                     <div class="bg"></div>
-                    <p class="prop">环境噪音<br />≤ 10 分贝</p>
-                    <p class="name">恒静</p>
+                    <div class="txt-box">
+                        <p class="prop">环境噪音<br />≤ 10 分贝</p>
+                        <p class="name">恒静</p>
+                    </div>
                 </div>
                 <div class="radius radius4">
                     <div class="bg"></div>
-                    <p class="prop">CO2含量<br />≤1000PPM</p>
-                    <p class="name">恒氧</p>
+                    <div class="txt-box">
+                        <p class="prop">CO2含量<br />≤1000PPM</p>
+                        <p class="name">恒氧</p>
+                    </div>
                 </div>
                 <div class="radius radius5">
                     <div class="bg"></div>
-                    <p class="prop">PM2.5<br />≤50μg/m3</p>
-                    <p class="name">恒净</p>
+                    <div class="txt-box">
+                        <p class="prop">PM2.5<br />≤50μg/m3</p>
+                        <p class="name">恒净</p>
+                    </div>
                 </div>
 
                 <div class="center-radius">众华舒适家<br />五恒环境解决方案</div>
@@ -263,7 +273,7 @@ export default {
 
                 .bg {
                     width: 100px;
-                    height: 90px;
+                    height: 100px;
                     position: absolute;
                     top: 0;
                     left: 0;
@@ -274,6 +284,7 @@ export default {
                         width: 88px;
                         height: 88px;
                         border-radius: 100px;
+                        box-shadow:0px 1px 2px 0px rgba(0,0,0,0.5);
                         content: " ";
                         position: absolute;
                         top: 0;
@@ -281,8 +292,18 @@ export default {
                     }
                 }
 
+                .txt-box {
+                    width: 100%;
+                    position: absolute;
+                    top: 50%;
+                    left: 0;
+                    z-index: 10;
+                    -webkit-transform: translateY(-50%);
+                    transform: translateY(-50%);
+                }
+
                 .prop {
-                    padding-top: 30px;
+                    padding-top: 10px;
                     line-height: 20px;
                     font-size: 14px;
                     color:#44423A;
@@ -292,7 +313,7 @@ export default {
                 }
 
                 .name {
-                    padding: 6px 0 0;
+                    padding: 5px 0 0;
                     color: #fff;
                     position: relative;
                     text-align: center;

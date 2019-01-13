@@ -4,28 +4,38 @@
             <div class="banner-con">
                 <div class="radius radius1">
                     <div class="bg"></div>
-                    <p class="name">恒湿</p>
-                    <p class="prop">湿度维持在<br />40%-65%</p>
+                    <div class="txt-box">
+                        <p class="name">恒湿</p>
+                        <p class="prop">湿度维持在<br />40%-65%</p>
+                    </div>
                 </div>
                 <div class="radius radius2">
                     <div class="bg"></div>
-                    <p class="name">恒温</p>
-                    <p class="prop">室温维持在<br />20℃-26℃</p>
+                    <div class="txt-box">
+                        <p class="name">恒温</p>
+                        <p class="prop">室温维持在<br />20℃-26℃</p>
+                    </div>
                 </div>
                 <div class="radius radius3">
                     <div class="bg"></div>
-                    <p class="name">恒静</p>
-                    <p class="prop">环境噪音<br />≤ 10 分贝</p>
+                    <div class="txt-box">
+                        <p class="name">恒静</p>
+                        <p class="prop">环境噪音<br />≤ 10 分贝</p>
+                    </div>
                 </div>
                 <div class="radius radius4">
                     <div class="bg"></div>
-                    <p class="name">恒氧</p>
-                    <p class="prop">CO2含量<br />≤1000PPM</p>
+                    <div class="txt-box">
+                        <p class="name">恒氧</p>
+                        <p class="prop">CO2含量<br />≤1000PPM</p>
+                    </div>
                 </div>
                 <div class="radius radius5">
                     <div class="bg"></div>
-                    <p class="name">恒净</p>
-                    <p class="prop">PM2.5<br />≤50μg/m3</p>
+                    <div class="txt-box">
+                        <p class="name">恒净</p>
+                        <p class="prop">PM2.5<br />≤50μg/m3</p>
+                    </div>
                 </div>
 
                 <div class="center-radius">
@@ -241,23 +251,25 @@ export default {
             z-index: 2;
 
             .radius {
-                width: 26%;
+                width: 27%;
+                height: 0;
+                padding-top: 27%;
                 position: absolute;
 
                 .bg {
-                    padding-top: 98%;
+                    padding-top: 100%;
                     width: 100%;
                     height: 0;
                     position: absolute;
                     top: 0;
                     left: 0;
                     z-index: 1;
-                    overflow: hidden;
 
                     &:after {
                         width: calc(100% - 1rem);
                         height: calc(100% - 1rem);
                         border-radius: 100%;
+                        box-shadow:0px 3px 7px 0px rgba(0,0,0,0.5);
                         content: " ";
                         display: block;
                         position: absolute;
@@ -266,18 +278,27 @@ export default {
                     }
                 }
 
+                .txt-box {
+                    width: 100%;
+                    position: absolute;
+                    top: 50%;
+                    left: 0;
+                    z-index: 10;
+                    -webkit-transform: translateY(-50%);
+                    transform: translateY(-50%);
+                }
+
                 .prop {
-                    padding-top: 0.25rem;
-                    line-height: 1.5rem;
+                    padding-bottom: 0.25rem;
+                    line-height: 1.7rem;
                     font-size: 1.2rem;
-                    color:#323132;
+                    color:#44423A;
                     text-align: center;
                     position: relative;
                     z-index: 2;
                 }
 
                 .name {
-                    padding: 0.25rem 0 0;
                     line-height: 2.15rem;
                     color: #fff;
                     position: relative;
@@ -574,6 +595,18 @@ export default {
             background-repeat: no-repeat;
             background-position: center center;
             background-size: cover;
+            position: relative;
+
+            &:after {
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                content: " ";
+                background: rgba(255, 255, 255, 0.5);
+                top: 0;
+                left: 0;
+                z-index: 1;
+            }
 
             &.col-bg-1 {
                 background-image: url(../../assets/img/pic-solution-640x567-1.jpg);
@@ -605,6 +638,8 @@ export default {
             font-size: 1.55rem;
             color: #fff;
             font-weight: 100;
+            position: relative;
+            z-index: 10;
         }
 
         .prop {
@@ -613,6 +648,9 @@ export default {
             color: #fff;
             font-size: 1.2rem;
             text-align: center;
+            position: relative;
+            z-index: 10;
+            text-shadow:0px 3px 7px rgba(0,0,0,0.5);
         }
 
         .infos  {
@@ -625,6 +663,8 @@ export default {
             -moz-justify-content: space-between;
             -ms-justify-content: space-between;
             justify-content: space-between;
+            position: relative;
+            z-index: 10;
 
             li {
                 -webkit-flex: 1;
@@ -632,8 +672,6 @@ export default {
                 -ms-flex: 1;
                 flex: 1;
                 padding: 0 0.3rem 0 0;
-
-                &:first-child {}
 
                 .pic {
                     padding-bottom: 0.85rem;
@@ -664,6 +702,7 @@ export default {
                     line-height: 1.2rem;
                     font-size: 0.85rem;
                     color:#252424;
+                    text-shadow:0px 3px 7px rgba(0,0,0,0.5);
                 }
             }
         }
