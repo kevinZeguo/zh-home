@@ -1,16 +1,16 @@
 <template>
     <div class="class-room">
         <ul class="c-nav">
-            <li class="active">温度课堂</li>
-            <li class="c-nav-2">空气课堂</li>
-            <li class="c-nav-3">水处理课堂</li>
-            <li class="c-nav-4">热水课堂</li>
-            <li class="c-nav-5">厨房课堂</li>
-            <li class="c-nav-6">智能课堂</li>
+            <li :class="{active: navIndex == 1}" @click="changeNav(1)">温度课堂</li>
+            <li :class="{active: navIndex == 2}" @click="changeNav(2)">空气课堂</li>
+            <li :class="{active: navIndex == 3}" @click="changeNav(3)">水处理课堂</li>
+            <li :class="{active: navIndex == 4}" @click="changeNav(4)">热水课堂</li>
+            <li :class="{active: navIndex == 5}" @click="changeNav(5)">厨房课堂</li>
+            <li :class="{active: navIndex == 6}" @click="changeNav(6)">智能课堂</li>
         </ul>
 
-        <div class="c-container">
-            <div class="c-con">
+        <div class="c-container" v-if="navIndex == 1">
+            <div class="c-con" v-if="tabIndex == 1">
                 <div class="c-tit">地暖小知识</div>
                 <div class="c-names"><span>地暖的定义</span></div>
                 <div class="c-prop">地暖是地板辐射采暖的简称，是以整个地面为散热器，通过地板辐射层中的热媒，均匀加热整个地面，利用地面自身的蓄热和热量向上辐射的规律由下至上进行传导，来达到取暖的目的。</div>
@@ -22,13 +22,39 @@
                 <div class="c-prop"></div>
             </div>
 
+            <div class="c-con" v-if="tabIndex == 2">
+                <div class="c-tit">暖气片小知识</div>
+                <div class="c-names"><span>暖气片的定义</span></div>
+                <div class="c-prop">暖气片是一种采暖为主的采暖设备。主要在冬天寒冷的北方地区使用，具有保暖的作用，以前多使用铸铁暖气片，现在已经发展出了更多材质的暖气片。 </div>
+                <div class="c-prop">铸铁暖气片已经逐步退出了市场舞台，钢制暖气片、铜铝复合散热器、铝制暖气片等新型暖气片无论从材质上还是制作工艺上都优于铸铁散热器，成为市场上最主流的暖气片。</div>
+                <div class="c-prop"><img src="../../assets/img/pic-700x293-1.jpg" width="100%" /></div>
+                <div class="c-names"><span>暖气片安装事项</span></div>
+                <div class="c-prop">1、暖气片在安装前确认暖气片包装的完整,放置时采用相应的防震、防碰措施，不能以任何方式拖拉暖气片，暖气片应存放在干燥和防雨的安全地方。<br />2、现场要清理干净，供热系统的阀门、干管、支管及管道的支、吊架均已安装并按设计要求管道冲洗试压完毕。 3、暖气片外接口螺纹应符合JG/T6-1999的要求，连接暖气片的支管螺纹应完整，如有断丝或缺丝则不得大于螺纹全扣的10%，并至少年宫扣以上的完整螺纹。<br />4、安装暖气片处的内墙已处理完毕。<br />5、钢制暖气片、铝制暖气片、铜铝复合暖气片、铸铁暖气片等本体试验压力如设计无要求时应按设计选用的工作压力的1.5倍进行，但钢制板式暖气片本体最大试验压力不应超过1.3MPa并不小于1.3MPa.试压2至3分钟不渗漏为合格。<br /> 6、暖气片安装步骤：先安进水阀和回水阀，固定挂件用水平尺测量暖气片的位置，将暖气片平稳放置，将阀门连接件与进出水口阀门连接在一起，使用水平尺测量暖气片是否平直，管路安装是否符合要求。使用管钳加固拧紧连接件。试压：关闭主管连接阀门，关闭暖气片的进回水阀，试验压力应为工作压力的1.5倍进行试压2至3分钟不渗漏为合格。</div>
+                <div class="c-names"><span>散热器如何保养？</span></div>
+                <div class="c-prop">散热器在下一个供暖季节来临之前，一直处于闲置状态。因此，在供暖之前对散热器进行清洁与保护是十分必要的。而正确保养散热器也是必不可少的。<br />新的采暖季节到来之前，应对散热器上连接的放气阀、丝堵及管路上的管件进行检查，（受热胀冷缩的影响）螺纹连接处如有松动现象应拧紧，以免供暖后漏水。还有，清洁散热器表面时，请使用软毛巾或毛刷，请勿使用任何种类的有机溶液，可使用日常的洗涤剂，如：洗洁灵，弱碱性肥皂水等。<br />弄清散热片材质，采暖适宜的保养方法。不同材质的散热片保养方式不一样，如钢制散热片一般要用满水保养的方法，而铝制的则不需要。<br />因此，当我们准备启用散热器供暖之前，如何做好清洁工作是非常重要的，而且马虎不得。毕竟想要舒服的过完整个冬天，散热器是大功臣一个。</div>
+                <div class="c-prop text-center"><img src="../../assets/img/pic-648x370-1.jpg" width="100%" /></div>
+                <div class="c-prop"></div>
+            </div>
+
+            <div class="c-con" v-if="tabIndex == 3">
+                
+                <div class="c-prop">暂无</div>
+                <div class="c-prop"></div>
+            </div>
+
+            <div class="c-con" v-if="tabIndex == 4">
+                
+                <div class="c-prop">暂无</div>
+                <div class="c-prop"></div>
+            </div>
+
             <div class="c-sidebar">
                 <div class="hd">温度课堂</div>
                 <ul class="bd">
-                    <li>地暖小知识</li>
-                    <li>暖气片小知识</li>
-                    <li>老房装暖气</li>
-                    <li>中央空调小知识</li>
+                    <li :class="{active: tabIndex == 1}" @click="changeTab(1)">地暖小知识</li>
+                    <li :class="{active: tabIndex == 2}" @click="changeTab(2)">暖气片小知识</li>
+                    <li :class="{active: tabIndex == 3}" @click="changeTab(3)">老房装暖气</li>
+                    <li :class="{active: tabIndex == 4}" @click="changeTab(4)">中央空调小知识</li>
                 </ul>
             </div>
 
@@ -39,6 +65,76 @@
                 <a href="javascript:;">1分钟快速报价</a>
             </div>
         </div>
+
+        <div class="c-container" v-if="navIndex == 2">
+            <div class="c-con">
+                <div class="c-prop">暂无</div>
+                <div class="c-prop"></div>
+            </div>
+
+            <div class="c-sidebar">
+                <div class="hd">空气课堂</div>
+                <ul class="bd">
+                    <li :class="{active: tabIndex == 1}" @click="changeTab(1)">标题1</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="c-container" v-if="navIndex == 3">
+            <div class="c-con">
+                <div class="c-prop">暂无</div>
+                <div class="c-prop"></div>
+            </div>
+
+            <div class="c-sidebar">
+                <div class="hd">水处理课堂</div>
+                <ul class="bd">
+                    <li :class="{active: tabIndex == 1}" @click="changeTab(1)">标题1</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="c-container" v-if="navIndex == 4">
+            <div class="c-con">
+                <div class="c-prop">暂无</div>
+                <div class="c-prop"></div>
+            </div>
+
+            <div class="c-sidebar">
+                <div class="hd">热水课堂</div>
+                <ul class="bd">
+                    <li :class="{active: tabIndex == 1}" @click="changeTab(1)">标题1</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="c-container" v-if="navIndex == 5">
+            <div class="c-con">
+                <div class="c-prop">暂无</div>
+                <div class="c-prop"></div>
+            </div>
+
+            <div class="c-sidebar">
+                <div class="hd">厨房课堂</div>
+                <ul class="bd">
+                    <li :class="{active: tabIndex == 1}" @click="changeTab(1)">标题1</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="c-container" v-if="navIndex == 6">
+            <div class="c-con">
+                <div class="c-prop">暂无</div>
+                <div class="c-prop"></div>
+            </div>
+
+            <div class="c-sidebar">
+                <div class="hd">智能课堂</div>
+                <ul class="bd">
+                    <li :class="{active: tabIndex == 1}" @click="changeTab(1)">标题1</li>
+                </ul>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -46,13 +142,22 @@
 export default {
     data () {
         return {
-            selected: '1'
+            navIndex: 1,
+            tabIndex: 1
         }
     },
     mounted () {
         
     },
     methods: {
+        changeNav (index) {
+            this.navIndex = index;
+            this.tabIndex = 1;
+        },
+        changeTab (index) {
+            this.tabIndex = index;
+            document.body.scrollTop = document.documentElement.scrollTop = 0;
+        }
     }
 
 }
@@ -134,7 +239,7 @@ export default {
                     color: #3F3F40;
                     cursor: pointer;
 
-                    &:hover {
+                    &.active, &:hover {
                         color: #0780ED;
                     }
                 }
