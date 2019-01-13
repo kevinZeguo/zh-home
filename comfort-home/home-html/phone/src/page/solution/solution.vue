@@ -616,7 +616,7 @@ export default {
         }
 
         .infos  {
-            padding: 0 0 2.66rem;
+            padding: 0 0 2.66rem 0.3rem;
             -webkit-display: flex;
             -moz-display: flex;
             -ms-display: flex;
@@ -631,7 +631,9 @@ export default {
                 -moz-flex: 1;
                 -ms-flex: 1;
                 flex: 1;
-                padding: 0 0.45rem;
+                padding: 0 0.3rem 0 0;
+
+                &:first-child {}
 
                 .pic {
                     padding-bottom: 0.85rem;
@@ -646,11 +648,12 @@ export default {
                     text-align: center;
 
                     span {
+                        white-space: nowrap;
                         line-height:2.55rem;
                         background:#EAEAEA;
                         border-radius:3.4rem;
                         text-align: center;
-                        font-size: 1.2rem;
+                        font-size: 1.0rem;
                         color:#252424;
                         display: block;
                     }
