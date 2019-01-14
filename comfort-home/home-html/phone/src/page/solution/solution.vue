@@ -58,7 +58,7 @@
             </div>
         </div>
 
-        <div class="s-tabs">
+        <div class="s-tabs" id="tabs">
             <ul>
                 <li :class="{ active: tabsIndex == 1 }" @click="tabsChange(1)">
                     <div class="pic"><img src="../../assets/img/icon-temperature.png" style="width:1rem" /></div>
@@ -226,7 +226,19 @@ export default {
         }
     },
     mounted () {
-        
+        let index = this.$route.params.index;
+
+        if (index == 2 || index == 3 || index == 4 || index == 5) {
+            this.tabsIndex = index;
+
+            setTimeout(() => {
+                let top = this.$el.querySelector('#tabs').offsetTop - 100;
+                document.body.scrollTop = top;
+                document.documentElement.scrollTop  =  top;
+            }, 100);
+        } else {
+            this.tabsIndex = 1;
+        }
     },
     methods: {
         tabsChange (index) {

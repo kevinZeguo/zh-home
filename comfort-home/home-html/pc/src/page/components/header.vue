@@ -33,7 +33,7 @@ export default {
                 },
                 {
                     name: '解决方案',
-                    url: '/solution'
+                    url: '/solution/1'
                 },
                 /*{
                     name: '客户案例',

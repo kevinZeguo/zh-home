@@ -35,7 +35,7 @@ const routes = [
                 component: quotation
             },
             {
-                path: 'solution',
+                path: 'solution/:index',
                 component: solution
             },
             {

@@ -156,27 +156,27 @@
                     <ul>
                         <li>
                             <div class="icons icon-home-five-1"></div>
-                            <p class="name"><a href="javascript:;">温度</a></p>
+                            <p class="name"><router-link to="/solution/1">温度</router-link></p>
                         </li>
                         <li>
                             <div class="icons icon-home-five-2"></div>
-                            <p class="name"><a href="javascript:;">水处理</a></p>
+                            <p class="name"><router-link to="/solution/2">水处理</router-link></p>
                         </li>
                         <li>
                             <div class="icons icon-home-five-3"></div>
-                            <p class="name"><a href="javascript:;">空气</a></p>
+                            <p class="name"><router-link to="/solution/3">空气</router-link></p>
                         </li>
                         <li>
                             <div class="icons icon-home-five-4"></div>
-                            <p class="name"><a href="javascript:;">热水</a></p>
+                            <p class="name"><router-link to="/solution/4">热水</router-link></p>
                         </li>
                         <li>
                             <div class="icons icon-home-five-5"></div>
-                            <p class="name"><a href="javascript:;">智能厨房</a></p>
+                            <p class="name"><router-link to="/solution/1">智能厨房</router-link></p>
                         </li>
                         <li>
                             <div class="icons icon-home-five-6"></div>
-                            <p class="name"><a href="javascript:;">智能联控</a></p>
+                            <p class="name"><router-link to="/solution/5">智能联控</router-link></p>
                         </li>
                     </ul>
 

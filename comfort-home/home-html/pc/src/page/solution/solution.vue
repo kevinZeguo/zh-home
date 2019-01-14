@@ -56,7 +56,7 @@
             </div>
         </div>
 
-        <div class="layout s-tabs">
+        <div class="layout s-tabs" id="tabs">
             <ul>
                 <li :class="{ active: tabsIndex == 1 }" @click="tabsChange(1)"><img src="../../assets/img/icon-temperature.png" width="18" />温度解决方案</li>
                 <li :class="{ active: tabsIndex == 2 }" @click="tabsChange(2)"><img src="../../assets/img/icon-air.png" width="30" />空气解决方案</li>
@@ -224,7 +224,18 @@ export default {
         }
     },
     mounted () {
+        let index = this.$route.params.index;
         
+        if (index == 2 || index == 3 || index == 4 || index == 5) {
+            this.tabsIndex = index;
+
+            setTimeout(() => {
+                document.body.scrollTop = 1500;
+                document.documentElement.scrollTop  =  1500;
+            }, 100);
+        } else {
+            this.tabsIndex = 1;
+        }
     },
     methods: {
         tabsChange (index) {

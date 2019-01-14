@@ -31,7 +31,7 @@ export default {
                 },
                 {
                     name: '解决方案',
-                    url: '/solution'
+                    url: '/solution/1'
                 },
                 /*{
                     name: '客户案例',
@@ -102,6 +102,7 @@ export default {
             font-weight:300;
             color: #666;
             display: block;
+            cursor: pointer;
             
             &.router-link-exact-active, &:hover {
                 color: #000;

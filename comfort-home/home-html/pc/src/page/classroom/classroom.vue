@@ -62,8 +62,8 @@
 
                 <div class="c-con mt30">
                     <ul class="c-name-link">
-                        <li><a href="javascript:;">查看温度解决方案</a></li>
-                        <li><a href="javascript:;">1分钟快速报价</a></li>
+                        <li><router-link to="/solution/1">查看温度解决方案</router-link></li>
+                        <li><router-link to="/quotation">1分钟快速报价</router-link></li>
                     </ul>
                 </div>
             </div>
@@ -79,9 +79,16 @@
                 </div>
             </div>
             <div class="c-col-r">
-                <div class="c-con">
+                <div class="c-con" v-if="tabIndex == 1">
                     <div class="c-prop">暂无</div>
                     <div class="c-prop"></div>
+                </div>
+
+                <div class="c-con mt30">
+                    <ul class="c-name-link">
+                        <li><router-link to="/solution/2">查看空气解决方案</router-link></li>
+                        <li><router-link to="/quotation">1分钟快速报价</router-link></li>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -96,9 +103,16 @@
                 </div>
             </div>
             <div class="c-col-r">
-                <div class="c-con">
+                <div class="c-con" v-if="tabIndex == 1">
                     <div class="c-prop">暂无</div>
                     <div class="c-prop"></div>
+                </div>
+
+                <div class="c-con mt30">
+                    <ul class="c-name-link">
+                        <li><router-link to="/solution/3">查看水处理解决方案</router-link></li>
+                        <li><router-link to="/quotation">1分钟快速报价</router-link></li>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -113,9 +127,16 @@
                 </div>
             </div>
             <div class="c-col-r">
-                <div class="c-con">
+                <div class="c-con" v-if="tabIndex == 1">
                     <div class="c-prop">暂无</div>
                     <div class="c-prop"></div>
+                </div>
+
+                <div class="c-con mt30">
+                    <ul class="c-name-link">
+                        <li><router-link to="/solution/4">查看热水解决方案</router-link></li>
+                        <li><router-link to="/quotation">1分钟快速报价</router-link></li>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -130,9 +151,16 @@
                 </div>
             </div>
             <div class="c-col-r">
-                <div class="c-con">
+                <div class="c-con" v-if="tabIndex == 1">
                     <div class="c-prop">暂无</div>
                     <div class="c-prop"></div>
+                </div>
+
+                <div class="c-con mt30">
+                    <ul class="c-name-link">
+                        <li><router-link to="/solution/1">查看厨房解决方案</router-link></li>
+                        <li><router-link to="/quotation">1分钟快速报价</router-link></li>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -147,9 +175,16 @@
                 </div>
             </div>
             <div class="c-col-r">
-                <div class="c-con">
+                <div class="c-con" v-if="tabIndex == 1">
                     <div class="c-prop">暂无</div>
                     <div class="c-prop"></div>
+                </div>
+
+                <div class="c-con mt30">
+                    <ul class="c-name-link">
+                        <li><router-link to="/solution/5">查看智能解决方案</router-link></li>
+                        <li><router-link to="/quotation">1分钟快速报价</router-link></li>
+                    </ul>
                 </div>
             </div>
         </div>
