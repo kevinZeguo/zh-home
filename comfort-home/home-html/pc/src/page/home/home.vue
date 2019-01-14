@@ -160,11 +160,11 @@
                         </li>
                         <li>
                             <div class="icons icon-home-five-2"></div>
-                            <p class="name"><router-link to="/solution/2">水处理</router-link></p>
+                            <p class="name"><router-link to="/solution/3">水处理</router-link></p>
                         </li>
                         <li>
                             <div class="icons icon-home-five-3"></div>
-                            <p class="name"><router-link to="/solution/3">空气</router-link></p>
+                            <p class="name"><router-link to="/solution/2">空气</router-link></p>
                         </li>
                         <li>
                             <div class="icons icon-home-five-4"></div>
