@@ -584,7 +584,7 @@ export default {
                 -moz-flex: 1;
                 -ms-flex: 1;
                 flex: 1;
-                padding: 0 6px;
+                padding: 0 5px;
 
                 &:first-child {
                     padding-left: 0;
@@ -608,7 +608,7 @@ export default {
                     background:#EAEAEA;
                     border-radius:40px;
                     text-align: center;
-                    font-size: 18px;
+                    font-size: 14px;
                     color:#252424;
                 }
 

@@ -289,7 +289,7 @@ export default {
                 }
 
                 .prop {
-                    padding-bottom: 0.25rem;
+                    padding: 0.5rem 0 0.3rem;
                     line-height: 1.7rem;
                     font-size: 1.2rem;
                     color:#44423A;
