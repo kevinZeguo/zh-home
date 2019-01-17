@@ -614,7 +614,7 @@ export default {
                 height: 100%;
                 position: absolute;
                 content: " ";
-                background: rgba(255, 255, 255, 0.5);
+                background: rgba(0, 0, 0, 0.5);
                 top: 0;
                 left: 0;
                 z-index: 1;
@@ -713,7 +713,7 @@ export default {
                     padding-top: 1rem;
                     line-height: 1.2rem;
                     font-size: 0.85rem;
-                    color:#252424;
+                    color:#fff;
                     text-shadow:0px 3px 7px rgba(0,0,0,0.5);
                 }
             }
