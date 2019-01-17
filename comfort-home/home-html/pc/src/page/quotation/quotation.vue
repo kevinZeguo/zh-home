@@ -1,6 +1,13 @@
 <template>
     <div class="quotation">
-        <div class="banner"></div>
+        <div class="banner">
+            <div class="layout">
+                <div class="txt-box">
+                    <p class="prop">“舒适的家，没那么难”</p>
+                    <p class="name">1分钟获得<strong>免费</strong>报价</p>
+                </div>
+            </div>
+        </div>
 
         <el-form :model="chooseForm" ref="chooseForm" :rules="rules" class="layout">
             <div class="step-num">1</div>
@@ -530,6 +537,55 @@ export default {
         min-width: 1200px;
         height:680px;
         background: url(../../assets/img/pic-banner-2.jpg) no-repeat center center;
+
+        .txt-box {
+            padding: 26px 0 0;
+            width:372px;
+            height:135px;
+            background:rgba(248,209,19,1);
+            box-shadow:2px 4px 6px 0px rgba(144,148,143,1);
+            border-radius:10px;
+            position: relative;
+            top: 180px;
+            left: 63px;
+            text-align: center;
+
+            &:after {
+                width:121px;
+                height:1px;
+                overflow: hidden;
+                background: #fff;
+                content: " ";
+                position: absolute;
+                top: 116px;
+                right: 57px;
+            }
+
+            &:before {
+                width:58px;
+                height:3px;
+                overflow: hidden;
+                background: #fff;
+                content: " ";
+                position: absolute;
+                top: 122px;
+                right: 57px;
+            }
+
+            .prop {
+                margin-bottom: 12px;
+                font-size:30px;
+                font-family:KaiTi;
+                color: #fff;
+                line-height:34px;
+            }
+
+            .name {
+                font-size:30px;
+                color:#fff;
+                line-height:42px;
+            }
+        }
     }
 
     .step-num {
@@ -549,26 +605,26 @@ export default {
 
     .step-name {
         margin: 20px auto 0;
-        width:260px;
-        height:60px;
-        line-height: 60px;
+        width:240px;
+        height:50px;
+        line-height: 50px;
         position: relative;
         
         p {
-            width:260px;
-            height:60px;
+            width:240px;
+            height:50px;
             background:rgba(125,172,112,1);
             border:1px solid rgba(125,172,112,1);
             position: relative;
             z-index: 20;
             text-align: center;
             color: #fff;
-            font-size: 30px;
+            font-size: 24px;
         }
 
         &:after {
-            width:260px;
-            height:60px;
+            width:240px;
+            height:50px;
             background:rgba(215,227,212,1);
             border:1px solid rgba(125,172,112,1);
             content: " ";

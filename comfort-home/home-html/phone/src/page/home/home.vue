@@ -5,11 +5,20 @@
                 <div class="pic" :style="{backgroundImage: 'url(' + banners[0].src +')'}"></div>
                 <div class="txt">舒适，<br />家的意义。</div>
             </mt-swipe-item>
-            <mt-swipe-item >
+            <mt-swipe-item>
                 <router-link to="/enrol" style="width: 100%;display: block;">
                     <div class="pic" :style="{backgroundImage: 'url(' + banners[1].src +')'}"></div>
                     <div class="txt">这个冬天，<br />告别寒冷。</div>
                     <div class="btns-box"><button type="button">明装采暖在线报名</button></div>
+                </router-link>
+            </mt-swipe-item>
+            <mt-swipe-item>
+                <router-link to="/quotation" style="width: 100%;display: block;">
+                    <div class="pic" :style="{backgroundImage: 'url(' + banners[2].src +')'}"></div>
+                    <div class="txt-box">
+                        <p class="prop">“舒适的家，没那么难”</p>
+                        <p class="name">1分钟获得<span><strong>免费</strong><b>报价</b></span></p>
+                    </div>
                 </router-link>
             </mt-swipe-item>
         </mt-swipe>
@@ -258,6 +267,9 @@ export default {
                 },
                 {
                     src: require('../../assets/img/pic-banner-3.jpg')
+                },
+                {
+                    src: require('../../assets/img/pic-banner-2.jpg')
                 }
             ],
             homeThreeMenu: [
@@ -357,6 +369,70 @@ export default {
 
         /deep/ .mint-swipe-indicators {
             bottom: 0;
+        }
+
+        .txt-box {
+            padding: 2rem;
+            background:rgba(248,209,19,1);
+            box-shadow:0.1rem 0.2rem 0.3rem 0 rgba(144,148,143,1);
+            border-radius:1rem;
+            position: absolute;
+            z-index: 10;
+            top: 50%;
+            left: 50%;
+            text-align: center;
+            -webkit-transform: translate(-50%, -50%);
+            -moz-transform: translate(-50%, -50%);
+            -ms-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);        
+
+            .prop {
+                margin-bottom: 0.5rem;
+                font-size:1.8rem;
+                font-family:KaiTi;
+                color: #fff;
+                line-height:2.1rem;
+                white-space: nowrap;
+            }
+
+            .name {
+                font-size:1.8rem;
+                color:#fff;
+                line-height:2.2rem;
+
+                span {
+                    display: inline-block;
+                    position: relative;
+
+                    &:after {
+                        width:100%;
+                        height:1px;
+                        overflow: hidden;
+                        background: #fff;
+                        content: " ";
+                        position: absolute;
+                        bottom: -0.4rem;
+                        right: 0;
+                    }
+
+                    b {
+                        display: inline-block;
+                        position: relative;
+                        font-weight: 100;
+
+                        &:before {
+                            width:100%;
+                            height:0.15rem;
+                            overflow: hidden;
+                            background: #fff;
+                            content: " ";
+                            position: absolute;
+                            bottom: -0.9rem;
+                            right: 0;
+                        }
+                    }
+                }
+            }
         }
     }
 

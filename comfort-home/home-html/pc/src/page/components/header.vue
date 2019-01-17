@@ -1,5 +1,5 @@
 <template>
-    <div class="header">
+    <div class="header" :class="{addBg: addBgBln}">
         <div class="layout">
             <div class="logo">
                 <router-link to="/">home</router-link>
@@ -17,7 +17,7 @@
 export default {
     data () {
         return {
-            msg: '',
+            addBgBln: false,
             menuList: [
                 {
                     name: '首页',
@@ -47,11 +47,19 @@ export default {
         }
     },
     mounted () {
-        
+        window.addEventListener('scroll', this.handleScroll);
     },
     methods: {
+        handleScroll () {
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
+            
+            if (scrollTop > 80) {
+                this.addBgBln = true;
+            } else {
+                this.addBgBln = false;
+            }
+        }
     }
-
 }
 </script>
 
@@ -65,6 +73,10 @@ export default {
     top: 0;
     left: 0;
     z-index: 2000;
+
+    &.addBg {
+        background: #fff;
+    }
 
     .logo {
         width: 260px;

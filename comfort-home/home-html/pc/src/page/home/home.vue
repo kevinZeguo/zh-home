@@ -12,6 +12,21 @@
                     <div class="btns-box"><button type="button">明装采暖在线报名</button></div>
                 </router-link>
             </el-carousel-item>
+            <el-carousel-item>
+                <router-link to="/quotation" style="width: 100%;display: block;">
+                    <img class="pic" :src="banners[2].src" />
+                    <!--
+                    <div class="txt">舒适的家，没那么难。<br />一分钟获得免费报价</div>
+                    <div class="btns-box"><button type="button">明装采暖在线报名</button></div>
+                    -->
+                    <div class="layout">
+                        <div class="txt-box">
+                            <p class="prop">“舒适的家，没那么难”</p>
+                            <p class="name">1分钟获得<strong>免费</strong>报价</p>
+                        </div>
+                    </div>
+                </router-link>
+            </el-carousel-item>
         </el-carousel>
         <div class="home-container bg1">
             <div class="layout">
@@ -262,6 +277,9 @@ export default {
                 },
                 {
                     src:  require('../../assets/img/pic-banner-3.jpg')
+                },
+                {
+                    src:  require('../../assets/img/pic-banner-2.jpg')
                 }
             ]
         }
@@ -334,6 +352,57 @@ export default {
                 top: 50%;
                 margin-top: -5px;
             }
+        }
+    }
+
+
+    .txt-box {
+        padding: 26px 0 0;
+        width:372px;
+        height:135px;
+        background:rgba(248,209,19,1);
+        box-shadow:2px 4px 6px 0px rgba(144,148,143,1);
+        border-radius:10px;
+        position: relative;
+        z-index: 10;
+        top: 180px;
+        left: 63px;
+        text-align: center;
+
+        &:after {
+            width:121px;
+            height:1px;
+            overflow: hidden;
+            background: #fff;
+            content: " ";
+            position: absolute;
+            top: 116px;
+            right: 57px;
+        }
+
+        &:before {
+            width:58px;
+            height:3px;
+            overflow: hidden;
+            background: #fff;
+            content: " ";
+            position: absolute;
+            top: 122px;
+            right: 57px;
+        }
+
+        .prop {
+            margin-bottom: 12px;
+            font-size:30px;
+            font-family:KaiTi;
+            color: #fff;
+            line-height:34px;
+        }
+
+        .name {
+            font-size:30px;
+            color:#fff;
+            line-height:42px;
         }
     }
 }

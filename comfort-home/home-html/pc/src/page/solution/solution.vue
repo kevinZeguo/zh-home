@@ -148,7 +148,7 @@
                         </li>
                     </ul>
 
-                    <div class="pro"><img src="../../assets/img/pic-500x184-1.jpg" /></div>
+                    <div class="pro"><img src="../../assets/img/pic-500x184-1.jpg" width="400" /></div>
                 </div>
 
                 <div class="col-r"><img src="../../assets/img/pic-solution-585x616-3.jpg" /></div>
@@ -180,7 +180,7 @@
                         </li>
                     </ul>
 
-                    <div class="pro"><img src="../../assets/img/pic-500x417-1.jpg" /></div>
+                    <div class="pro"><img src="../../assets/img/pic-500x417-1.jpg" width="400" /></div>
                 </div>
 
                 <div class="col-r"><img src="../../assets/img/pic-solution-585x616-4.jpg" /></div>
@@ -207,7 +207,7 @@
                         </li>
                     </ul>
 
-                    <div class="pro"><img src="../../assets/img/pic-370x370-1.jpg" /></div>
+                    <div class="pro"><img src="../../assets/img/pic-370x370-1.jpg" width="300" /></div>
                 </div>
 
                 <div class="col-r"><img src="../../assets/img/pic-solution-585x616-5.jpg" /></div>
@@ -561,6 +561,14 @@ export default {
 
         .col-r {
             width: 585px;
+            position: relative;
+            overflow: hidden;
+
+            img {
+                position: absolute; 
+                top: 0;
+                left: 0;
+            }
         }
 
         .tit {
@@ -575,7 +583,7 @@ export default {
 
         .prop {
             padding: 20px 0 40px;
-            line-height: 20px;
+            line-height: 24px;
             color: #8a8a8a;
         }
 

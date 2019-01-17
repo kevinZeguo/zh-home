@@ -40,6 +40,10 @@ const routes = [
                 component: solution
             },
             {
+                path: 'solution',
+                component: solution
+            },
+            {
                 path: 'customer-case',
                 component: customerCase
             },
