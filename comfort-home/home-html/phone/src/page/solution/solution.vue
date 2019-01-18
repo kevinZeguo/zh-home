@@ -3,35 +3,35 @@
         <div class="banner">
             <div class="banner-con">
                 <div class="radius radius1">
-                    <div class="bg"></div>
+                    <div class="bg"><div class="bg-box"></div></div>
                     <div class="txt-box">
                         <p class="name">恒湿</p>
                         <p class="prop">湿度维持在<br />40%-65%</p>
                     </div>
                 </div>
                 <div class="radius radius2">
-                    <div class="bg"></div>
+                    <div class="bg"><div class="bg-box"></div></div>
                     <div class="txt-box">
                         <p class="name">恒温</p>
                         <p class="prop">室温维持在<br />20℃-26℃</p>
                     </div>
                 </div>
                 <div class="radius radius3">
-                    <div class="bg"></div>
+                    <div class="bg"><div class="bg-box"></div></div>
                     <div class="txt-box">
                         <p class="name">恒静</p>
                         <p class="prop">环境噪音<br />≤ 10 分贝</p>
                     </div>
                 </div>
                 <div class="radius radius4">
-                    <div class="bg"></div>
+                    <div class="bg"><div class="bg-box"></div></div>
                     <div class="txt-box">
                         <p class="name">恒氧</p>
                         <p class="prop">CO2含量<br />≤1000PPM</p>
                     </div>
                 </div>
                 <div class="radius radius5">
-                    <div class="bg"></div>
+                    <div class="bg"><div class="bg-box"></div></div>
                     <div class="txt-box">
                         <p class="name">恒净</p>
                         <p class="prop">PM2.5<br />≤50μg/m3</p>
@@ -277,16 +277,18 @@ export default {
                     left: 0;
                     z-index: 1;
 
-                    &:after {
-                        width: calc(100% - 1rem);
-                        height: calc(100% - 1rem);
-                        border-radius: 100%;
-                        box-shadow:0px 3px 7px 0px rgba(0,0,0,0.5);
-                        content: " ";
-                        display: block;
+                    .bg-box {
+                        width: 100%;
+                        height: 100%;
+                        -webkit-border-radius: 50%;
+                        border-radius: 50%;
+                        -webkit-box-shadow:0px 3px 7px 0 #7f7f7f;
+                        box-shadow:0px 3px 7px 0 #7f7f7f;
+                        overflow: hidden;
                         position: absolute;
                         top: 0;
                         left: 0;
+                        z-index: 10;
                     }
                 }
 
@@ -327,9 +329,9 @@ export default {
                 transform: translateX(-50%);
 
                 .bg {
-                    &:after {
+                    .bg-box {
                         border: 0.5rem solid #90C421;
-                        background:rgba(144,196,33,0.4);
+                        background: #d2e7a6;
                     }
                 }
 
@@ -343,9 +345,9 @@ export default {
                 left: 0.1rem;
 
                 .bg {
-                    &:after {
+                    .bg-box {
                         border: 0.5rem solid #FCD202;
-                        background:rgba(252,210,2,0.4);
+                        background:#feed99;
                     }
                 }
 
@@ -359,9 +361,9 @@ export default {
                 right: 0.1rem;
 
                 .bg {
-                    &:after {
+                    .bg-box {
                         border: 0.5rem solid #01AFEB;
-                        background:rgba(1,175,235,0.4);
+                        background: #99dff7;
                     }
                 }
 
@@ -379,9 +381,9 @@ export default {
                 left: 9%;
 
                 .bg {
-                    &:after {
+                    .bg-box {
                         border: 0.5rem solid #90C421;
-                        background:rgba(144,196,33,0.4);
+                        background:#d2e7a6;
                     }
                 }
 
@@ -399,9 +401,9 @@ export default {
                 right: 9%;
 
                 .bg {
-                    &:after {
+                    .bg-box {
                         border: 0.5rem solid #1A2950;
-                        background:rgba(26,41,80,0.4);
+                        background:#a3a9b9;
                     }
                 }
 
