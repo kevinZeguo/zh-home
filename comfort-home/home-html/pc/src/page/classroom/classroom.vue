@@ -310,7 +310,57 @@ export default {
         }
     },
     mounted () {
-        
+        let query = this.$route.query;
+
+        if (query.tab && query.tab != '') {
+            switch (query.tab) {
+                case '1':
+                    this.navIndex = 1;
+                    break;
+
+                case '2':
+                    this.navIndex = 2;
+                    break;
+
+                case '3':
+                    this.navIndex = 3;
+                    break;
+
+                case '4':
+                    this.navIndex = 4;
+                    break;
+
+                case '5':
+                    this.navIndex = 5;
+                    break;
+
+                case '6':
+                    this.navIndex = 6;
+                    break;
+
+                default:
+                    this.navIndex = 1;
+            }
+        }
+
+        if (query.article && query.article != '') {
+            switch (query.article) {
+                case '1':
+                    this.tabIndex = 1;
+                    break;
+
+                case '2':
+                    this.tabIndex = 2;
+                    break;
+
+                case '3':
+                    this.tabIndex = 3;
+                    break;
+
+                default:
+                    this.tabIndex = 1;
+            }
+        }
     },
     methods: {
         changeNav (index) {

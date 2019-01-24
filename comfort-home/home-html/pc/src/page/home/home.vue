@@ -237,22 +237,22 @@
                         <div class="pic"><img src="../../assets/img/pic-home-seven-1.jpg" /></div>
                         <h2 class="tit">老房装暖气你需要知道的事</h2>
                         <p class="prop">立冬后成都人就不太喜欢外出，总是窝在家里，搭着小毛毯烤着小太阳，这样虽然是暖和了些，但你舒服吗？离开一小会，又冷了。很多人家都住在老房子里，或是新房子装修时没有考虑装暖气，进入冬季后，只能一家人忍受着寒冷，但其实老房子也是能装暖气的！老房装暖气俗称“明管”，是指因种种原因在装修时没有安装暖气片，房子已装修好了或已经入住后，再来安装暖气系统。明管的暖气片管道不做暗埋处理，直接沿着天花、墙角、踢角线等隐蔽地方走管，从而避免直接在墙面开槽、破坏地板的一种暖气片安装技术。</p>
-                        <p class="more"><a href="javscript:;">查看更多</a></p>
+                        <p class="more"><router-link to="/classroom/?tab=1&article=3">查看更多</router-link></p>
                     </div>
                     <div class="home-seven-box1 mt20">
                         <div class="boxs">
                             <div class="pic"><img src="../../assets/img/pic-home-seven-2.jpg" /></div>
                             <h2 class="tit">冬季如何保证卧室 内的温度和湿度恒定？</h2>
-                            <p class="more more1"><a href="javscript:;">查看更多</a></p>
+                            <p class="more more1"><router-link to="/classroom/?tab=1&article=3">查看更多</router-link></p>
                         </div>
                         <div class="boxs">
                             <div class="pic"><img src="../../assets/img/pic-home-seven-3.jpg" /></div>
                             <h2 class="tit">有孩子的家庭需要 什么样的新风系统？</h2>
-                            <p class="more more1"><a href="javscript:;">查看更多</a></p>
+                            <p class="more more1"><router-link to="/classroom/?tab=2&article=1">查看更多</router-link></p>
                         </div>
                     </div>
 
-                    <div class="btns-box"><button type="submit">查看更多</button></div>
+                    <div class="btns-box"><button type="submit" @click="$router.push({ path: '/classroom/' })">查看更多</button></div>
                 </div>
             </div>
         </div>
