@@ -3,7 +3,7 @@
         <div class="layout">
             <div class="copy">
                 <div class="logo"></div>
-                <p>津ICP备19000153号</p>
+                <p>津ICP备19000153号-1</p>
                 <p>&copy;2009~2019 众华舒适环境科技（天津）有限公司版权所有</p>
             </div>
 
