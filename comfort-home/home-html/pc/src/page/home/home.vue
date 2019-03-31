@@ -1,9 +1,31 @@
 <template>
     <div class="home">
         <el-carousel height="680px">
-            <el-carousel-item v-for="(item, index) in banners" :key="index">
-                <div class="pic" :style="{backgroundImage: 'url(' + item.src +')'}"></div>
+            <el-carousel-item>
+                <img class="pic" :src="banners[0].src" />
                 <div class="txt">舒适，<br />家的意义。</div>
+            </el-carousel-item>
+            <el-carousel-item>
+                <router-link to="/enrol" style="width: 100%;display: block;">
+                    <img class="pic" :src="banners[1].src" />
+                    <div class="txt">这个冬天，<br />告别寒冷。</div>
+                    <div class="btns-box"><button type="button">明装采暖在线报名</button></div>
+                </router-link>
+            </el-carousel-item>
+            <el-carousel-item>
+                <router-link to="/quotation" style="width: 100%;display: block;">
+                    <img class="pic" :src="banners[2].src" />
+                    <!--
+                    <div class="txt">舒适的家，没那么难。<br />一分钟获得免费报价</div>
+                    <div class="btns-box"><button type="button">明装采暖在线报名</button></div>
+                    -->
+                    <div class="layout">
+                        <div class="txt-box">
+                            <p class="prop">“舒适的家，没那么难”</p>
+                            <p class="name">1分钟获得<strong>免费</strong>报价</p>
+                        </div>
+                    </div>
+                </router-link>
             </el-carousel-item>
         </el-carousel>
         <div class="home-container bg1">
@@ -149,27 +171,27 @@
                     <ul>
                         <li>
                             <div class="icons icon-home-five-1"></div>
-                            <p class="name"><a href="javascript:;">温度</a></p>
+                            <p class="name"><router-link to="/solution/1">温度</router-link></p>
                         </li>
                         <li>
                             <div class="icons icon-home-five-2"></div>
-                            <p class="name"><a href="javascript:;">水处理</a></p>
+                            <p class="name"><router-link to="/solution/3">水处理</router-link></p>
                         </li>
                         <li>
                             <div class="icons icon-home-five-3"></div>
-                            <p class="name"><a href="javascript:;">空气</a></p>
+                            <p class="name"><router-link to="/solution/2">空气</router-link></p>
                         </li>
                         <li>
                             <div class="icons icon-home-five-4"></div>
-                            <p class="name"><a href="javascript:;">热水</a></p>
+                            <p class="name"><router-link to="/solution/4">热水</router-link></p>
                         </li>
                         <li>
                             <div class="icons icon-home-five-5"></div>
-                            <p class="name"><a href="javascript:;">智能厨房</a></p>
+                            <p class="name"><router-link to="/solution/1">智能厨房</router-link></p>
                         </li>
                         <li>
                             <div class="icons icon-home-five-6"></div>
-                            <p class="name"><a href="javascript:;">智能联控</a></p>
+                            <p class="name"><router-link to="/solution/5">智能联控</router-link></p>
                         </li>
                     </ul>
 
@@ -183,7 +205,7 @@
             <div class="layout">
                 <h2 class="home-tit">战略合作伙伴</h2>
                 <div class="home-intro">
-                    <p>联合德国威能、德国瑞好、德国卡洛、瑞士森德、美国霍尼韦尔、美国怡口净水、美国约克、荷兰<br />飞利浦、日本林内、日本能率、日本大金空调、日本日立空调、格力电器、老板电器、安<br />泊橱柜等世界知名品牌为用户定制高端舒适家居系统解决方案</p>
+                    <p>联合德国威能、德国瑞好、德国卡洛、瑞士森德、美国霍尼韦尔、美国怡口净水、美国约克、<br />日本林内、日本能率、日本大金空调、日本日立空调、韩国三星中央空调、格力电器、老板电器、<br />安泊橱柜等世界知名品牌为用户定制高端舒适家居系统解决方案</p>
                 </div>
                 <div class="home-six">
                     <ul>
@@ -215,22 +237,22 @@
                         <div class="pic"><img src="../../assets/img/pic-home-seven-1.jpg" /></div>
                         <h2 class="tit">老房装暖气你需要知道的事</h2>
                         <p class="prop">立冬后成都人就不太喜欢外出，总是窝在家里，搭着小毛毯烤着小太阳，这样虽然是暖和了些，但你舒服吗？离开一小会，又冷了。很多人家都住在老房子里，或是新房子装修时没有考虑装暖气，进入冬季后，只能一家人忍受着寒冷，但其实老房子也是能装暖气的！老房装暖气俗称“明管”，是指因种种原因在装修时没有安装暖气片，房子已装修好了或已经入住后，再来安装暖气系统。明管的暖气片管道不做暗埋处理，直接沿着天花、墙角、踢角线等隐蔽地方走管，从而避免直接在墙面开槽、破坏地板的一种暖气片安装技术。</p>
-                        <p class="more"><a href="javscript:;">查看更多</a></p>
+                        <p class="more"><router-link to="/classroom/?tab=1&article=3">查看更多</router-link></p>
                     </div>
                     <div class="home-seven-box1 mt20">
                         <div class="boxs">
                             <div class="pic"><img src="../../assets/img/pic-home-seven-2.jpg" /></div>
                             <h2 class="tit">冬季如何保证卧室 内的温度和湿度恒定？</h2>
-                            <p class="more more1"><a href="javscript:;">查看更多</a></p>
+                            <p class="more more1"><router-link to="/classroom/?tab=1&article=3">查看更多</router-link></p>
                         </div>
                         <div class="boxs">
                             <div class="pic"><img src="../../assets/img/pic-home-seven-3.jpg" /></div>
                             <h2 class="tit">有孩子的家庭需要 什么样的新风系统？</h2>
-                            <p class="more more1"><a href="javscript:;">查看更多</a></p>
+                            <p class="more more1"><router-link to="/classroom/?tab=2&article=1">查看更多</router-link></p>
                         </div>
                     </div>
 
-                    <div class="btns-box"><button type="submit">查看更多</button></div>
+                    <div class="btns-box"><button type="submit" @click="$router.push({ path: '/classroom/' })">查看更多</button></div>
                 </div>
             </div>
         </div>
@@ -254,27 +276,26 @@ export default {
                     src: require('../../assets/img/pic-banner-1.jpg')
                 },
                 {
+                    src:  require('../../assets/img/pic-banner-3.jpg')
+                },
+                {
                     src:  require('../../assets/img/pic-banner-2.jpg')
                 }
             ]
         }
-    },
-    mounted () {
-        
-    },
-    methods: {
     }
-
 }
 </script>
 
 <style lang="scss" scoped>
 .el-carousel__item { 
     .pic {
-        width: 100%;
-        height: 680px;
-        background-repeat: no-repeat;
-        background-position: center center;
+        margin-left: -960px;
+        width: 1920px;
+        position: absolute;
+        top: 0;
+        left: 50%;
+        z-index: 1;
     }
 
     .txt {
@@ -294,6 +315,95 @@ export default {
         background:rgba(83,78,78,0.53);
         font-size:90px;
         color: #fff;
+    }
+
+    .btns-box {
+        width: 255px;
+        text-align: center;
+        height:50px;
+        position: absolute;
+        top: 580px;
+        left: 50%;
+        z-index: 11;
+
+        button {
+            padding: 0 40px 0 20px;
+            height:50px;
+            line-height: 50px;
+            background:rgba(233,197,14,1);
+            box-shadow:0px 2px 4px 0px rgba(0,0,0,0.5);
+            border-radius:20px;
+            border: 0;
+            color: #fff;
+            font-size:20px;
+            cursor: pointer;
+            position: relative;
+
+            &:after {
+                margin-left: 5px;
+                width: 0;
+                height: 0;
+                content: " ";
+                border-color: transparent transparent transparent #fff;
+                border-style: dashed dashed dashed solid;
+                border-width: 5px 0 5px 8px;
+                position: absolute;
+                right: 25px;
+                top: 50%;
+                margin-top: -5px;
+            }
+        }
+    }
+
+
+    .txt-box {
+        padding: 26px 0 0;
+        width:372px;
+        height:135px;
+        background:rgba(248,209,19,1);
+        box-shadow:2px 4px 6px 0px rgba(144,148,143,1);
+        border-radius:10px;
+        position: relative;
+        z-index: 10;
+        top: 180px;
+        left: 63px;
+        text-align: center;
+
+        &:after {
+            width:121px;
+            height:1px;
+            overflow: hidden;
+            background: #fff;
+            content: " ";
+            position: absolute;
+            top: 116px;
+            right: 57px;
+        }
+
+        &:before {
+            width:58px;
+            height:3px;
+            overflow: hidden;
+            background: #fff;
+            content: " ";
+            position: absolute;
+            top: 122px;
+            right: 57px;
+        }
+
+        .prop {
+            margin-bottom: 12px;
+            font-size:30px;
+            font-family:KaiTi;
+            color: #fff;
+            line-height:34px;
+        }
+
+        .name {
+            font-size:30px;
+            color:#fff;
+            line-height:42px;
+        }
     }
 }
 

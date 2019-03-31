@@ -17,7 +17,7 @@
                 <div class="en-hd-box">
                     <h2 class="tit">把德国采暖系统搬回家</h2>
                     <h3 class="tit-sub">众华舒适家，送您一个温暖的冬天</h3>
-                    <div class="btns-box"><button type="button">快速获取冬天采暖报价</button></div>
+                    <div class="btns-box"><button type="button" v-tap="{ methods: openEnrol}">快速获取冬天采暖报价</button></div>
                 </div>
             </div>
 
@@ -116,17 +116,54 @@
                         </li>
                     </ul>
                     <div class="btns-box">
-                        <button type="button" @click="submitForm('ruleForm')">立即预约</button>
+                        <button type="button" v-tap="{ methods: submitForm }" v-if="loadingBtn">立即预约</button>
+                        <button type="button" v-if="!loadingBtn"><mt-spinner type="triple-bounce" color="rgb(255, 255, 255)"></mt-spinner></button>
                     </div>
                 </div>
             </div>
         </div>
+
+        <div class="quo-dialog" v-if="dialogBln">
+            <div class="quo-dialog-hd">
+                <div class="tit">获取报价</div>
+                <span class="icon-close" @click="closeClick">close</span>
+            </div>
+
+            <div class="quo-dialog-bd">
+                <p class="prop">报价结果将以短信形式发送至您手机</p>
+                <div class="quo-dialog-forms">
+                    <p class="p">我家是</p>
+                    <div class="select-box">
+                        <select v-model="chooseForm.roomCount">
+                            <option v-for="(item, index) in roomsType" :label="item.label" :value="item.value" :key="index">{{ item.label }}</option>
+                        </select>
+                        <span class="txt" v-if="chooseForm.roomCount == ''">请选择卧室数量</span>
+                    </div>
+                    <div class="select-box">
+                        <select v-model="chooseForm.parlorCount">
+                            <option v-for="(item, index) in hallsType" :label="item.label" :value="item.value" :key="index">{{ item.label }}</option>
+                        </select>
+                        <span class="txt" v-if="chooseForm.parlorCount == ''">请选择客厅数量</span>
+                    </div>
+
+                    <div class="field-box">
+                        <input type="tel" v-model="chooseForm.usableArea" placeholder="请填写使用面积" />
+                        <span class="txt">㎡</span>
+                    </div>
+                    <input type="text" class="text" v-model="chooseForm.userName" placeholder="姓名" />
+                    <input type="tel" class="text" v-model="chooseForm.phoneNum" placeholder="手机号" />
+                    <button type="submit" class="btn-submit" v-tap="{ methods: chooseFormValidate }" v-if="enrolPriceBtn">获取报价</button>
+                    <button type="submit" class="btn-submit" v-if="!enrolPriceBtn"><mt-spinner type="triple-bounce" color="rgb(255, 255, 255)"></mt-spinner></button>
+                </div>
+            </div>
+        </div>
+        <div class="quo-modal" v-if="dialogBln"></div>
     </div>
 </template>
 
 <script>
 import { isvalidPhone } from '../../config/utils';
-import { enrolReg } from '../../service/getData';
+import { enrolReg, productQuote } from '../../service/getData';
 
 export default {
     data () {
@@ -141,7 +178,93 @@ export default {
         };
 
         return {
-            dialogVisible: false,
+            dialogBln: false,
+            loadingBtn: true,
+            enrolPriceBtn: true,
+            roomsType: [
+                {
+                    value: 1,
+                    label:'1居'
+                },
+                {
+                    value: 2,
+                    label: '2居'
+                },
+                {
+                    value: 3,
+                    label: '3居'
+                },
+                {
+                    value: 4,
+                    label: '4居'
+                },
+                {
+                    value: 5,
+                    label: '5居'
+                },
+                {
+                    value: 6,
+                    label: '6居'
+                },
+                {
+                    value: 7,
+                    label: '7居'
+                },
+                {
+                    value: 8,
+                    label: '8居'
+                },
+                {
+                    value: 9,
+                    label: '9居'
+                }
+            ],
+            hallsType: [
+                {
+                    value: 1,
+                    label:'1厅'
+                },
+                {
+                    value: 2,
+                    label: '2厅'
+                },
+                {
+                    value: 3,
+                    label: '3厅'
+                },
+                {
+                    value: 4,
+                    label: '4厅'
+                },
+                {
+                    value: 5,
+                    label: '5厅'
+                },
+                {
+                    value: 6,
+                    label: '6厅'
+                },
+                {
+                    value: 7,
+                    label: '7厅'
+                },
+                {
+                    value: 8,
+                    label: '8厅'
+                },
+                {
+                    value: 9,
+                    label: '9厅'
+                }
+            ],
+            chooseForm: {
+                ps: '40002',
+                parlorCount: '', //客厅数量
+                roomCount: '', //卧室数量
+                usableArea: null, //使用面积
+                phoneNum: '', //手机号
+                userName: '' //用户姓名
+            },
             ruleForm: {
                 phoneNum: '', //手机号
                 userName: '' //用户姓名
@@ -159,7 +282,82 @@ export default {
     mounted () {
     },
     methods: {
-        submitForm (formName) {
+        openEnrol () {
+            this.dialogBln = true;
+        },
+        closeClick () {
+            this.dialogBln = false;
+            this.enrolPriceBtn = true;
+
+            this.chooseForm.ps = '40002';
+            this.chooseForm.parlorCount = ''; //客厅数量
+            this.chooseForm.roomCount = ''; //卧室数量
+            this.chooseForm.usableArea = null; //使用面积
+            this.chooseForm.phoneNum = ''; //手机号
+            this.chooseForm.userName = ''; //用户姓名
+        },
+        chooseFormValidate () {
+
+            //卧室数量
+            if (this.chooseForm.roomCount == '') {
+                this.$toast({
+                    message: '请选择卧室数量'
+                });
+
+                return false;
+            } 
+
+            //客厅数量
+            if (this.chooseForm.parlorCount == '') {
+                this.$toast({
+                    message: '请选择客厅数量'
+                });
+                return false;
+            }
+
+            //使用面积
+            if (this.chooseForm.usableArea == null) {
+                this.$toast({
+                    message: '请填写使用面积'
+                });
+                return false;
+            }
+
+            if (!/^\+?[1-9][0-9]*$/.test(this.chooseForm.usableArea)) {
+                this.$toast({
+                    message: '使用面积只能为数值'
+                });
+                return false;
+            }
+
+            //用户姓名
+            if (this.chooseForm.userName == '' ) {
+                this.$toast({
+                    message: '请填写用户姓名'
+                });
+                return false;
+            }
+
+            //手机号
+            if (this.chooseForm.phoneNum == '' ) {
+                this.$toast({
+                    message: '请填写手机号'
+                });
+
+                return false;
+            }
+
+            if (!isvalidPhone(this.chooseForm.phoneNum)) {
+                this.$toast({
+                    message: '请输入正确的11位手机号码'
+                });
+
+                return false;
+            }
+
+            this.productQuote(this.chooseForm);
+        },
+        submitForm () {
 
             //用户姓名
             if (this.ruleForm.userName == '' ) {
@@ -191,15 +389,53 @@ export default {
             this.enrolReg(params);
         },
         async enrolReg (params) {
+            this.loadingBtn = false;
+
             const res = await enrolReg(params);
 
+            this.loadingBtn = true;
+
             if (res.data.success == true) {
-                this.$message({
+                this.ruleForm.phoneNum = ''; //手机号
+                this.ruleForm.userName = ''; //用户姓名
+
+                this.$toast({
                     message: '恭喜您，预约成功！',
                     type: 'success'
                 });
             } else {
-                this.$message({
+                this.$toast({
+                    message: res.data.message,
+                    type: 'error'
+                });
+            }
+        },
+        async productQuote (params) {
+            let param = 'd=' + encodeURIComponent(JSON.stringify(params));
+            
+            this.enrolPriceBtn = false;
+
+            const res = await productQuote(param);
+
+            this.enrolPriceBtn = true;
+            // console.log(JSON.stringify(res));
+            if (res.data.success == true) {
+
+                this.dialogBln = false;
+
+                this.chooseForm.ps = '40002';
+                this.chooseForm.parlorCount = ''; //客厅数量
+                this.chooseForm.roomCount = ''; //卧室数量
+                this.chooseForm.usableArea = null; //使用面积
+                this.chooseForm.phoneNum = ''; //手机号
+                this.chooseForm.userName = ''; //用户姓名
+
+                this.$toast({
+                    message: '恭喜您，操作成功，报价信息已经发送至您的手机，请注意查收',
+                    type: 'success'
+                });
+            } else {
+                this.$toast({
                     message: res.data.message,
                     type: 'error'
                 });
@@ -231,7 +467,7 @@ export default {
                     border-bottom: 0.5rem solid #D69C16;
                     line-height: 3.6rem;
                     color: #D69C16;
-                    font-size:2.55rem;
+                    font-size:2.4rem;
                 }
 
                 p {
@@ -528,7 +764,7 @@ export default {
         -webkit-transform: translate3d(-50%, -50%, 0);
         transform: translate3d(-50%, -50%, 0);
         background-color: #fff;
-        width: 400px;
+        width: 85%;
         border-radius: 3px;
         font-size: 16px;
         -webkit-user-select: none;
@@ -537,57 +773,140 @@ export default {
         backface-visibility: hidden;
         -webkit-transition: .2s;
         transition: .2s;
-        z-index: 2001;
+        z-index: 201;
 
         .quo-dialog-hd {
-            padding: 17px 0 12px;
-            line-height: 38px;
+            padding: 1.7rem 0 1.2rem;
+            line-height: 1.9rem;
             text-align: center;
             position: relative;
 
             .tit {
-                line-height: 38px;
+                line-height: 1.9rem;
                 color: #4f4f4f;
-                font-size: 20px;
+                font-size: 1.4rem;
             }
 
             .icon-close {
-                width: 48px;
-                height: 48px;
+                width: 3.2rem;
+                height: 3.2rem;
                 background: url(../../assets/img/icon-close-f0f.png) no-repeat center center;
-                background-size: 24px 24px;
+                background-size: 1.6rem 1.6rem;
                 position: absolute;
-                top: 0;
-                right: 0;
+                top: 0rem;
+                right: 0rem;
                 text-indent: -999em;
                 overflow: hidden;
-                cursor: pointer;
             }
         }
 
 
         .quo-dialog-bd {
             .prop {
-                padding-bottom: 42px;
-                line-height: 15px;
-                font-size: 14px;
+                padding-bottom: 1.2rem;
+                line-height: 1.5rem;
+                font-size: 1.1rem;
                 color: #424242;
                 text-align: center;
             }
 
             .quo-dialog-forms {
-                padding: 0 45px 39px;
+                padding: 0 3.4rem 2rem;
+
+                .p {
+                    font-size: 1.2rem;
+                    color:#424242;
+                }
+
+                .select-box {
+                    margin-bottom: 1rem;
+                    width: 100%;
+                    height: 3.4rem;
+                    position: relative;
+
+                    select {
+                        padding-left: 1rem;
+                        width: 100%;
+                        height: 3.4rem;
+                        background: transparent;
+                        border-radius: 0.4rem;
+                        border:0.1rem solid rgba(194,194,194,1);
+                        line-height: 1.2rem;
+                        color: #424242;
+                        position: relative;
+                        font-size: 1.2rem;
+                        z-index: 10;
+                    }
+
+                    .txt {
+                        color:#C3C1C1;
+                        z-index: 1;
+                        position: absolute;
+                        top: 0;
+                        left: 1rem;
+                        line-height: 3.4rem;
+                        font-size: 1.2rem;
+                    }
+                }
+
+                .field-box {
+                    margin-bottom: 1rem;
+                    width: 100%;
+                    height: 3.4rem;
+                    background:rgba(252,252,252,1);
+                    border:0.1rem solid rgba(194,194,194,1);
+                    position: relative;
+                    overflow: hidden;
+
+                    input {
+                        padding: 1rem;
+                        width: 100%;
+                        height: 3.4rem;
+                        line-height: 1.2rem;
+                        font-size: 1.2rem;
+                        background: #fff;
+                        color: #424242;
+                        border: 0;
+
+                        &::placeholder {
+                            color: #C3C1C1;
+                        }
+                    }
+
+                    .txt {
+                        line-height: 3.4rem;
+                        position: absolute;
+                        top: 0;
+                        color:#C3C1C1;
+                        right: 1rem;
+                        font-size: 1.2rem;
+                    }
+                }
+
+                .text {
+                    margin-bottom: 1rem;
+                    padding: 1rem;
+                    width: 100%;
+                    background: transparent;
+                    height: 3.4rem;
+                    line-height: 1.4rem;
+                    border: 1px solid #CECECE;
+                    color: #424242;
+                    font-size: 1.2rem;
+
+                    &::placeholder {
+                        color: #C3C1C1;
+                    }
+                }
 
                 .btn-submit {
-                    width:100%;
-                    height:50px;
-                    background:rgba(233,197,14,1);
-                    box-shadow:0px 2px 4px 0px rgba(0,0,0,0.5);
-                    border-radius:20px;
-                    border: 0;
+                    width: 100%;
+                    height:3.5rem;
+                    background:#E9C50E;
+                    border-radius:1.7rem;
                     color: #fff;
-                    font-size:20px;
-                    cursor: pointer;
+                    font-size: 1.2rem;
+                    border: 0;
                 }
             }
         }
@@ -601,7 +920,7 @@ export default {
         height: 100%;
         opacity: 0.5;
         background: #000;
-        z-index: 2000;
+        z-index: 200;
     }
 }
 </style>

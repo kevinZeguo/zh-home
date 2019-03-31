@@ -1,6 +1,13 @@
 <template>
     <div class="quotation">
-        <div class="banner"></div>
+        <div class="banner">
+            <div class="layout">
+                <div class="txt-box">
+                    <p class="prop">“舒适的家，没那么难”</p>
+                    <p class="name">1分钟获得<strong>免费</strong>报价</p>
+                </div>
+            </div>
+        </div>
 
         <el-form :model="chooseForm" ref="chooseForm" :rules="rules" class="layout">
             <div class="step-num">1</div>
@@ -67,27 +74,32 @@
                         <li :class="{active: activeStatus == 1}">
                             <div class="icons icon-home-five-5" @click="changeTabs(1)"></div>
                             <p class="name">凉爽的夏日</p>
+                            <!--<p class="sel-result" v-if="oneStatus != null">已选 | {{ this.resultArrs[0][this.oneStatus].brand }}<span class="sel-btn-close"></span></p>-->
                         </li>
                         <li :class="{active: activeStatus == 2}">
                             <div class="icons icon-home-five-3" @click="changeTabs(2)"></div>
                             <p class="name">清新的空气</p>
-                            <!--<p class="sel-result">已选 | 森得新风<span class="sel-btn-close"></span></p>-->
+                            <!--<p class="sel-result" v-if="twoStatus != null">已选 | {{ this.resultArrs[1][this.twoStatus].brand }}<span class="sel-btn-close"></span></p>-->
                         </li>
                         <li :class="{active: activeStatus == 3}">
                             <div class="icons icon-home-five-2" @click="changeTabs(3)"></div>
                             <p class="name">洁净的水源</a></p>
+                            <!--<p class="sel-result" v-if="threeStatus != null">已选 | {{ this.resultArrs[2][this.threeStatus].brand }}<span class="sel-btn-close"></span></p>-->
                         </li>
                         <li :class="{active: activeStatus == 4}">
                             <div class="icons icon-home-five-1" @click="changeTabs(4)"></div>
                             <p class="name">温暖的房间</p>
+                            <!--<p class="sel-result" v-if="fourStatus != null">已选 | {{ this.resultArrs[3][this.fourStatus].brand }}<span class="sel-btn-close"></span></p>-->
                         </li>
                         <li :class="{active: activeStatus == 5}">
                             <div class="icons icon-home-five-4" @click="changeTabs(5)"></div>
                             <p class="name">24小时热水</p>
+                            <!--<p class="sel-result" v-if="fiveStatus != null">已选 | {{ this.resultArrs[4][this.fiveStatus].brand }}<span class="sel-btn-close"></span></p>-->
                         </li>
                         <li :class="{active: activeStatus == 6}">
                             <div class="icons icon-home-five-6" @click="changeTabs(6)"></div>
                             <p class="name">智能的房子</p>
+                            <!--<p class="sel-result" v-if="sixStatus.length > 0">已选 | <span v-for="(item, index) in this.sixStatus">{{ item }}</span><span class="sel-btn-close"></span></p>-->
                         </li>
                     </ul>
 
@@ -525,6 +537,55 @@ export default {
         min-width: 1200px;
         height:680px;
         background: url(../../assets/img/pic-banner-2.jpg) no-repeat center center;
+
+        .txt-box {
+            padding: 26px 0 0;
+            width:372px;
+            height:135px;
+            background:rgba(248,209,19,1);
+            box-shadow:2px 4px 6px 0px rgba(144,148,143,1);
+            border-radius:10px;
+            position: relative;
+            top: 180px;
+            left: 63px;
+            text-align: center;
+
+            &:after {
+                width:121px;
+                height:1px;
+                overflow: hidden;
+                background: #fff;
+                content: " ";
+                position: absolute;
+                top: 116px;
+                right: 57px;
+            }
+
+            &:before {
+                width:58px;
+                height:3px;
+                overflow: hidden;
+                background: #fff;
+                content: " ";
+                position: absolute;
+                top: 122px;
+                right: 57px;
+            }
+
+            .prop {
+                margin-bottom: 12px;
+                font-size:30px;
+                font-family:KaiTi;
+                color: #fff;
+                line-height:34px;
+            }
+
+            .name {
+                font-size:30px;
+                color:#fff;
+                line-height:42px;
+            }
+        }
     }
 
     .step-num {
@@ -544,26 +605,26 @@ export default {
 
     .step-name {
         margin: 20px auto 0;
-        width:260px;
-        height:60px;
-        line-height: 60px;
+        width:240px;
+        height:50px;
+        line-height: 50px;
         position: relative;
         
         p {
-            width:260px;
-            height:60px;
+            width:240px;
+            height:50px;
             background:rgba(125,172,112,1);
             border:1px solid rgba(125,172,112,1);
             position: relative;
             z-index: 20;
             text-align: center;
             color: #fff;
-            font-size: 30px;
+            font-size: 24px;
         }
 
         &:after {
-            width:260px;
-            height:60px;
+            width:240px;
+            height:50px;
             background:rgba(215,227,212,1);
             border:1px solid rgba(125,172,112,1);
             content: " ";

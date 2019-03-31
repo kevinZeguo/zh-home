@@ -36,6 +36,10 @@ const routes = [
                 component: quotation
             },
             {
+                path: 'solution/:index',
+                component: solution
+            },
+            {
                 path: 'solution',
                 component: solution
             },

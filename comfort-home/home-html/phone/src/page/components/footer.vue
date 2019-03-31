@@ -21,8 +21,8 @@
             -->
         </div>
         <div class="copy">
-            <p>津ICP备案号 13000000000</p>
-            <p>Copyright&copy;2009-2018 众华舒适环境科技（天津）有限公司版权所有</p>
+            <p>津ICP备19000153号-1</p>
+            <p>&copy;2009~2019 众华舒适环境科技（天津）有限公司版权所有</p>
         </div>
     </div>
 </template>
@@ -77,7 +77,7 @@ export default {
         margin-bottom: 1.8rem;
         width: 8.6rem;
         height: 2rem;
-        background: url(../../assets/img/logo.png) no-repeat;
+        background: url(../../assets/img/logo-min.png) no-repeat;
         background-size: 100% 100%;
     }
 

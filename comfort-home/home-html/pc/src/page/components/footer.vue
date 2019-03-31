@@ -3,8 +3,8 @@
         <div class="layout">
             <div class="copy">
                 <div class="logo"></div>
-                <p>津ICP备案号 13000000000</p>
-                <p>Copyright&copy;2009-2018 众华舒适环境科技（天津）有限公司版权所有</p>
+                <p>津ICP备19000153号-1</p>
+                <p>&copy;2009~2019 众华舒适环境科技（天津）有限公司版权所有</p>
             </div>
 
             <div class="menu">
@@ -46,10 +46,10 @@ export default {
                     name: '解决方案',
                     url: '/solution'
                 },
-                {
+                /*{
                     name: '客户案例',
                     url: '/customer-case'
-                },
+                },*/
                 {
                     name: '关于我们',
                     url: '/about'
@@ -87,7 +87,7 @@ export default {
             margin-bottom: 20px;
             width: 200px;
             height: 47px;
-            background: url(../../assets/img/logo.png) no-repeat;
+            background: url(../../assets/img/logo-min.png) no-repeat;
             background-size: 100% 100%;
         }
 
@@ -170,7 +170,8 @@ export default {
         width: 250px;
         height: 130px;
         float: left;
-        background: url(../../assets/img/icon-code.png) no-repeat left top;
+        background: url(../../assets/img/icon-code.jpg) no-repeat left top;
+        background-size: 118px 118px;
     }
 }
 </style>

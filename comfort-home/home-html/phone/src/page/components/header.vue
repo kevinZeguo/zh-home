@@ -1,10 +1,13 @@
 <template>
-    <div class="header">
-        <div class="logo">众华舒适家居门户</div>
-        <div class="menu" @click="popupVisible=true"></div>
+    <div>
+        <div class="header">
+            <div class="logo">众华舒适家居门户</div>
+            <div class="menu" @click="popupVisible=true"></div>
+        </div>
         <mt-popup v-model="popupVisible" position="top">
+            <div class="btn-close" @click="popupVisible=false">关闭</div>
             <div class="nav">
-                <span v-for="(item, index) in menuList" :key="index" @click="goPath(item.url)">{{ item.name }}</span>
+                <span v-for="(item, index) in menuList" :key="index" @click="goPath(item.url)" :class="item.className">{{ item.name }}</span>
             </div>
         </mt-popup>
     </div>
@@ -19,19 +22,23 @@ export default {
             menuList: [
                 {
                     name: '首页',
-                    url: '/'
+                    url: '/',
+                    className: 'home'
                 },
                 {
                     name: '舒适课堂',
-                    url: '/classroom'
+                    url: '/classroom',
+                    className: 'classroom'
                 },
                 {
                     name: '快速报价',
-                    url: '/quotation'
+                    url: '/quotation',
+                    className: 'quotation'
                 },
                 {
                     name: '解决方案',
-                    url: '/solution'
+                    url: '/solution/1',
+                    className: 'solution'
                 },
                 /*{
                     name: '客户案例',
@@ -39,7 +46,8 @@ export default {
                 },*/
                 {
                     name: '关于我们',
-                    url: '/about'
+                    url: '/about',
+                    className: 'about'
                 }
             ]
         }
@@ -66,7 +74,7 @@ export default {
     position: fixed;
     top: 0;
     left: 0;
-    z-index: 1000;
+    z-index: 100;
 
     .logo {
         margin: 0 auto;
@@ -88,26 +96,60 @@ export default {
         top: 1.5rem;
         left: 1rem;
     }
+}
 
-    .nav {
-        width: 100vw;
-        padding: 15px 0 15px 58px;
+.nav {
+    width: 100vw;
+    padding: 1.5rem 0 3rem 3.15rem;
 
 
-        span {
-            padding: 0 20px;
-            height:50px;
-            line-height: 50px;
-            font-size:20px;
-            font-weight:300;
-            color: #666;
-            display: block;
-            
-            &.router-link-exact-active, &:hover {
-                color: #000;
-                text-decoration: underline;
-            }
+    span {
+        padding: 0 2rem 0 4.2rem;
+        height:3.9rem;
+        line-height: 3.9rem;
+        font-size:1.55rem;
+        font-weight:300;
+        color: #666;
+        display: block;
+        cursor: pointer;
+        border-bottom: 1px solid #D6D1D1;
+        background-repeat: no-repeat;
+        background-position: 0.8rem center;
+        background-size: 2.2rem 2.2rem;
+        background-image: url(../../assets/img/icon-home-default.png);
+        
+        &.router-link-exact-active, &:hover {
+            color: #000;
+            text-decoration: underline;
+        }
+
+        &.classroom {
+            background-image: url(../../assets/img/icon-classroom-default.png);
+        }
+
+        &.quotation {
+            background-image: url(../../assets/img/icon-quotation-default.png);
+        }
+
+        &.solution {
+            background-image: url(../../assets/img/icon-solution-default.png);
+        }
+
+        &.about {
+            background-image: url(../../assets/img/icon-about-default.png);
         }
     }
+}
+
+.btn-close {
+    width: 3.2rem;
+    height: 3.2rem;
+    background: url(../../assets/img/icon-close-f0f.png) no-repeat center center;
+    background-size: 1.6rem 1.6rem;
+    position: absolute;
+    top: 0rem;
+    right: 0rem;
+    text-indent: -999em;
+    overflow: hidden;
 }
 </style>
