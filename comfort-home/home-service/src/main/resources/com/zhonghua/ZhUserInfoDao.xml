@@ -6,9 +6,55 @@
         <selectKey keyProperty="id" resultType="Integer">
             SELECT @@IDENTITY AS id
         </selectKey>
-        insert into zh_user_info (user_name,phone_num,type,floorage,usable_area,parlor_count,room_count,live_count,created)
-        values (#{userName},#{phoneNum},#{type},#{floorage},#{usableArea},#{parlorCount},#{roomCount},#{liveCount},now())
+        insert into zh_user_info
+        (user_name,phone_num,type,floorage,usable_area,parlor_count,room_count,live_count,created)
+        values
+        (#{userName},#{phoneNum},#{type},#{floorage},#{usableArea},#{parlorCount},#{roomCount},#{liveCount},now())
     </insert>
+
+    <select id="selectUserTotalCount" parameterType="CusteromQueryParam" resultType="int">
+        select count(1) from zh_user_info
+        where 1=1
+        <if test="keys !=null and keys != ''">
+            and (user_name =#{keys} or phone_num = #{keys} )
+        </if>
+        <if test="createdStart != null ">
+            and created > #{createdStart}
+        </if>
+        <if test="createdEnd != null">
+            AND <![CDATA[ created < #{createdStart}]]>
+        </if>
+        <if test="type != null ">
+            and type =#{type}
+        </if>
+    </select>
+
+    <select id="selectUserListByPage" parameterType="CusteromQueryParam" resultType="CustomerInfo">
+        select id, user_name userName, phone_num phoneNum,type,
+        floorage,usable_area usableArea,parlor_count parlorCount,
+        room_count roomCount,live_count liveCount,created
+        from zh_user_info
+        where 1=1
+        <if test="keys !=null and keys != ''">
+            and (user_name =#{keys} or phone_num = #{keys} )
+        </if>
+        <if test="createdStart != null ">
+            and created > #{createdStart}
+        </if>
+        <if test="createdEnd != null">
+            AND <![CDATA[ created < #{createdStart}]]>
+        </if>
+        <if test="type != null ">
+            and type =#{type}
+        </if>
+        <if test="orderCol !=null ">
+            order by #{orderCol} desc
+        </if>
+        <if test="orderCol ==null ">
+            order by id desc
+        </if>
+        limit #{start} ,#{limit}
+    </select>
 
 
 </mapper>

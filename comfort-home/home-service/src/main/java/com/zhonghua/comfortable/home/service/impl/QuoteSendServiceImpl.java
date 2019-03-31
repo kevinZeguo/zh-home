@@ -123,16 +123,18 @@ public class QuoteSendServiceImpl implements QuoteSendService {
         //短信模板
         NumberFormat nf = NumberFormat.getInstance();
         List<UserChooseProduct> products = projectPrice.getChooseProductList();
+        int i = 1;
         for (UserChooseProduct product : products) {
             String price = null;
-            content.put("model" + product.getModuleId(), product.getModuleName());
+            content.put("model" + i, product.getModuleName());
 
             if (product.getCostMax() == product.getCostMin()) {
                 price = nf.format(product.getCostMin());
             } else {
                 price = nf.format(product.getCostMin()) + "元-" + nf.format(product.getCostMax());
             }
-            content.put("price" + product.getModuleId(), price);
+            content.put("price" + i, price);
+            i++;
         }
         return content.toJSONString();
     }

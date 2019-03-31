@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.beijing.cms.sys.dao.user.SysUserDao">
+    <resultMap id="BaseResultMap" type="com.beijing.cms.sys.domain.user.SysUser">
+        <id column="user_id" property="userId" jdbcType="INTEGER"/>
+        <result column="user_name" property="userName" jdbcType="VARCHAR"/>
+        <result column="password" property="password" jdbcType="VARCHAR"/>
+        <result column="real_name" property="realName" jdbcType="VARCHAR"/>
+        <result column="status" property="status" jdbcType="SMALLINT"/>
+        <result column="user_key" property="userKey" jdbcType="VARCHAR"/>
+        <result column="creator" property="creator" jdbcType="INTEGER"/>
+        <result column="created" property="created" jdbcType="TIMESTAMP"/>
+        <result column="modifier" property="modifier" jdbcType="INTEGER"/>
+        <result column="modified" property="modified" jdbcType="TIMESTAMP"/>
+        <result column="deleted" property="deleted" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+    user_id, user_name, password, real_name, status, user_key, creator, created, modifier,
+    modified, deleted
+  </sql>
+
+    <select id="selectById" resultType="SysUser" parameterType="java.lang.Integer">
+        select
+        <include refid="user_col"/>,
+        group_concat(ud.dept_id ) departId,
+        group_concat(sd.depart_name) departName,
+        group_concat(sr.role_name) roleNames,
+        group_concat(sr.role_id) roleIds,
+        group_concat(sdr.data_type) dataType,
+        group_concat(sdr.data_user_ids) dataUserIds
+        from sys_user su
+        left join sys_user_depart ud on su.user_id = ud.user_id and ud.deleted = 0
+        left join sys_depart sd on sd.depart_id = ud.dept_id and sd.deleted = 0
+        left join sys_permission sp on su.user_id = sp.user_id and sp.deleted = 0
+        left join sys_role sr on sr.role_id = sp.role_id and sr.deleted = 0
+        left join sys_user_data_right sdr on sdr.user_id = su.user_id and sdr.deleted = 0
+        where su.user_id = #{userId,jdbcType=INTEGER}
+        group by su.user_id
+    </select>
+    <delete id="deleteById" parameterType="SysUser">
+    update sys_user
+     set deleted = 1,
+     modifier = #{modifier},
+     modified = now()
+    where user_id = #{userId,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.beijing.cms.sys.domain.user.SysUser">
+        <selectKey keyProperty="userId" resultType="Integer">
+            SELECT @@IDENTITY AS userId
+        </selectKey>
+        insert into sys_user (user_name, password,real_name, status, user_key,creator, created, modifier,
+        modified, deleted, signature,telephone,office_phone,email
+        )
+        values (#{userName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},#{realName,jdbcType=VARCHAR},
+        #{status,jdbcType=SMALLINT}, #{userKey,jdbcType=VARCHAR},#{creator,jdbcType=INTEGER}, now(),
+        #{modifier,jdbcType=INTEGER},
+        now(), 0,
+        #{signature,jdbcType=LONGVARBINARY},#{telephone,jdbcType=LONGVARBINARY},#{officePhone,jdbcType=LONGVARBINARY},
+        #{email}
+        )
+    </insert>
+
+    <update id="updateById" parameterType="SysUser">
+        update sys_user
+        set
+        <if test="status != null and status != ''">
+            status = #{status,jdbcType=SMALLINT},
+        </if>
+        telephone = #{telephone,jdbcType=VARCHAR},
+        office_phone = #{officePhone,jdbcType=VARCHAR},
+        email = #{email,jdbcType=VARCHAR},
+        modifier = #{modifier,jdbcType=INTEGER},
+        modified = now()
+        where user_id = #{userId,jdbcType=INTEGER}
+    </update>
+
+    <!--查询用户数量 mazeguo-->
+    <select id="selectUserCountByPage" resultType="int" parameterType="UserQueryParam">
+        select count(1) from sys_user su
+        where deleted = 0
+        <if test="realName != null and realName !='' ">
+            and real_name like #{realName,jdbcType=VARCHAR}
+        </if>
+        <if test="userName != null and userName !='' ">
+            and user_name like #{userName,jdbcType=VARCHAR}
+        </if>
+    </select>
+
+    <sql id="user_col">
+        su.user_id userId, su.user_name userName, su.password, su.real_name realName, su.status, su.user_key userKey,
+        su.creator, su.created, su.modifier,su.modified, su.deleted,su.telephone telephone, su.office_phone officePhone,
+        su.email email
+    </sql>
+
+    <!--查询用户列表 mazeguo-->
+    <select id="selectUserListByPage" resultType="SysUser" parameterType="UserQueryParam">
+        select
+        <include refid="user_col"/>,
+        DATE_FORMAT( su.created,'%Y-%m-%d %H:%i:%S') createdStr,
+        DATE_FORMAT( su.modified,'%Y-%m-%d %H:%i:%S') modifiedStr,
+        group_concat(sd.depart_name) departName,
+        group_concat(sr.role_name) roleNames
+        from sys_user su
+        left join sys_user_depart ud on su.user_id = ud.user_id and ud.deleted = 0
+        left join sys_depart sd on sd.depart_id = ud.dept_id and sd.deleted = 0
+        left join sys_permission sp on su.user_id = sp.user_id and sp.deleted = 0
+        left join sys_role sr on sr.role_id = sp.role_id and sr.deleted = 0
+        where su.deleted = 0
+        <if test="realName != null and realName !='' ">
+            and su.real_name like #{realName,jdbcType=VARCHAR}
+        </if>
+        <if test="userName != null and userName !='' ">
+            and su.user_name like #{userName,jdbcType=VARCHAR}
+        </if>
+        group by su.user_id
+        order by su.user_id desc
+        limit #{start} ,#{limit}
+    </select>
+
+    <!--根据用户名密码查询用户信息 mazeguo-->
+    <select id="selectUserByPasswdAndUserName" resultType="SysUser" parameterType="SysUser">
+        select
+        <include refid="user_col"/>
+        from sys_user su
+        where su.deleted = 0
+        and su.user_name = #{userName,jdbcType=VARCHAR}
+        and su.password = #{password,jdbcType=VARCHAR}
+    </select>
+
+    <select id="selectListByRuleId" parameterType="int" resultType="SysUser">
+        select
+        <include refid="user_col"/>
+        from sys_user su
+        left join sys_permission sp on sp.user_id = su.user_id and sp.deleted = 0
+        where su.deleted = 0
+        and sp.role_id = #{roleId}
+    </select>
+
+    <select id="selectByRealName" parameterType="java.lang.String" resultType="SysUser">
+        select
+        <include refid="user_col"/>
+        from sys_user su
+        where su.deleted = 0
+        and su.real_name = #{realName,jdbcType=VARCHAR}
+        limit 1
+    </select>
+
+
+    <select id="selectByUserName" parameterType="java.lang.String" resultType="SysUser">
+        select
+        <include refid="user_col"/>
+        from sys_user su
+        where su.deleted = 0
+        and su.user_name = #{userName,jdbcType=VARCHAR}
+    </select>
+
+    <update id="modifiyPwd" parameterType="SysUser">
+        update sys_user
+        set password = #{password,jdbcType=VARCHAR},
+        modified = now()
+        where user_id = #{userId,jdbcType=INTEGER}
+    </update>
+
+    <select id="selectByUserKey" parameterType="java.lang.String" resultType="SysUser">
+        select
+        <include refid="user_col"/>
+        from sys_user su
+        where su.deleted = 0
+        and su.user_key = #{userKey,jdbcType=VARCHAR}
+    </select>
+
+    <select id="selectUserListByRoleCode" resultType="SysUser">
+        select
+        <include refid="user_col"/>
+        from sys_user su
+        left join sys_permission sp on su.user_id = sp.user_id and sp.deleted = 0
+        left join sys_role sr on sr.role_id = sp.role_id and sp.deleted = 0
+        where su.deleted = 0
+        <if test="roleCode != null and roleCode != ''">
+            and sr.role_code = #{roleCode}
+        </if>
+        order by su.user_id
+    </select>
+
+
+</mapper>
